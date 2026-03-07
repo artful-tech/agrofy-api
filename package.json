@@ -5,7 +5,8 @@
   "main": "index.js",
   
   "scripts": {
-    "dev": "dotenv -e .env.development -- npx nodemon --watch 'src/' -e ts --exec 'ts-node -r tsconfig-paths/register src/server.ts'",
+    "dev": "dotenv -e .env.development -- npx nodemon --watch src/ -e ts --exec \"ts-node -r tsconfig-paths/register src/server.ts\"",
+    "prod": "dotenv -e .env -- npx nodemon --watch src/ -e ts --exec \"ts-node -r tsconfig-paths/register src/server.ts\"",
     "migrate:dev": "dotenv -e .env.development -- npx prisma migrate dev",
     "migrate:prod": "npx prisma migrate deploy",
     "seed:dev": "dotenv -e .env.development -- npx prisma db seed",
