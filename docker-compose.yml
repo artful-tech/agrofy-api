@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: agrofy_dev_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: agrofy_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - agrofy_pgdata:/var/lib/postgresql/data
+
+volumes:
+  agrofy_pgdata:
