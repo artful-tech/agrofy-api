@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
  
-const PORT = parseInt(`${process.env.PORT || 3000}`);
+const PORT = parseInt(`${process.env.PORT || 8080}`);
  
 import app from './app';
 
