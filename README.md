@@ -27,10 +27,36 @@ Este projeto utiliza o que há de mais moderno no ecossistema JavaScript:
 
 Antes de começar, você vai precisar ter instalado em sua máquina:
 
+### Obrigatório
+
 *   [Node.js](https://nodejs.org/en/) (v18 ou superior recomendado)
-*   [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+*   NPM (Node Package Manager). Obs: O NPM é instalado junto com o NodeJS de forma automática.
+
+### Opcional (Altamente recomendado)
+
+Para conseguir iniciar o servidor de banco de dados PostgreSQL localmente de forma fácil e rápida e se conectar com a aplicação de forma facilitada, instale o Docker:
+
+*   [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/)
 
 ---
+
+## 📝 Preparativos
+
+### Obrigatório
+
+#### 1. Instale o [Node.js](https://nodejs.org/en/) no link:
+[https://nodejs.org/en/](https://nodejs.org/en/)
+
+#### 2. Após instalar o [Node.js](https://nodejs.org/en/), instale o compilador do typescript através do comando:
+```bash
+npm install -g typescript
+```
+
+### Opcional (Altamente recomendado)
+
+#### 1. Instale o [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/) no link: 
+[https://docs.docker.com/desktop/setup/install/windows-install/](https://docs.docker.com/desktop/setup/install/windows-install/)
+
 
 ## 🚀 Como Rodar a Aplicação
 
@@ -47,27 +73,53 @@ cd agrofy-api
 npm install
 ```
 
-### 3. Configurar variáveis de ambiente
-Crie um arquivo `.env` na raiz do projeto:
-```env
-PORT=3000
+### 3. Acesse o drive da turma e faça o download das variáveis de ambiente (".env" e ".env.development").
+<img src="images/1772977269895009905.webp" width="15px"> Essas variáveis carregam dados de acesso confidenciais, que não devem ser expostos em qualquer lugar ou armazenados em computadores públicos.
+
+### 4. Copie e cole essas variáveis de ambiente para dentro da raíz do projeto agrofy-api, como demonstra a imagem abaixo:
+
+<img src="images/files-screenshot.png">
+
+### 5. Próxima Etapa: Formas para rodar a aplicação
+
+### A. Produção
+
+#### 1. Para rodar a aplicação em produção, basta executar os seguintes comandos:
+
+```bash
+npx prisma generate
 ```
 
-### 4. Executar o projeto
+```bash
+npm run prod
+```
 
-#### 👨‍💻 Em modo de desenvolvimento (Auto-reload)
+### B. Desenvolvimento
+
+#### 1. Para rodar a aplicação em desenvolvimento é necessário ter um servidor de banco de dados PostgreSQL rodando. Para isso, após ter instalado o [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/), basta executar o seguinte comando:
+
+```bash
+docker-compose up
+```
+
+Obs: Esse comando sobe o container listado no arquivo "docker-compose.yml", criando o servidor de banco de dados com as informações de acesso exatas listadas no arquivo ".env.development", tornando a conexão da aplicação com o banco de dados simples e direta.
+
+#### 2. Em seguida, com o servidor de banco de dados PostgreSQL rodando, execute o comando para criar as tabelas:
+
+```bash
+npm run migrate:dev
+```
+
+#### 3. Para adicionar os dados de teste no banco de dados, execute o comando abaixo:
+
+```bash
+npm run seed:dev
+```
+
+#### 4. Agora, para rodar a aplicação, execute o comando:
+
 ```bash
 npm run dev
-```
-
-#### 🏗️ Build (Compilar TypeScript para JavaScript)
-```bash
-npm run compile
-```
-
-#### 🏁 Iniciar em produção (Após o build)
-```bash
-npm start
 ```
 
 ---
@@ -83,13 +135,23 @@ npm start
 ## 📂 Estrutura de Pastas
 
 ```text
-src/
+images/             # Imagens utilizadas pelo README.md
+prisma/             # Armazena algumas informações do ORM Prisma, que acessa o banco de dados
+src/                # Armazena o código da aplicação
 ├── controllers/    # Lógica de controle das rotas
+├── lib/            # Arquivos compartilháveis pela aplicação
 ├── models/         # Definições de dados (Interfaces/Types)
 ├── repositories/   # Acesso a dados e persistência
 ├── routers/        # Definição das rotas da API
 ├── app.ts          # Configuração do Express
 └── server.ts       # Inicialização do servidor
+docker-compose.yml  # Código para inicialização de containers Docker
+LICENSE             # Controla a licença do aplicativo
+package.lock.json   # Armazena dependências do projeto
+package.json        # Armazena dependências e configurações do projeto
+prisma.config.ts    # Armazena a configuração do Prisma ORM
+README.md           # Essa documentação
+tsconfig.json       # Armazena as configurações do Typescript na aplicação
 ```
 
 ---
