@@ -57,6 +57,7 @@ npm install -g typescript
 #### 1. Instale o [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/) no link: 
 [https://docs.docker.com/desktop/setup/install/windows-install/](https://docs.docker.com/desktop/setup/install/windows-install/)
 
+---
 
 ## 🚀 Como Rodar a Aplicação
 
