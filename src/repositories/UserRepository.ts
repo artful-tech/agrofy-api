@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/gen-client'
+import { PrismaClient } from '../../prisma/generated/prisma/client'
 import { CreateUserDTO, UpdateUserDTO } from '../models/UserModel'
 
 export class UserRepository {
