@@ -1,11 +1,14 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import userRouter from "./userRouter";
 import path from 'node:path';
+import farmRouter from './farmRouter';
 
 const root = Router();
 const apiRouter = Router();
 
 apiRouter.use("/users", userRouter);
+apiRouter.use("/farms", farmRouter)
+
 root.use("/api", apiRouter);
 
 root.get("/", (req: Request, res: Response, next: NextFunction) => {
