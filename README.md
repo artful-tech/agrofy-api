@@ -97,7 +97,13 @@ npm run prod
 
 ### B. Desenvolvimento
 
-#### 1. Para rodar a aplicação em desenvolvimento é necessário ter um servidor de banco de dados PostgreSQL rodando. Para isso, após ter instalado o [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/), basta executar o seguinte comando:
+#### 1. Vá para a branch "develop" com o comando:
+
+```bash
+git checkout develop
+```
+
+#### 2. Para rodar a aplicação em desenvolvimento é necessário ter um servidor de banco de dados PostgreSQL rodando. Para isso, após ter instalado o [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/), basta executar o seguinte comando:
 
 ```bash
 docker-compose up
@@ -105,19 +111,19 @@ docker-compose up
 
 Obs: Esse comando sobe o container listado no arquivo "docker-compose.yml", criando o servidor de banco de dados com as informações de acesso exatas listadas no arquivo ".env.development", tornando a conexão da aplicação com o banco de dados simples e direta.
 
-#### 2. Em seguida, com o servidor de banco de dados PostgreSQL rodando, execute o comando para criar as tabelas:
+#### 3. Em seguida, com o servidor de banco de dados PostgreSQL rodando, execute o comando para criar as tabelas:
 
 ```bash
 npm run migrate:dev
 ```
 
-#### 3. Para adicionar os dados de teste no banco de dados, execute o comando abaixo:
+#### 4. Para adicionar os dados de teste no banco de dados, execute o comando abaixo:
 
 ```bash
 npm run seed:dev
 ```
 
-#### 4. Agora, para rodar a aplicação, execute o comando:
+#### 5. Agora, para rodar a aplicação, execute o comando:
 
 ```bash
 npm run dev
