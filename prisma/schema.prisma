@@ -20,3 +20,112 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Farm {
+  id          String   @id @default(uuid())
+  name        String
+  ownerName   String?
+  totalArea   Float
+  location    String   // Ex: Espraiado, Maricá
+  address     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  plots       Plot[]
+  @@map("farms")
+}
+
+model Plot {
+  id          String   @id @default(uuid())
+  name        String
+  area        Float
+  soilType    String?
+  farmId      String
+  farm        Farm     @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  
+  seasons     Season[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("plots")
+}
+
+// --- CATÁLOGO DE CULTURAS ---
+
+model Crop {
+  id            String   @id @default(uuid())
+  name          String   // Ex: Alface, Tomate
+  variety       String?  // Ex: Americana, Cereja
+  daysToHarvest Int      // Tempo médio de maturação
+  
+  seasons       Season[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("crops")
+}
+
+// --- CICLO PRODUTIVO (SAFRAS) ---
+
+model Season {
+  id          String    @id @default(uuid())
+  status      String    @default("PLANTED") // PLANTED, GROWING, HARVESTED, CANCELLED
+  plantedAt   DateTime  @default(now())
+  harvestAt   DateTime? // Data prevista ou real da colheita
+  
+  plotId      String
+  plot        Plot      @relation(fields: [plotId], references: [id])
+  
+  cropId      String
+  crop        Crop      @relation(fields: [cropId], references: [id])
+
+  logs        FieldLog[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("seasons")
+}
+
+model FieldLog {
+  id          String   @id @default(uuid())
+  description String   // Ex: Aplicado fertilizante orgânico
+  category    String   // WEATHER, PEST, OBSERVATION
+  date        DateTime @default(now())
+  
+  seasonId    String
+  season      Season   @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@map("field_logs")
+}
+
+// --- LOGÍSTICA E ESTOQUE ---
+
+model InventoryItem {
+  id          String   @id @default(uuid())
+  name        String   // Ex: Semente de Tomate, Adubo NPK
+  category    String   // SEED, FERTILIZER, CHEMICAL
+  quantity    Float
+  unit        String   // KG, L, UN
+  minStock    Float    @default(0) // Para alertas de reposição
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("inventory_items")
+}
+
+// --- ADMINISTRAÇÃO FINANCEIRA ---
+
+model Expense {
+  id          String   @id @default(uuid())
+  description String
+  amount      Float
+  currency    String   @default("BRL") // BRL ou MUMBUCA
+  date        DateTime @default(now())
+  category    String   // LABOR, SEED, UTILITY, MAINTENANCE
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("expenses")
+}
