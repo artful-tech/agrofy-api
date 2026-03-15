@@ -111,19 +111,25 @@ docker-compose up
 
 Obs: Esse comando sobe o container listado no arquivo "docker-compose.yml", criando o servidor de banco de dados com as informações de acesso exatas listadas no arquivo ".env.development", tornando a conexão da aplicação com o banco de dados simples e direta.
 
-#### 3. Em seguida, com o servidor de banco de dados PostgreSQL rodando, execute o comando para criar as tabelas:
+#### 3. Em seguida, com o servidor de banco de dados PostgreSQL rodando, execute o comando para gerar o prisma client:
+
+```bash
+npm run prisma:generate
+```
+
+#### 4. Em seguida, com o servidor de banco de dados PostgreSQL rodando, execute o comando para criar as tabelas:
 
 ```bash
 npm run migrate:dev
 ```
 
-#### 4. Para adicionar os dados de teste no banco de dados, execute o comando abaixo:
+#### 5. Para adicionar os dados de teste no banco de dados, execute o comando abaixo:
 
 ```bash
 npm run seed:dev
 ```
 
-#### 5. Agora, para rodar a aplicação, execute o comando:
+#### 6. Agora, para rodar a aplicação, execute o comando:
 
 ```bash
 npm run dev
