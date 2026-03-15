@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  
   "scripts": {
     "dev": "dotenv -e .env.development -- npx nodemon --watch src/ -e ts --exec \"ts-node -r tsconfig-paths/register src/server.ts\"",
     "prod": "dotenv -e .env -- npx nodemon --watch src/ -e ts --exec \"ts-node -r tsconfig-paths/register src/server.ts\"",
@@ -28,7 +27,8 @@
     "helmet": "^8.1.0",
     "morgan": "^1.10.1",
     "pg": "^8.20.0",
-    "prisma": "^7.4.2"
+    "prisma": "^7.4.2",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

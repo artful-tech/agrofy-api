@@ -188,3 +188,86 @@ Este projeto está sob a licença **ISC**.
 <p align="center">
   Feito com ❤️ pela equipe Agrofy 🌿
 </p>
+
+
+## Modelo Entidade Relacionamento
+
+```mermaid
+
+erDiagram
+    FARM ||--o{ PLOT : "possui"
+    PLOT ||--o{ SEASON : "recebe"
+    CROP ||--o{ SEASON : "eh_plantada_em"
+    SEASON ||--o{ FIELD_LOG : "registra"
+    
+    FARM {
+        string id PK
+        string name
+        string ownerName
+        float totalArea
+        string location
+        string address
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    PLOT {
+        string id PK
+        string name
+        float area
+        string soilType
+        string farmId FK
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    CROP {
+        string id PK
+        string name
+        string variety
+        int daysToHarvest
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    SEASON {
+        string id PK
+        string status
+        datetime plantedAt
+        datetime harvestAt
+        string plotId FK
+        string cropId FK
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    FIELD_LOG {
+        string id PK
+        string description
+        string category
+        datetime date
+        string seasonId FK
+    }
+
+    INVENTORY_ITEM {
+        string id PK
+        string name
+        string category
+        float quantity
+        string unit
+        float minStock
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    EXPENSE {
+        string id PK
+        string description
+        float amount
+        string currency
+        datetime date
+        string category
+        datetime createdAt
+        datetime updatedAt
+    }
+```
