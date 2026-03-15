@@ -5,7 +5,7 @@ export class CropController {
     constructor(private cropRepository: CropRepository) {}
 
     public index = async (req: Request, res: Response) => {
-        const crops = this.cropRepository.findAll();
+        const crops = await this.cropRepository.findAll();
         res.json(crops);
     }
 }

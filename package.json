@@ -10,6 +10,7 @@
     "migrate:prod": "npx prisma migrate deploy",
     "prisma:generate": "dotenv -e .env.development -- npx prisma generate",
     "seed:dev": "dotenv -e .env.development -- npx prisma db seed",
+    "seed:prod": "dotenv -e .env -- npx prisma db seed",
     "studio:dev": "dotenv -e .env.development -- npx prisma studio",
     "compile": "npx tsc",
     "start": "node ./dist/server.js"
