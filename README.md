@@ -95,6 +95,8 @@ npx prisma generate
 npm run prod
 ```
 
+---
+
 ### B. Desenvolvimento com Docker
 
 #### 1. Vá para a branch "develop" com o comando:
