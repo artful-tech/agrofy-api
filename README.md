@@ -59,7 +59,7 @@ npm install -g typescript
 
 ---
 
-## 🚀 Como Rodar a Aplicação
+## 🚀 Como Rodar a Aplicação pela Primeira Vez
 
 Siga o passo a passo abaixo para colocar a API no ar:
 
@@ -95,7 +95,7 @@ npx prisma generate
 npm run prod
 ```
 
-### B. Desenvolvimento
+### B. Desenvolvimento com Docker
 
 #### 1. Vá para a branch "develop" com o comando:
 
@@ -137,34 +137,161 @@ npm run dev
 
 ---
 
+### C. Desenvolvimento sem Docker
+
+#### 1. Vá para a branch "develop" com o comando:
+
+```bash
+git checkout develop
+```
+
+#### 2. Para rodar a aplicação em desenvolvimento é necessário ter um servidor de banco de dados PostgreSQL rodando. Como não irá utilizar Docker, precisará instalar o PostgreSQL na sua máquina local, para isso instale o PostgreSQL no link [https://www.enterprisedb.com/downloads/postgres-postgresql-downloads](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads):
+
+
+#### 3. Após a instalação do PostgreSQL, crie o banco de dados no PgAdmin com o nome _"agrofy_dev"_ , e modifique o arquivo _".env.development"_ com o nome de usuário e senha que configurou no banco de dados. O arquivo _".env.development"_, vai ficar algo parecido com:
+
+```.env.development
+PORT=3000
+
+DATABASE_URL="postgresql://seu-usuario:sua-senha@localhost:5432/agrofy_dev"
+```
+
+<img src="images/1772977269895009905.webp" width="15px"> Pode ser que haja algum problema com algum usuário que você tenha adicionado posteriormente, por isso é recomendado que utilize o usuário padrão do PostgreSQL, que é o usuário _"postgres"_.
+
+#### 4. Após os passos anteriores, com o servidor de banco de dados PostgreSQL rodando, execute o comando para gerar o prisma client:
+
+```bash
+npm run prisma:generate
+```
+
+#### 5. Em seguida, execute o comando para criar as tabelas no banco de dados:
+
+```bash
+npm run migrate:dev
+```
+
+#### 6. Para adicionar os dados de teste no banco de dados, execute o comando abaixo:
+
+```bash
+npm run seed:dev
+```
+
+#### 7. Agora, para rodar a aplicação, execute o comando:
+
+```bash
+npm run dev
+```
+
+---
+<br>
+
+## ❓ Objetivos por comandos
+
+### A. Para somente rodar a aplicação:
+
+```bash
+npm run dev
+```
+
+### B. Para atualizar as tabelas do banco de dados:
+
+```bash
+npm run migrate:dev
+```
+
+### C. Para gerar um novo prisma client, que é utilizado como interface do banco de dados para a aplicação:
+
+```bash
+npm run prisma:generate
+```
+
+### D. Para limpar os dados de teste do banco de dados e adicionar novos dados de teste:
+
+```bash
+npm run seed:dev
+```
+
+### E. Mudar de branch local no Git:
+
+```bash
+git checkout nome-da-branch
+```
+
+### F. Verificar nome das branchs locais:
+
+```bash
+git branch
+```
+
+### G. Criar uma nova branch:
+
+```bash
+git branch nome-da-branch
+```
+
+---
+<br>
+
 ## 🛣️ Endpoints Principais
 
 | Método | Endpoint | Descrição |
 | :--- | :--- | :--- |
-| `GET` | `/users/:id` | Retorna os detalhes de um usuário específico |
+| `GET` | `/api/farms` | Lista todas as propriedades rurais de Maricá |
+| `POST` | `/api/farm` | Cria uma nova propriedade agrícola no sistema |
+| `DELETE` | `/api/farm/:id` | Exclui uma propriedade do sistema |
+| `PATCH` | `/api/farm/:id` | Edita os dados cadastrais (nome, área, local) de uma fazenda |
+| `GET` | `/api/plots` | Lista os lotes vinculados a uma fazenda |
+| `POST` | `/api/plot` | Cria um novo lote vinculado a uma fazenda |
+| `DELETE` | `/api/plot/:id` | Exclui um lote vinculado a uma fazenda |
+| `PATCH` | `/api/plot/:id` | Edita as características de um lote existente |
+| `GET` | `/api/crops` | Retorna o catálogo completo de vegetais e ciclos botânicos |
+| `POST` | `/api/crop` | Cria um novo tipo de cultura no catálogo (ex: Alface Vanda) |
+| `DELETE` | `/api/crop/:id` | Exclui uma cultura do catálogo de vegetais |
+| `PATCH` | `/api/crop/:id` | Edita informações de uma cultura no catálogo |
+| `POST` | `/api/seasons` | Inicia um novo ciclo de plantio vinculado a um lote |
+| `POST` | `/api/season` | Atalho para criação de um novo ciclo de plantio |
+| `DELETE` | `/api/season/:id` | Exclui o registro de uma safra (ciclo produtivo) específica |
+| `PATCH` | `/api/seasons/:id` | Atualiza o status da safra (ex: marcar como "Colhido") |
+| `GET` | `/api/inventory` | Exibe o saldo atual de todas as sementes e insumos |
+| `POST` | `/api/inventory` | Registra a entrada de novos materiais no estoque |
+| `DELETE` | `/api/inventory/:id` | Deleta permanentemente sementes ou insumos do catálogo |
+| `PATCH` | `/api/inventory/:id` | Edita o saldo atual ou detalhes técnicos de um insumo |
+| `GET` | `/api/inventory/alerts` | Lista itens com estoque abaixo do nível de segurança |
+| `POST` | `/api/finances/expenses` | Registra uma nova conta paga ou gasto (BRL ou Mumbuca) |
+| `GET` | `/api/finances/summary` | Resumo mensal consolidado de gastos em BRL e Mumbuca |
+| `POST` | `/api/logs` | Registra um evento ou observação no diário de campo |
+| `GET` | `/api/team` | Lista os membros e responsabilidades do time Agrofy |
 
 ---
 
 ## 📂 Estrutura de Pastas
 
 ```text
-images/             # Imagens utilizadas pelo README.md
-prisma/             # Armazena algumas informações do ORM Prisma, que acessa o banco de dados
-src/                # Armazena o código da aplicação
-├── controllers/    # Lógica de controle das rotas
-├── lib/            # Arquivos compartilháveis pela aplicação
-├── models/         # Definições de dados (Interfaces/Types)
-├── repositories/   # Acesso a dados e persistência
-├── routers/        # Definição das rotas da API
-├── app.ts          # Configuração do Express
-└── server.ts       # Inicialização do servidor
-docker-compose.yml  # Código para inicialização de containers Docker
-LICENSE             # Controla a licença do aplicativo
-package.lock.json   # Armazena dependências do projeto
-package.json        # Armazena dependências e configurações do projeto
-prisma.config.ts    # Armazena a configuração do Prisma ORM
-README.md           # Essa documentação
-tsconfig.json       # Armazena as configurações do Typescript na aplicação
+AGROFY-API
+├── docs
+├── images
+├── node_modules
+├── prisma
+├── public
+├── src
+│   ├── controllers
+│   ├── lib
+│   ├── models
+│   ├── repositories
+│   ├── routers
+│   ├── app.ts
+│   └── server.ts
+├── .env
+├── .env.development
+├── .gitignore
+├── docker-compose.yml
+├── Dockerfile
+├── LICENSE
+├── package-lock.json
+├── package.json
+├── prisma.config.ts
+├── README.md
+└── tsconfig.json
 ```
 
 ---
