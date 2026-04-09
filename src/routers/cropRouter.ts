@@ -1,13 +1,22 @@
 import { Router } from "express";
 import { CropRepository } from "../repositories/CropRepository";
-import { prisma } from "../lib/prisma";
 import { CropController } from "../controllers/CropController";
+import { PrismaClient } from "@prisma/gen-client";
 
-const cropRouter = Router();
+export default  class CropRouter {
+    private cropRepository: CropRepository;
+    private cropController: CropController;
 
-const cropRepository = new CropRepository(prisma);
-const cropController = new CropController(cropRepository);
+    constructor(private prisma: PrismaClient) {
+        this.cropRepository = new CropRepository(this.prisma);
+        this.cropController = new CropController(this.cropRepository);
+    }
 
-cropRouter.get('/', cropController.index);
+    getRoutes = (): Router => {
+        const cropRouter = Router();
 
-export default cropRouter;
+        cropRouter.get('/', this.cropController.index);
+
+        return cropRouter;
+    }
+}

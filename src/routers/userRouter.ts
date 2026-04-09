@@ -3,7 +3,7 @@ import { UserController } from "../controllers/UserController";
 import { UserRepository } from "../repositories/UserRepository";
 import { PrismaClient } from "@prisma/gen-client";
 
-export class UserRouter {
+export default class UserRouter {
     private userRepository: UserRepository;
     private userController: UserController;
 
@@ -12,7 +12,7 @@ export class UserRouter {
         this.userController = new UserController(this.userRepository);
     }
 
-    public getUserRoutes = (): Router => {
+    getRoutes = (): Router => {
         const userRouter = Router();
 
         userRouter.get('/', this.userController.index)

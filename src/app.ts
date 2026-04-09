@@ -25,9 +25,8 @@ app.use(
 );
 app.use(express.json());
 
-const routers = new Routers(prisma);
-
 // ROTAS DA APLICAÇÃO
+const routers = new Routers(prisma);
 app.use(routers.getRouter());
  
 export default app;

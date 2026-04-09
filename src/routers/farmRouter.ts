@@ -2,12 +2,22 @@ import { Router } from "express";
 import { FarmRepository } from "../repositories/FarmRepository";
 import { FarmController } from "../controllers/FarmController";
 import { prisma } from "../lib/prisma";
+import { PrismaClient } from "@prisma/gen-client";
 
-const farmRouter = Router();
+export default class FarmRouter {
+    private farmRepository: FarmRepository;
+    private farmController: FarmController;
 
-const farmRepository = new FarmRepository(prisma);
-const farmController = new FarmController(farmRepository);
+    constructor(private prisma: PrismaClient) {
+        this.farmRepository = new FarmRepository(this.prisma);
+        this.farmController = new FarmController(this.farmRepository);
+    }
 
-farmRouter.get('/', farmController.index);
+    getRoutes = (): Router => {
+        const farmRouter = Router();
 
-export default farmRouter;
+        farmRouter.get('/', this.farmController.index);
+
+        return farmRouter;
+    }
+}
