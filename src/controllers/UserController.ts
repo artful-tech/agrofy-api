@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
-import { UserRepository } from '../repositories/UserRepository'
+import { IUserRepository } from '../repositories/interfaces/IUserRepository'
 
 export class UserController {
 
-    constructor(private userRepository: UserRepository) {}
+    constructor(private userRepository: IUserRepository) {}
 
     public index = async (req: Request, res: Response) => {
         const users = await this.userRepository.findAll()

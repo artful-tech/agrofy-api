@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { CropRepository } from "../repositories/CropRepository";
+import { ICropRepository } from "../repositories/interfaces/ICropRepository";
 
 export class CropController {
-    constructor(private cropRepository: CropRepository) {}
+    constructor(private cropRepository: ICropRepository) {}
 
     public index = async (req: Request, res: Response) => {
         const crops = await this.cropRepository.findAll();

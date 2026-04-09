@@ -1,15 +1,16 @@
-import { PrismaClient } from '../../prisma/generated/prisma/client'
+import { PrismaClient, User } from '@prisma/gen-client'
 import { CreateUserDTO, UpdateUserDTO } from '../models/UserModel'
+import { IUserRepository } from './interfaces/IUserRepository'
 
-export class UserRepository {
+export class UserRepository implements IUserRepository {
 
     constructor(private prisma: PrismaClient) {}
 
-    findAll = async () => {
+    findAll = async (): Promise<User[]> => {
         return this.prisma.user.findMany()
     }
 
-    findById = async (id: number) => {
+    findById = async (id: number): Promise<User | null> => {
         return this.prisma.user.findUnique({ where: { id } })
     }
 
@@ -17,11 +18,11 @@ export class UserRepository {
         return this.prisma.user.create({ data })
     }
 
-    update = async (id: number, data: UpdateUserDTO) => {
+    update = async (id: number, data: UpdateUserDTO): Promise<User> => {
         return this.prisma.user.update({ where: { id }, data })
     }
 
-    delete = async (id: number) => {
+    delete = async (id: number): Promise<User> => {
         return this.prisma.user.delete({ where: { id } })
     }
 }

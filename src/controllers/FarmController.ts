@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { FarmRepository } from "../repositories/FarmRepository";
+import { IFarmRepository } from "../repositories/interfaces/IFarmRepository";
 
 export class FarmController {
-    constructor(private farmRepository: FarmRepository) {}
+    constructor(private farmRepository: IFarmRepository) {}
 
     public index = async (req: Request, res: Response) => {
         const farms = await this.farmRepository.findAll();
