@@ -1,17 +1,39 @@
 import { Router } from "express";
 import { UserController } from "../controllers/UserController";
 import { UserRepository } from "../repositories/UserRepository";
-import { prisma } from "../lib/prisma";
+import { PrismaClient } from "@prisma/gen-client";
 
-const userRouter = Router();
+export class UserRouter {
+    private userRepository: UserRepository;
+    private userController: UserController;
 
-const userRepository = new UserRepository(prisma);
-const userController = new UserController(userRepository);
+    constructor(private prisma: PrismaClient) {
+        this.userRepository = new UserRepository(this.prisma);
+        this.userController = new UserController(this.userRepository);
+    }
 
-userRouter.get('/', userController.index)
-userRouter.get('/:id', userController.show)
-userRouter.post('/', userController.store)
-userRouter.put('/:id', userController.update)
-userRouter.delete('/:id', userController.destroy)
+    public getUserRoutes = (): Router => {
+        const userRouter = Router();
 
-export default userRouter;
+        userRouter.get('/', this.userController.index)
+        userRouter.get('/:id', this.userController.show)
+        userRouter.post('/', this.userController.store)
+        userRouter.put('/:id', this.userController.update)
+        userRouter.delete('/:id', this.userController.destroy)
+        
+        return userRouter;
+    }
+}
+
+// const userRouter = Router();
+
+// const userRepository = new UserRepository(prisma);
+// const userController = new UserController(userRepository);
+
+// userRouter.get('/', userController.index)
+// userRouter.get('/:id', userController.show)
+// userRouter.post('/', userController.store)
+// userRouter.put('/:id', userController.update)
+// userRouter.delete('/:id', userController.destroy)
+
+// export default userRouter;

@@ -1,14 +1,15 @@
-import express from 'express';
+import express, { Router } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
-import routes from './routers';
+import { Routers } from './routers';
+import { prisma } from './lib/prisma';
 
 const app = express();
  
 app.use(morgan('tiny'));
 app.use(cors());
-// app.use(helmet());
+
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -24,8 +25,10 @@ app.use(
 );
 app.use(express.json());
 
+const routers = new Routers(prisma);
+
 // ROTAS DA APLICAÇÃO
-app.use(routes);
+app.use(routers.getRouter());
  
 export default app;
  

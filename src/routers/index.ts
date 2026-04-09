@@ -1,28 +1,59 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import userRouter from "./userRouter";
+
 import path from 'node:path';
 import farmRouter from './farmRouter';
 import cropRouter from './cropRouter';
+import { PrismaClient } from '@prisma/gen-client';
+import { UserRouter } from './userRouter';
 
-const root = Router();
-const apiRouter = Router();
+export class Routers {
+    private userRouters: UserRouter;
 
-apiRouter.use("/users", userRouter);
-apiRouter.use("/farms", farmRouter);
-apiRouter.use("/crops", cropRouter);
+    constructor(private prisma: PrismaClient) {
+        this.userRouters = new UserRouter(this.prisma);
+    }
 
-root.use("/api", apiRouter);
+    private initApiRoutes = (): Router => {
+        const apiRouter = Router();
+        
+        apiRouter.use("/users", this.userRouters.getUserRoutes());
+        apiRouter.use("/farms", farmRouter);
+        apiRouter.use("/crops", cropRouter);
 
-root.get("/", (req: Request, res: Response, next: NextFunction) => {
-    res.sendFile(path.resolve(__dirname, '../../public/front-end-example.html'));
-});
+        return apiRouter;
+    }
 
-// ERROS
-root.use((req: Request, res: Response) => {
-    res.status(404).send("<h1>ERRO 404: PÁGINA NÃO EXISTE</h1>");
-});
-root.use((error: Error, req: Request, res: Response, next: NextFunction) => {
-    res.status(500).send(error.message);
-});
+    private initApiErrors = (): Router => {
+        const apiErrors = Router();
 
-export default root;
+        apiErrors.use((req: Request, res: Response) => {
+            res.status(404).json({
+                status: "error",
+                message: "Endpoint não encontrado"
+            });
+        });
+
+        apiErrors.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+            res.status(500).json({
+                status: "error",
+                message: error.message || "Erro interno do servidor"
+            });
+        });
+
+        return apiErrors;
+    }
+
+    public getRouter = (): Router => {
+        const root = Router();
+    
+        root.use("/api", this.initApiRoutes());
+
+        root.get("/", (req: Request, res: Response, next: NextFunction) => {
+            res.sendFile(path.resolve(__dirname, '../../public/front-end-example.html'));
+        });
+
+        root.use(this.initApiErrors());
+
+        return root;
+    }
+}

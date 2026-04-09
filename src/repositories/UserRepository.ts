@@ -5,23 +5,23 @@ export class UserRepository {
 
     constructor(private prisma: PrismaClient) {}
 
-    async findAll() {
+    findAll = async () => {
         return this.prisma.user.findMany()
     }
 
-    async findById(id: number) {
+    findById = async (id: number) => {
         return this.prisma.user.findUnique({ where: { id } })
     }
 
-    async create(data: CreateUserDTO) {
+    create = async (data: CreateUserDTO) => {
         return this.prisma.user.create({ data })
     }
 
-    async update(id: number, data: UpdateUserDTO) {
+    update = async (id: number, data: UpdateUserDTO) => {
         return this.prisma.user.update({ where: { id }, data })
     }
 
-    async delete(id: number) {
+    delete = async (id: number) => {
         return this.prisma.user.delete({ where: { id } })
     }
 }
