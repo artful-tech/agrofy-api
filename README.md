@@ -286,31 +286,43 @@ git branch nome-da-branch
 
 ## 📂 Estrutura de Pastas
 
-```text
-AGROFY-API
-├── docs
-├── images
-├── node_modules
-├── prisma
-├── public
-├── src
-│   ├── controllers
-│   ├── lib
-│   ├── models
-│   ├── repositories
-│   ├── routers
-│   ├── app.ts
-│   └── server.ts
-├── .env
-├── .env.development
-├── .gitignore
+```
+.AGROFY-API
 ├── docker-compose.yml
 ├── Dockerfile
+├── docs
+│   └── MVP-agrofy.pdf
+├── images
+│   ├── 1772977269895009905.webp
+│   └── files-screenshot.png
 ├── LICENSE
-├── package-lock.json
 ├── package.json
+├── package-lock.json
+├── prisma
+│   ├── migrations
+│   │   ├── 20260307171544_init
+│   │   ├── 20260314223426_create_farms_and_another_tables
+│   │   └── migration_lock.toml
+│   ├── schema.prisma
+│   └── seed.ts
 ├── prisma.config.ts
 ├── README.md
+├── src
+│   ├── app.ts
+│   ├── core
+│   │   ├── repositories
+│   │   └── usecases
+│   ├── infra
+│   │   ├── database
+│   │   ├── factories
+│   │   ├── http
+│   │   └── services
+│   ├── server.ts
+│   ├── shared
+│   │   └── index.ts
+│   └── views
+│       ├── dto
+│       └── pages
 └── tsconfig.json
 ```
 
