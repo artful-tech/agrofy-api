@@ -12,7 +12,7 @@
     "seed:dev": "dotenv -e .env.development -- npx prisma db seed",
     "seed:prod": "dotenv -e .env -- npx prisma db seed",
     "studio:dev": "dotenv -e .env.development -- npx prisma studio",
-    "compile": "npx tsc",
+    "compile": "npx tsc && copyfiles -u 1 src/views/pages/*.html dist/src/",
     "start": "node ./dist/server.js"
   },
   "keywords": [],
@@ -35,6 +35,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/morgan": "^1.9.10",
+    "copyfiles": "^2.4.1",
     "dotenv-cli": "^11.0.0",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",

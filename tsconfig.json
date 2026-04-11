@@ -12,5 +12,6 @@
       "@prisma/gen-client": ["./prisma/generated/prisma/client"]
     }
   },
-  "ts-node": { "transpileOnly": true }
+  "ts-node": { "transpileOnly": true },
+  "exclude": ["node_modules", "docs", "images", "public", "**/*.spec.ts"]
 }
