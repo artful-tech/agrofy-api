@@ -13,7 +13,7 @@
     "seed:prod": "dotenv -e .env -- npx prisma db seed",
     "studio:dev": "dotenv -e .env.development -- npx prisma studio",
     "compile": "npx tsc && copyfiles -u 1 src/views/pages/*.html dist/src/",
-    "start": "node ./dist/server.js"
+    "start": "node ./dist/src/server.js"
   },
   "keywords": [],
   "author": "",
