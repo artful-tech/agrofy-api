@@ -1,9 +1,9 @@
-import express, { Router } from 'express';
+import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
-import { Routers } from './routers';
-import { prisma } from './lib/prisma';
+import { prisma } from './infra/database/prisma';
+import { Routers } from './infra/http/routers';
 
 const app = express();
  

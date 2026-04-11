@@ -195,37 +195,55 @@ npm run dev
 npm run dev
 ```
 
-### B. Para atualizar as tabelas do banco de dados:
+### B. Para iniciar os containers:
+
+```bash
+docker compose up
+```
+
+### C. Para parar os containers:
+
+```bash
+docker compose down
+```
+
+### D. Para parar os containers e excluir o volume:
+
+```bash
+docker compose down -v
+```
+
+### E. Para atualizar as tabelas do banco de dados:
 
 ```bash
 npm run migrate:dev
 ```
 
-### C. Para gerar um novo prisma client, que é utilizado como interface do banco de dados para a aplicação:
+### F. Para gerar um novo prisma client, que é utilizado como interface do banco de dados para a aplicação:
 
 ```bash
 npm run prisma:generate
 ```
 
-### D. Para limpar os dados de teste do banco de dados e adicionar novos dados de teste:
+### G. Para limpar os dados de teste do banco de dados e adicionar novos dados de teste:
 
 ```bash
 npm run seed:dev
 ```
 
-### E. Mudar de branch local no Git:
+### H. Mudar de branch local no Git:
 
 ```bash
 git checkout nome-da-branch
 ```
 
-### F. Verificar nome das branchs locais:
+### J. Verificar nome das branchs locais:
 
 ```bash
 git branch
 ```
 
-### G. Criar uma nova branch:
+### K. Criar uma nova branch:
 
 ```bash
 git branch nome-da-branch
