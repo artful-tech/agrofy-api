@@ -30,4 +30,3 @@ const routers = new Routers(prisma);
 app.use(routers.getRouter());
  
 export default app;
- 

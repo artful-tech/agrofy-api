@@ -29,13 +29,13 @@ RUN apt-get update -y && apt-get install -y openssl
 WORKDIR /app
 
 # Definir variável de ambiente solicitada
-ENV DATABASE_URL="postgres://4065e26c9d39c714675a6d6ecd95ebb734dd1c7808272f4cf157ab1c932f5d8c:sk_s0KikyS4BylpBQD4tZ5pX@db.prisma.io:5432/postgres?sslmode=verify-full"
+ENV DATABASE_URL=$DATABASE_URL
 ENV NODE_ENV=production
 
 # Copiar apenas o necessário do estágio de build
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/public ./dist/public
+COPY --from=builder /app/src/views/pages ./dist/src/views/pages
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/prisma ./prisma
 

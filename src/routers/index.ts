@@ -53,7 +53,7 @@ export class Routers {
         root.use("/api", this.initApiRoutes());
 
         root.get("/", (req: Request, res: Response, next: NextFunction) => {
-            res.sendFile(path.resolve(__dirname, '../../public/front-end-example.html'));
+            res.sendFile(path.resolve(__dirname, '../views/pages/front-end-example.html'));
         });
 
         root.use(this.initApiErrors());
