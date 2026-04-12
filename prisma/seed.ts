@@ -1,4 +1,4 @@
-import { Role, SeasonStatus, Currency, LogCategory, TransactionType } from "@prisma/gen-client";
+import { Role, SeasonStatus, Currency, LogCategory, TransactionType } from "@prisma/client";
 import { prisma } from '../src/infra/database/prisma';
 
 async function main() {

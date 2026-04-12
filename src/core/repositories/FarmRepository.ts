@@ -1,4 +1,4 @@
-import { Farm, PrismaClient } from "@prisma/gen-client";
+import { Farm, PrismaClient } from "@prisma/client";
 import { IFarmRepository } from "./interfaces";
 
 

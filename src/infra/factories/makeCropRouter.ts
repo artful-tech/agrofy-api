@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/gen-client";
+import { PrismaClient } from "@prisma/client";
 import CropRouter from "../http/routers/cropRouter";
 import { CropRepository } from "../../core/repositories/CropRepository";
 import { CropController } from "../http/controllers/CropController";

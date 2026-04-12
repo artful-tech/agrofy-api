@@ -1,4 +1,4 @@
-import { Prisma, User } from "@prisma/gen-client";
+import { Prisma, User } from "@prisma/client";
 import { CreateUserDto, UpdatePasswordDto, ViewUserDto } from "../../views/dto/UserDto";
 
 export type UserModel = User;

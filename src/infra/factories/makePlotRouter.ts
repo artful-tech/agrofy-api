@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/gen-client";
+import { PrismaClient } from "@prisma/client";
 import { PlotRepository } from "../../core/repositories/PlotRepository";
 import { PlotController } from "../http/controllers/PlotController";
 import PlotRouter from "../http/routers/PlotRouter";

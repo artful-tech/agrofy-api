@@ -1,3 +1,4 @@
-import { Address } from "@prisma/gen-client";
+import { Address } from "@prisma/client";
+
 
 export type AddressModel = Address;

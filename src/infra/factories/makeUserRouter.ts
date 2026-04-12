@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/gen-client";
+import { PrismaClient } from "@prisma/client";
 import UserRouter from "../http/routers/userRouter";
 import { UserRepository } from "../../core/repositories/UserRepository";
 import { UserController } from "../http/controllers/UserController";

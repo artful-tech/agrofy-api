@@ -1,4 +1,4 @@
-import { Farm, Prisma } from "@prisma/gen-client";
+import { Farm, Prisma } from "@prisma/client";
 import { CreateFarmDto, UpdateFarmDto, ViewFarmDto } from "../../views/dto/FarmDto";
 
 export type FarmModel = Farm;

@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient, User } from '@prisma/gen-client'
+import { Prisma, PrismaClient, User } from "@prisma/client";
 import { IUserRepository } from './interfaces'
 
 

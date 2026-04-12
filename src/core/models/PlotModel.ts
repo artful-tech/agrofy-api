@@ -1,4 +1,4 @@
-import { Plot, Prisma } from "@prisma/gen-client";
+import { Plot, Prisma } from "@prisma/client";
 import { CreatePlotDto, UpdatePlotDto, ViewPlotDto } from "../../views/dto/PlotDto";
 
 export type PlotModel = Plot;

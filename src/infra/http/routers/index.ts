@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { PrismaClient } from "@prisma/gen-client";
+import { PrismaClient } from "@prisma/client";
 import { NextFunction, Router, Request, Response } from "express";
 import { makeCropRouter } from '../../factories/makeCropRouter';
 import { makePlotRouter } from '../../factories/makePlotRouter';

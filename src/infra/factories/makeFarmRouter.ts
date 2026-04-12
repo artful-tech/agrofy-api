@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/gen-client";
+import { PrismaClient } from "@prisma/client";
 import FarmRouter from "../http/routers/farmRouter";
 import { FarmRepository } from "../../core/repositories/FarmRepository";
 import { FarmController } from "../http/controllers/FarmController";

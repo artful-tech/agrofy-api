@@ -1,4 +1,4 @@
-import { Crop, Prisma } from "@prisma/gen-client";
+import { Crop, Prisma } from "@prisma/client";
 import { CreateCropDto, UpdateCropDto, ViewCropDto } from "../../views/dto/CropDto";
 
 export type CropModel  = Crop;

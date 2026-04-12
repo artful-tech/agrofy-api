@@ -1,4 +1,4 @@
-import { Crop, Farm, Plot, User } from "@prisma/gen-client";
+import { Crop, Farm, Plot, User } from "@prisma/client";
 
 export interface IBaseRepository<T> {
     findAll(): Promise<T[]>

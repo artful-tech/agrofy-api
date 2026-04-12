@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/gen-client";
+import { PrismaClient } from "@prisma/client";
 import { ICropRepository } from "./interfaces";
 import { CropModel } from "../models/CropModel";
 

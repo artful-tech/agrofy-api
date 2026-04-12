@@ -1,4 +1,4 @@
-import { Plot, PrismaClient } from "@prisma/gen-client";
+import { Plot, PrismaClient } from "@prisma/client";
 import { IPlotRepository } from "./interfaces";
 
 
