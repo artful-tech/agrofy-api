@@ -13,24 +13,24 @@ export class UserController implements IUserController {
         return res.json(users)
     }
 
-    public show = async (req: Request, res: Response) => {
-        const user = await this.userUsecase.findById(Number(req.params.id))
-        if (!user) return res.status(404).json({ message: 'User not found' })
-        return res.json(user)
-    }
+    // public show = async (req: Request, res: Response) => {
+    //     const user = await this.userUsecase.findById(Number(req.params.id))
+    //     if (!user) return res.status(404).json({ message: 'User not found' })
+    //     return res.json(user)
+    // }
 
-    public store = async (req: Request, res: Response) => {
-        const user = await this.userUsecase.create(req.body)
-        return res.status(201).json(user)
-    }
+    // public store = async (req: Request, res: Response) => {
+    //     const user = await this.userUsecase.create(req.body)
+    //     return res.status(201).json(user)
+    // }
 
-    public update = async (req: Request, res: Response) => {
-        const user = await this.userUsecase.update(Number(req.params.id), req.body)
-        return res.json(user)
-    }
+    // public update = async (req: Request, res: Response) => {
+    //     const user = await this.userUsecase.update(Number(req.params.id), req.body)
+    //     return res.json(user)
+    // }
 
-    public destroy = async (req: Request, res: Response) => {
-        await this.userUsecase.delete(Number(req.params.id))
-        return res.status(204).send()
-    }
+    // public destroy = async (req: Request, res: Response) => {
+    //     await this.userUsecase.delete(Number(req.params.id))
+    //     return res.status(204).send()
+    // }
 }
