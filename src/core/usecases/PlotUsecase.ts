@@ -1,4 +1,5 @@
 import { ViewPlotDto } from "../../views/dto/PlotDto";
+import { PlotMapper } from "../models/PlotModel";
 import { IPlotRepository } from "../repositories/interfaces";
 import { IPlotUsecase } from "./interfaces";
 
@@ -12,14 +13,6 @@ export class PlotUsecase implements IPlotUsecase {
             return [];
         }
 
-        return plots.map(plot => ({
-            name: plot.name,
-            id: plot.id,
-            area: plot.area,
-            soilType: plot.soilType,
-            farmId: plot.farmId,
-            createdAt: plot.createdAt,
-            updatedAt: plot.updatedAt
-        }));
+        return PlotMapper.toView(plots);
     }
 }

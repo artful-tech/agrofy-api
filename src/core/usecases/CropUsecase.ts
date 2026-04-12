@@ -1,4 +1,5 @@
 import { ViewCropDto } from "../../views/dto/CropDto";
+import { CropMapper } from "../models/CropModel";
 import { ICropRepository } from "../repositories/interfaces";
 import { ICropUsecase } from "./interfaces";
 
@@ -14,13 +15,6 @@ export class CropUsecase implements ICropUsecase {
             return [];
         }
 
-        return crops.map(crop => ({
-            id: crop.id,
-            name: crop.name,
-            variety: crop.variety,
-            daysToHarvest: crop.daysToHarvest,
-            createdAt: crop.createdAt,
-            updatedAt: crop.updatedAt
-        }));
+        return CropMapper.toView(crops);
     }
 }

@@ -1,27 +1,36 @@
+import { CreateAddressDto, UpdateAddressDto, ViewAddressDto } from "./AddressDto";
+
 export type CreateFarmDto = {
     name: string;
-    ownerName?: string | null;
-    totalArea?: number | null;
-    location?: string | null;
-    address?: string | null;
+    totalArea: number;
+    unity: string;
+    resume?: string;
+    photo?: string;
+    address: CreateAddressDto;
+    observation?: string;
 }
 
 export type UpdateFarmDto = {
+    name?: string;
     id: string;
-    name?: string | null;
-    ownerName?: string | null;
-    totalArea?: number | null;
-    location?: string | null;
-    address?: string | null;
+    totalArea?: number;
+    unity?: string;
+    resume?: string;
+    photo?: string;
+    address?: UpdateAddressDto;
+    observation?: string;
 }
 
 export type ViewFarmDto = {
     name: string;
     id: string;
-    ownerName?: string | null;
     totalArea: number;
-    location: string;
-    address?: string | null;
+    unity: string;
+    resume: string | null;
+    photo: string | null;
+    addressId: string;
+    observation: string | null;
     createdAt: Date;
-    updatedAt?: Date | null;
+    updatedAt: Date;
+    deletedAt?: Date | null;
 }

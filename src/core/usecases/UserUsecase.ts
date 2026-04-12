@@ -1,4 +1,5 @@
 import { ViewUserDto } from "../../views/dto/UserDto";
+import { UserMapper } from "../models/UserModel";
 import { IUserRepository } from "../repositories/interfaces";
 import { IUserUsecase } from "./interfaces";
 
@@ -12,12 +13,6 @@ export class UserUsecase implements IUserUsecase {
             return [];
         }
 
-        return users.map(user => ({
-            name: user.name,
-            id: user.id,
-            email: user.email,
-            createdAt: user.createdAt,
-            updatedAt: user.updatedAt
-        }));
+        return UserMapper.toView(users);
     }
 }

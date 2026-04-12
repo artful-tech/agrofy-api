@@ -1,6 +1,5 @@
-import { PrismaClient, User } from '@prisma/gen-client'
+import { Prisma, PrismaClient, User } from '@prisma/gen-client'
 import { IUserRepository } from './interfaces'
-import { UserCreateInput, UserUpdateInput } from '../../../prisma/generated/prisma/models'
 
 
 export class UserRepository implements IUserRepository {
@@ -15,11 +14,11 @@ export class UserRepository implements IUserRepository {
         return this.prisma.user.findUnique({ where: { id } })
     }
 
-    create = async (data: UserCreateInput) => {
+    create = async (data: Prisma.UserCreateInput) => {
         return this.prisma.user.create({ data })
     }
 
-    update = async (id: string, data: UserUpdateInput): Promise<User> => {
+    update = async (id: string, data: Prisma.UserUpdateInput): Promise<User> => {
         return this.prisma.user.update({ where: { id }, data })
     }
 

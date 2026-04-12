@@ -1,18 +1,18 @@
 export type CreateUserDto = {
-    name: string;
     email: string;
+    password: string;
 }
 
-export type UpdateUserDto = {
-    id: string;
-    name?: string | null;
-    email?: string | null;
+export type UpdatePasswordDto = {
+    email: string;
+    currentPassword: string;
+    newPassword: string;
 }
 
 export type ViewUserDto = {
-    name: string;
     id: string;
     email: string;
     createdAt: Date;
-    updatedAt?: Date | null;
+    updatedAt: Date;
+    deletedAt?: Date | null;
 }

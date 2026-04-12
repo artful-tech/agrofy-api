@@ -1,4 +1,5 @@
 import { ViewFarmDto } from "../../views/dto/FarmDto";
+import { FarmMapper } from "../models/FarmModel";
 import { IFarmRepository } from "../repositories/interfaces";
 import { IFarmUsecase } from "./interfaces";
 
@@ -12,15 +13,6 @@ export class FarmUsecase implements IFarmUsecase {
             return [];
         }
 
-        return farms.map(farm => ({
-            name: farm.name,
-            id: farm.id,
-            ownerName: farm.ownerName,
-            totalArea: farm.totalArea,
-            location: farm.location,
-            address: farm.address,
-            createdAt: farm.createdAt,
-            updatedAt: farm.updatedAt
-        }));
+        return FarmMapper.toView(farms);
     }
 }
