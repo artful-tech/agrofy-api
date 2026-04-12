@@ -44,6 +44,7 @@ ENV NODE_ENV=production
 COPY --from=builder /app/dist ./dist
 COPY --from=deps-prod /app/node_modules ./node_modules
 COPY --from=deps-prod /app/package*.json ./
+COPY --from=deps-prod /app/prisma ./prisma
 
 EXPOSE 8080
 
