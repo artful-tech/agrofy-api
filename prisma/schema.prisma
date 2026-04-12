@@ -1,131 +1,277 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client"
-  output   = "./generated/prisma"
+    provider = "prisma-client-js" // Corrigido para o provider padrão
+    output   = "./generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+    provider = "postgresql"
 }
 
+// --- ENUMS PARA PERFORMANCE E INTEGRIDADE ---
+
+enum Role {
+    ADMIN
+    MANAGER
+    WORKER
+    OWNER
+}
+
+enum SeasonStatus {
+    PLANTED
+    GROWING
+    HARVESTED
+    CANCELLED
+}
+
+enum Currency {
+    BRL
+    MUMBUCA
+    DOLAR
+    EURO
+}
+
+enum LogCategory {
+    WEATHER
+    PEST
+    EMERGENCY
+    OBSERVATION
+}
+
+enum TransactionType {
+    INCOME // Receita (Venda de safra, subsídio)
+    EXPENSE // Despesa (Sementes, mão de obra)
+}
+
+// --- TABELAS ---
+
 model User {
-  id        String      @id @default(uuid())
-  name      String
-  email     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+    id       String @id @default(uuid())
+    email    String @unique @db.VarChar(255)
+    password String @db.VarChar(35)
+
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    people People?
+
+    @@map("users")
+}
+
+model People {
+    id        String  @id @default(uuid())
+    name      String  @db.VarChar(150)
+    cellphone String? @db.VarChar(20)
+    role      Role    @default(WORKER) // Alterado para Enum
+    photo     String? @db.Text
+    userId    String  @unique
+
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    user    User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+    farms   PeopleOnFarms[]
+    manager Manager?
+
+    @@map("peoples")
+}
+
+model Manager {
+    id       String @id @default(uuid())
+    peopleId String @unique
+
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    people   People    @relation(fields: [peopleId], references: [id])
+    transactions Transaction[]
+    finance Finance?
+
+    @@map("managers")
+}
+
+model Address {
+    id           String  @id @default(uuid())
+    street       String? @db.VarChar(60)
+    number       Int?
+    complement   String? @db.VarChar(40)
+    neighborhood String? @db.VarChar(100)
+    city         String  @db.VarChar(100)
+    state        String  @db.VarChar(50)
+    country      String  @default("Brasil") @db.VarChar(50)
+
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    farm Farm?
+
+    @@map("addresses")
 }
 
 model Farm {
-  id          String   @id @default(uuid())
-  name        String
-  ownerName   String?
-  totalArea   Float
-  location    String   // Ex: Espraiado, Maricá
-  address     String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+    id          String  @id @default(uuid())
+    name        String  @db.VarChar(150)
+    totalArea   Float
+    unity       String  @db.VarChar(10)
+    resume      String? @db.VarChar(255)
+    photo       String? @db.Text
+    addressId   String  @unique
+    observation String? @db.VarChar(255)
 
-  plots       Plot[]
-  @@map("farms")
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    peoples     PeopleOnFarms[]
+    plots       Plot[]
+    address     Address         @relation(fields: [addressId], references: [id])
+    inventories InventoryItem[]
+
+    @@map("farms")
+}
+
+model PeopleOnFarms {
+    peopleId String
+    farmId   String
+
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    people People @relation(fields: [peopleId], references: [id])
+    farm   Farm   @relation(fields: [farmId], references: [id])
+
+    @@id([peopleId, farmId])
+    @@map("people_on_farms")
 }
 
 model Plot {
-  id          String   @id @default(uuid())
-  name        String
-  area        Float
-  soilType    String?
-  farmId      String
-  farm        Farm     @relation(fields: [farmId], references: [id], onDelete: Cascade)
-  
-  seasons     Season[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+    id          String  @id @default(uuid())
+    name        String  @db.VarChar(100)
+    area        Float
+    unity       String  @db.VarChar(10)
+    soilType    String? @db.VarChar(40)
+    farmId      String
+    photo       String? @db.Text
+    observation String? @db.VarChar(255)
 
-  @@map("plots")
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    farm    Farm     @relation(fields: [farmId], references: [id])
+    seasons Season[]
+
+    @@map("plots")
 }
-
-// --- CATÁLOGO DE CULTURAS ---
 
 model Crop {
-  id            String   @id @default(uuid())
-  name          String   // Ex: Alface, Tomate
-  variety       String?  // Ex: Americana, Cereja
-  daysToHarvest Int      // Tempo médio de maturação
-  
-  seasons       Season[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+    id            String  @id @default(uuid())
+    name          String  @db.VarChar(100)
+    variety       String? @db.VarChar(100)
+    photo         String? @db.Text
+    daysToHarvest Int
+    observation   String? @db.VarChar(255)
 
-  @@map("crops")
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    seasons Season[]
+
+    @@map("crops")
 }
 
-// --- CICLO PRODUTIVO (SAFRAS) ---
-
 model Season {
-  id          String    @id @default(uuid())
-  status      String    @default("PLANTED") // PLANTED, GROWING, HARVESTED, CANCELLED
-  plantedAt   DateTime  @default(now())
-  harvestAt   DateTime? // Data prevista ou real da colheita
-  
-  plotId      String
-  plot        Plot      @relation(fields: [plotId], references: [id])
-  
-  cropId      String
-  crop        Crop      @relation(fields: [cropId], references: [id])
+    id        String       @id @default(uuid())
+    status    SeasonStatus @default(PLANTED) // Alterado para Enum
+    plantedAt DateTime     @default(now())
+    harvestAt DateTime?
+    photo     String?      @db.Text
+    plotId    String
+    cropId    String
 
-  logs        FieldLog[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
 
-  @@map("seasons")
+    plot Plot       @relation(fields: [plotId], references: [id])
+    crop Crop       @relation(fields: [cropId], references: [id])
+    logs FieldLog[]
+    transactions Transaction[]
+
+    @@map("seasons")
 }
 
 model FieldLog {
-  id          String   @id @default(uuid())
-  description String   // Ex: Aplicado fertilizante orgânico
-  category    String   // WEATHER, PEST, OBSERVATION
-  date        DateTime @default(now())
-  
-  seasonId    String
-  season      Season   @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+    id          String      @id @default(uuid())
+    description String      @db.VarChar(255)
+    category    LogCategory // Alterado para Enum
+    date        DateTime    @default(now())
+    seasonId    String
 
-  @@map("field_logs")
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+    @@map("field_logs")
 }
-
-// --- LOGÍSTICA E ESTOQUE ---
 
 model InventoryItem {
-  id          String   @id @default(uuid())
-  name        String   // Ex: Semente de Tomate, Adubo NPK
-  category    String   // SEED, FERTILIZER, CHEMICAL
-  quantity    Float
-  unit        String   // KG, L, UN
-  minStock    Float    @default(0) // Para alertas de reposição
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+    id       String  @id @default(uuid())
+    name     String  @db.VarChar(100)
+    category String? @db.VarChar(50)
+    quantity Float
+    unit     String  @db.VarChar(20) // Ex: KG, UN, L
+    minStock Float   @default(0)
+    farmId   String
 
-  @@map("inventory_items")
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    farm Farm @relation(fields: [farmId], references: [id])
+
+    @@map("inventory_items")
 }
 
-// --- ADMINISTRAÇÃO FINANCEIRA ---
+model Transaction {
+    id          String          @id @default(uuid())
+    description String          @db.VarChar(255)
+    amount      Decimal         @db.Decimal(12, 2)
+    type        TransactionType
+    currency    Currency        @default(BRL)
+    date        DateTime        @default(now())
+    category    String?         @db.VarChar(100)
+    managerId   String
+    seasonId    String?
 
-model Expense {
-  id          String   @id @default(uuid())
-  description String
-  amount      Float
-  currency    String   @default("BRL") // BRL ou MUMBUCA
-  date        DateTime @default(now())
-  category    String   // LABOR, SEED, UTILITY, MAINTENANCE
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
 
-  @@map("expenses")
+    manager Manager @relation(fields: [managerId], references: [id])
+    season  Season? @relation(fields: [seasonId], references: [id])
+
+    @@map("transactions")
+}
+
+model Finance {
+    id        String   @id @default(uuid())
+    balance   Decimal  @db.Decimal(15, 2) // Maior precisão para balanços totais
+    currency  Currency @default(BRL)
+    managerId String @unique
+
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    manager Manager @relation(fields: [managerId], references: [id])
+
+    @@map("finances")
 }

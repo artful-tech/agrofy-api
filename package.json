@@ -7,6 +7,7 @@
     "dev": "dotenv -e .env.development -- npx nodemon --watch src/ -e ts --exec \"ts-node -r tsconfig-paths/register src/server.ts\"",
     "prod": "dotenv -e .env -- npx nodemon --watch src/ -e ts --exec \"ts-node -r tsconfig-paths/register src/server.ts\"",
     "migrate:dev": "dotenv -e .env.development -- npx prisma migrate dev",
+    "migrate:dev:reset": "dotenv -e .env.development -- npx prisma migrate reset",
     "migrate:prod": "npx prisma migrate deploy",
     "prisma:generate": "dotenv -e .env.development -- npx prisma generate",
     "seed:dev": "dotenv -e .env.development -- npx prisma db seed",
