@@ -9,6 +9,7 @@
     "migrate:dev": "dotenv -e .env.development -- npx prisma migrate dev",
     "migrate:dev:reset": "dotenv -e .env.development -- npx prisma migrate reset",
     "migrate:prod": "npx prisma migrate deploy",
+    "migrate:prod:reset": "dotenv -e .env -- npx prisma migrate reset",
     "prisma:generate": "dotenv -e .env.development -- npx prisma generate",
     "seed:dev": "dotenv -e .env.development -- npx prisma db seed",
     "seed:prod": "dotenv -e .env -- npx prisma db seed",
