@@ -14,7 +14,12 @@ export class PlotUsecase implements IPlotUsecase {
 
         return plots.map(plot => ({
             name: plot.name,
-            id: plot.id
+            id: plot.id,
+            area: plot.area,
+            soilType: plot.soilType,
+            farmId: plot.farmId,
+            createdAt: plot.createdAt,
+            updatedAt: plot.updatedAt
         }));
     }
 }

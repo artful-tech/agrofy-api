@@ -11,7 +11,7 @@ export type UpdateUserDto = {
 
 export type ViewUserDto = {
     name: string;
-    id: number;
+    id: string;
     email: string;
     createdAt: Date;
     updatedAt?: Date | null;
