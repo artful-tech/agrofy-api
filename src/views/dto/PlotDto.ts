@@ -1,13 +1,24 @@
 export type CreatePlotDto = {
-  name: string
-  email: string
+    name: string;
+    area?: number | null;
+    soilType?: string | null;
+    farmId: string;
 }
 
 export type UpdatePlotDto = {
-  name?: string
-  email?: string
+    id: string;
+    name?: string | null;
+    area?: number | null;
+    soilType?: string | null;
+    farmId?: string | null;
 }
 
 export type ViewPlotDto = {
-
+    name: string;
+    id: string;
+    area: number;
+    soilType: string | null;
+    farmId: string;
+    createdAt: Date;
+    updatedAt?: Date | null;
 }

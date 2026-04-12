@@ -6,3 +6,9 @@ export interface IBaseController {
 }
 
 export interface ICropController extends IBaseController {}
+
+export interface IFarmController extends IBaseController {}
+
+export interface IPlotController extends IBaseController {}
+
+export interface IUserController extends IBaseController {}

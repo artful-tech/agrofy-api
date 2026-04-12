@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { PrismaClient } from "@prisma/gen-client";
 import { UserController } from "../controllers/UserController";
+
 
 export default class UserRouter {
 

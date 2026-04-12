@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
 import { IFarmUsecase } from "../../../core/usecases/interfaces";
+import { IFarmController } from "./interfaces";
+import { ViewFarmDto } from "../../../views/dto/FarmDto";
 
 
-export class FarmController {
-    constructor(private farmRepository: IFarmUsecase) {}
+export class FarmController implements IFarmController {
 
-    public index = async (req: Request, res: Response) => {
-        const farms = await this.farmRepository.getAll();
-        res.json(farms);
+    constructor(private farmUsecase: IFarmUsecase) {}
+
+    public index = async (_req: Request, res: Response): Promise<Response> => {
+        const farms: ViewFarmDto[] = await this.farmUsecase.getAll();
+        return res.json(farms);
     }
 }

@@ -1,6 +1,6 @@
 import { PrismaClient, User } from '@prisma/gen-client'
-import { CreateUserDto, UpdateUserDto } from '../../views/dto/UserDto'
 import { IUserRepository } from './interfaces'
+import { UserCreateInput, UserUpdateInput } from '../../../prisma/generated/prisma/models'
 
 
 export class UserRepository implements IUserRepository {
@@ -11,19 +11,19 @@ export class UserRepository implements IUserRepository {
         return this.prisma.user.findMany()
     }
 
-    findById = async (id: number): Promise<User | null> => {
+    findById = async (id: string): Promise<User | null> => {
         return this.prisma.user.findUnique({ where: { id } })
     }
 
-    create = async (data: CreateUserDto) => {
+    create = async (data: UserCreateInput) => {
         return this.prisma.user.create({ data })
     }
 
-    update = async (id: number, data: UpdateUserDto): Promise<User> => {
+    update = async (id: string, data: UserUpdateInput): Promise<User> => {
         return this.prisma.user.update({ where: { id }, data })
     }
 
-    delete = async (id: number): Promise<User> => {
+    delete = async (id: string): Promise<User> => {
         return this.prisma.user.delete({ where: { id } })
     }
 }

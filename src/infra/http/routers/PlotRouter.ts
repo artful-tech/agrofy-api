@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { PlotController } from "../controllers/PlotController";
 
+
 export default  class PlotRouter {
 
     constructor(private plotController: PlotController) {}

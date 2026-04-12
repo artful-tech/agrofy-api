@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ICropController } from "../controllers/interfaces/ICropController";
+import { ICropController } from "../controllers/interfaces";
 
 
 export default  class CropRouter {

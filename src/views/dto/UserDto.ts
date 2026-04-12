@@ -1,18 +1,18 @@
 export type CreateUserDto = {
-  name: string
-  email: string
+    name: string;
+    email: string;
 }
 
 export type UpdateUserDto = {
-  name?: string
-  email?: string
+    id: string;
+    name?: string | null;
+    email?: string | null;
 }
 
 export type ViewUserDto = {
     name: string;
-    id: string;
-    variety: string | null;
-    daysToHarvest: number;
+    id: number;
+    email: string;
     createdAt: Date;
-    updatedAt?: Date;
+    updatedAt?: Date | null;
 }

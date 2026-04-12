@@ -1,16 +1,17 @@
 export type CreateFarmDto = {
     name: string;
-    ownerName: string | null;
-    totalArea: number;
-    location: string;
-    address: string | null;
+    ownerName?: string | null;
+    totalArea?: number | null;
+    location?: string | null;
+    address?: string | null;
 }
 
 export type UpdateFarmDto = {
-    name: string;
+    id: string;
+    name?: string | null;
     ownerName?: string | null;
-    totalArea?: number;
-    location?: string;
+    totalArea?: number | null;
+    location?: string | null;
     address?: string | null;
 }
 

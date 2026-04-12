@@ -5,14 +5,16 @@ export type CreateCropDto = {
 }
 
 export type UpdateCropDto = {
-    name?: string
-    email?: string
+    id: string;
+    name?: string | null;
+    variety?: string | null;
+    daysToHarvest?: number | null;
 }
 
 export type ViewCropDto = {
     name: string;
     id: string;
-    variety: string | null;
+    variety?: string | null;
     daysToHarvest: number;
     createdAt: Date;
     updatedAt?: Date;

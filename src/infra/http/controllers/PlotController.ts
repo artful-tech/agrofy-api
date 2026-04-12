@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
-import { IPlotRepository } from "../../../core/repositories/interfaces/IPlotRepository";
+import { IPlotUsecase } from "../../../core/usecases/interfaces";
+import { IPlotController } from "./interfaces";
+import { ViewPlotDto } from "../../../views/dto/PlotDto";
 
 
-export class PlotController {
-    constructor(private plotRepository: IPlotRepository) { }
+export class PlotController implements IPlotController {
+    
+    constructor(private plotUsecase: IPlotUsecase) { }
 
-    index = async (req: Request, res: Response) => {
-        const plots = await this.plotRepository.findAll();
-        res.json(plots);
+    index = async (_req: Request, res: Response): Promise<Response>  => {
+        const plots: ViewPlotDto[] = await this.plotUsecase.getAll();
+        return res.json(plots);
     }
 }

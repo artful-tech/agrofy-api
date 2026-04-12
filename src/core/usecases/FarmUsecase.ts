@@ -1,7 +1,8 @@
 import { ViewFarmDto } from "../../views/dto/FarmDto";
 import { IFarmRepository } from "../repositories/interfaces";
+import { IFarmUsecase } from "./interfaces";
 
-export class FarmUsecase {
+export class FarmUsecase implements IFarmUsecase {
     constructor(private farmRepository: IFarmRepository) {}
     
     public getAll = async (): Promise<ViewFarmDto[]> => {

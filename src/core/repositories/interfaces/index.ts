@@ -11,8 +11,8 @@ export interface IFarmRepository extends IBaseRepository<Farm> {}
 export interface IPlotRepository extends IBaseRepository<Plot> {}
 
 export interface IUserRepository extends IBaseRepository<User> {
-    findById(id: number): Promise<User | null>;
+    findById(id: string): Promise<User | null>;
     create(data: any): Promise<User>;
-    update(id: number, data: any): Promise<User>;
-    delete(id: number): Promise<User>;
+    update(id: string, data: any): Promise<User>;
+    delete(id: string): Promise<User>;
 }
