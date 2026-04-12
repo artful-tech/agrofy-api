@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
-import { ICropRepository } from "../../../core/repositories/interfaces/ICropRepository";
-import { ICropController } from "./interfaces/ICropController";
+import { ViewCropDto } from "../../../views/dto/CropDto";
+import { ICropUsecase } from "../../../core/usecases/interfaces";
+import { ICropController } from "./interfaces";
 
 
 export class CropController implements ICropController {
-    constructor(private cropRepository: ICropRepository) {}
+    constructor(private cropUsecase: ICropUsecase) {}
 
-    public index = async (req: Request, res: Response): Promise<any> => {
-        const crops = await this.cropRepository.findAll();
-        res.json(crops);
+    public index = async (_req: Request, res: Response): Promise<Response> => {
+        const crops: ViewCropDto[] = await this.cropUsecase.getAll();
+        return res.json(crops);
     }
 }

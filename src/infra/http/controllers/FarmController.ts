@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { IFarmRepository } from "../../../core/repositories/interfaces/IFarmRepository";
+import { IFarmUsecase } from "../../../core/usecases/interfaces";
 
 
 export class FarmController {
-    constructor(private farmRepository: IFarmRepository) {}
+    constructor(private farmRepository: IFarmUsecase) {}
 
     public index = async (req: Request, res: Response) => {
-        const farms = await this.farmRepository.findAll();
+        const farms = await this.farmRepository.getAll();
         res.json(farms);
     }
 }
