@@ -1,5 +1,5 @@
 import { Plot, PrismaClient } from "@prisma/gen-client";
-import { IPlotRepository } from "./interfaces/IPlotRepository";
+import { IPlotRepository } from "./interfaces";
 
 
 export class PlotRepository implements IPlotRepository {

@@ -1,5 +1,5 @@
 import { Farm, PrismaClient } from "@prisma/gen-client";
-import { IFarmRepository } from "./interfaces/IFarmRepository";
+import { IFarmRepository } from "./interfaces";
 
 
 export class FarmRepository implements IFarmRepository {
