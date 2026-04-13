@@ -288,42 +288,40 @@ git branch nome-da-branch
 
 ```
 .AGROFY-API
-├── docker-compose.yml
-├── Dockerfile
-├── docs
-│   └── MVP-agrofy.pdf
-├── images
-│   ├── 1772977269895009905.webp
-│   └── files-screenshot.png
+├── docker-compose.yml        # Descreve o container do banco de dados
+├── Dockerfile                # Arquivo para preparar container para o deploy
+├── docs                      # Documentação técnica, PDF do MVP e fluxogramas
+├── images                    # Assets estáticos e screenshots para o README
 ├── LICENSE
 ├── package.json
-├── package-lock.json
-├── prisma
-│   ├── migrations
-│   │   ├── 20260307171544_init
-│   │   ├── 20260314223426_create_farms_and_another_tables
-│   │   └── migration_lock.toml
-│   ├── schema.prisma
-│   └── seed.ts
-├── prisma.config.ts
-├── README.md
+├── prisma                    # Esse é o ORM que se comunica com o banco de dados
+│   ├── migrations            # Histórico de alterações estruturais do banco (SQL)
+│   ├── schema.prisma         # Definição das tabelas, Enums e relações (Fonte da verdade)
+│   └── seed.ts               # Scripts para popular o banco com dados de teste/iniciais
 ├── src
-│   ├── app.ts
-│   ├── core
-│   │   ├── repositories
-│   │   └── usecases
-│   ├── infra
-│   │   ├── database
-│   │   ├── factories
-│   │   ├── http
-│   │   └── services
-│   ├── server.ts
-│   ├── shared
-│   │   └── index.ts
-│   └── views
-│       ├── dto
-│       └── pages
-└── tsconfig.json
+│   ├── app.ts                # Configuração do Express (middlewares, rotas e instâncias)
+│   ├── core                  # CAMADA DE DOMÍNIO: Regras de negócio puras e abstrações
+│   │   ├── errors            # Classes de exceções customizadas (ex: AppError)
+│   │   ├── models            # Entidades de domínio e Mappers (tradução de tipos)
+│   │   ├── repositories      # Implementação da comunicação direta com o banco (Prisma)
+│   │   │   └── interfaces    # Contratos (tipos) que os repositórios devem seguir
+│   │   └── usecases          # Lógica de negócio (onde a mágica do Agrofy acontece)
+│   │       └── interfaces    # Definição das entradas e saídas de cada caso de uso
+│   ├── infra                 # CAMADA DE INFRAESTRUTURA: Ferramentas externas e HTTP
+│   │   ├── database          # Configuração e conexão com o banco de dados (Prisma Client)
+│   │   ├── factories         # Injeção de dependência: onde você "monta" as peças das rotas
+│   │   ├── http              # Tudo relacionado ao protocolo HTTP
+│   │   │   ├── controllers   # Recebem a requisição, chamam o UseCase e dão a resposta
+│   │   │   ├── middlewares   # Filtros de requisição: Erros, Validação (Zod) e Auth
+│   │   │   └── routers       # Definição dos endpoints (URLs) da aplicação
+│   │   └── services          # Integrações externas (E-mail, APIs de terceiros, Clima)
+│   ├── server.ts             # Ponto de entrada: inicia o servidor e escuta a porta (8080)
+│   ├── shared                # Recursos compartilhados por todas as camadas
+│   │   ├── dtos              # Schemas de validação (Zod) e interfaces de entrada/saída
+│   │   └── utils             # Funções utilitárias genéricas (datas, moedas, logs)
+│   └── views                 # Arquivos que serão servidos para o cliente final
+│       └── pages             # HTMLs estáticos e templates de visualização
+└── tsconfig.json             # Configurações do compilador TypeScript e Aliases (@)
 ```
 
 ---
