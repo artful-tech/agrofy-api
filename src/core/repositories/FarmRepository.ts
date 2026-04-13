@@ -1,11 +1,12 @@
-import { Farm, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { IFarmRepository } from "./interfaces";
+import { FarmModel } from "../models/FarmModel";
 
 
 export class FarmRepository implements IFarmRepository {
     constructor(private prisma: PrismaClient) {}
 
-    findAll = async (): Promise<Farm[]> => {
+    findAll = async (): Promise<FarmModel[]> => {
         return this.prisma.farm.findMany();
     }
 }
