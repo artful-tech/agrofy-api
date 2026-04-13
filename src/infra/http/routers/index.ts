@@ -31,7 +31,8 @@ export class Routers {
             res.sendFile(path.resolve(__dirname, '../../../views/pages/front-end-example.html'));
         });
 
-        root.use(ErrorMiddleware.getRoutes());
+        root.use(ErrorMiddleware.notFoundHandler);
+        root.use(ErrorMiddleware.errorHandler);
 
         return root;
     }
