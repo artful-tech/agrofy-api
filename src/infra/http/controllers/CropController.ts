@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { ViewCropDto } from "../../../views/dto/CropDto";
 import { ICropUsecase } from "../../../core/usecases/interfaces";
 import { ICropController } from "./interfaces";
+import { ViewCropDto } from "../../../shared/dtos/CropDto";
 
 
 export class CropController implements ICropController {

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IFarmUsecase } from "../../../core/usecases/interfaces";
 import { IFarmController } from "./interfaces";
-import { ViewFarmDto } from "../../../views/dto/FarmDto";
+import { ViewFarmDto } from "../../../shared/dtos/FarmDto";
 
 
 export class FarmController implements IFarmController {

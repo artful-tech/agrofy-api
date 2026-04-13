@@ -1,10 +1,11 @@
 import { Crop, Prisma } from "@prisma/client";
-import { CreateCropDto, UpdateCropDto, ViewCropDto } from "../../views/dto/CropDto";
+import { CreateCropDto, UpdateCropDto, ViewCropDto } from "../../shared/dtos/CropDto";
+
 
 export type CropModel  = Crop;
 
 export class CropMapper {
-    
+
     static toView(model: CropModel): ViewCropDto;
     static toView(models: CropModel[]): ViewCropDto[];
 

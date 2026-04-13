@@ -1,4 +1,4 @@
-import { ViewUserDto } from "../../views/dto/UserDto";
+import { ViewUserDto } from "../../shared/dtos/UserDto";
 import { UserMapper } from "../models/UserModel";
 import { IUserRepository } from "../repositories/interfaces";
 import { IUserUsecase } from "./interfaces";

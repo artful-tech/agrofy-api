@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import UserRouter from "../http/routers/userRouter";
+import UserRouter from "../http/routers/UserRouter";
 import { UserRepository } from "../../core/repositories/UserRepository";
 import { UserController } from "../http/controllers/UserController";
 import { UserUsecase } from "../../core/usecases/UserUsecase";

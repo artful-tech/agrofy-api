@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { IUserUsecase } from '../../../core/usecases/interfaces'
 import { IUserController } from './interfaces'
-import { ViewUserDto } from '../../../views/dto/UserDto'
+import { ViewUserDto } from '../../../shared/dtos/UserDto'
 
 
 export class UserController implements IUserController {

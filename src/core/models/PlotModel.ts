@@ -1,9 +1,11 @@
 import { Plot, Prisma } from "@prisma/client";
-import { CreatePlotDto, UpdatePlotDto, ViewPlotDto } from "../../views/dto/PlotDto";
+import { CreatePlotDto, UpdatePlotDto, ViewPlotDto } from "../../shared/dtos/PlotDto";
+
 
 export type PlotModel = Plot;
 
 export class PlotMapper {
+    
     static toView(model: PlotModel): ViewPlotDto;
     static toView(models: PlotModel[]): ViewPlotDto[];
 

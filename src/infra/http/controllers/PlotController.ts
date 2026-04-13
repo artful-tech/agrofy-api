@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IPlotUsecase } from "../../../core/usecases/interfaces";
 import { IPlotController } from "./interfaces";
-import { ViewPlotDto } from "../../../views/dto/PlotDto";
+import { ViewPlotDto } from "../../../shared/dtos/PlotDto";
 
 
 export class PlotController implements IPlotController {

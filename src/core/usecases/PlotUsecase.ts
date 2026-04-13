@@ -1,4 +1,4 @@
-import { ViewPlotDto } from "../../views/dto/PlotDto";
+import { ViewPlotDto } from "../../shared/dtos/PlotDto";
 import { PlotMapper } from "../models/PlotModel";
 import { IPlotRepository } from "../repositories/interfaces";
 import { IPlotUsecase } from "./interfaces";

@@ -1,4 +1,5 @@
-import { ViewCropDto } from "../../views/dto/CropDto";
+
+import { ViewCropDto } from "../../shared/dtos/CropDto";
 import { CropMapper } from "../models/CropModel";
 import { ICropRepository } from "../repositories/interfaces";
 import { ICropUsecase } from "./interfaces";

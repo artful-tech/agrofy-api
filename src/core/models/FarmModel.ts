@@ -1,9 +1,11 @@
 import { Farm, Prisma } from "@prisma/client";
-import { CreateFarmDto, UpdateFarmDto, ViewFarmDto } from "../../views/dto/FarmDto";
+import { CreateFarmDto, UpdateFarmDto, ViewFarmDto } from "../../shared/dtos/FarmDto";
+
 
 export type FarmModel = Farm;
 
 export class FarmMapper {
+    
     static toView(model: FarmModel): ViewFarmDto;
     static toView(models: FarmModel[]): ViewFarmDto[];
 

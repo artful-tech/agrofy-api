@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import FarmRouter from "../http/routers/farmRouter";
+import FarmRouter from "../http/routers/FarmRouter";
 import { FarmRepository } from "../../core/repositories/FarmRepository";
 import { FarmController } from "../http/controllers/FarmController";
 import { FarmUsecase } from "../../core/usecases/FarmUsecase";

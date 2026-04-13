@@ -1,4 +1,4 @@
-import { ViewFarmDto } from "../../views/dto/FarmDto";
+import { ViewFarmDto } from "../../shared/dtos/FarmDto";
 import { FarmMapper } from "../models/FarmModel";
 import { IFarmRepository } from "../repositories/interfaces";
 import { IFarmUsecase } from "./interfaces";

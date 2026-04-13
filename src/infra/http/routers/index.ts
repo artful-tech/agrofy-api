@@ -5,7 +5,7 @@ import { makeCropRouter } from '../../factories/makeCropRouter';
 import { makePlotRouter } from '../../factories/makePlotRouter';
 import { makeUserRouter } from '../../factories/makeUserRouter';
 import { makeFarmRouter } from '../../factories/makeFarmRouter';
-import { errorMiddlewares } from '../middlewares/error.middleware';
+import { ErrorMiddleware } from '../middlewares/ErrorMiddleware';
 
 
 export class Routers {
@@ -31,7 +31,7 @@ export class Routers {
             res.sendFile(path.resolve(__dirname, '../../../views/pages/front-end-example.html'));
         });
 
-        root.use(errorMiddlewares());
+        root.use(ErrorMiddleware.getRoutes());
 
         return root;
     }

@@ -1,9 +1,11 @@
 import { Prisma, User } from "@prisma/client";
-import { CreateUserDto, UpdatePasswordDto, ViewUserDto } from "../../views/dto/UserDto";
+import { CreateUserDto, UpdatePasswordDto, ViewUserDto } from "../../shared/dtos/UserDto";
+
 
 export type UserModel = User;
 
 export class UserMapper {
+
     static toView(model: UserModel): ViewUserDto;
     static toView(models: UserModel[]): ViewUserDto[];
 

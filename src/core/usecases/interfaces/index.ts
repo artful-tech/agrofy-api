@@ -1,7 +1,8 @@
-import { CreateCropDto, UpdateCropDto, ViewCropDto } from "../../../views/dto/CropDto";
-import { CreateFarmDto, UpdateFarmDto, ViewFarmDto } from "../../../views/dto/FarmDto";
-import { CreatePlotDto, UpdatePlotDto, ViewPlotDto } from "../../../views/dto/PlotDto";
-import { CreateUserDto, UpdatePasswordDto, ViewUserDto } from "../../../views/dto/UserDto";
+import { CreateCropDto, UpdateCropDto, ViewCropDto } from "../../../shared/dtos/CropDto";
+import { CreateFarmDto, UpdateFarmDto, ViewFarmDto } from "../../../shared/dtos/FarmDto";
+import { CreatePlotDto, UpdatePlotDto, ViewPlotDto } from "../../../shared/dtos/PlotDto";
+import { CreateUserDto, UpdatePasswordDto, ViewUserDto } from "../../../shared/dtos/UserDto";
+
 
 export interface IBaseUsecase<V, C, U, D> {
     getAll(): Promise<V[]>
