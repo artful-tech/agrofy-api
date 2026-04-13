@@ -31,7 +31,7 @@ export class Routers {
             res.sendFile(path.resolve(__dirname, '../../../views/pages/front-end-example.html'));
         });
 
-        root.use(errorMiddlewares);
+        root.use(errorMiddlewares());
 
         return root;
     }
