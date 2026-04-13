@@ -12,4 +12,10 @@ export class CropController implements ICropController {
         const crops: ViewCropDto[] = await this.cropUsecase.getAll();
         return res.json(crops);
     }
+
+    public create = async (req: Request, res: Response): Promise<Response> => {
+        return res.json({
+            "message": "CHEGOU AQUI NO CONTROLLER"
+        });
+    }
 }

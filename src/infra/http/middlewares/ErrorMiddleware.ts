@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { AppError } from "../../../core/errors/AppError";
+import { ZodError } from "zod/v4";
 
 export class ErrorMiddleware {
 
@@ -21,6 +22,14 @@ export class ErrorMiddleware {
             return res.status(error.statusCode).json({
                 status: "error",
                 message: error.message,
+            });
+        }
+
+        if (error instanceof ZodError) {
+            return res.status(400).json({
+                status: "validation_error",
+                message: "Dados inválidos",
+                errors: error.issues
             });
         }
 
