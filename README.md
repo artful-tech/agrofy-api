@@ -281,6 +281,9 @@ git branch nome-da-branch
 | `GET` | `/api/finances/summary` | Resumo mensal consolidado de gastos em BRL e Mumbuca |
 | `POST` | `/api/logs` | Registra um evento ou observação no diário de campo |
 | `GET` | `/api/team` | Lista os membros e responsabilidades do time Agrofy |
+  `POST` | `/api/auth/signin` | Faz a autenticação do usuário na aplicação |
+  `POST` | `/api/user/signup` | Faz um novo cadastro do usuário na aplicação |
+  `GET` | `/api/user` | Lista os dados básicos do usuário conectado |
 
 ---
 
@@ -352,30 +355,64 @@ Este projeto está sob a licença **ISC**.
 ```mermaid
 
 erDiagram
-    FARM ||--o{ PLOT : "possui"
+    USER ||--o| PEOPLE : "possui"
+    PEOPLE ||--o| MANAGER : "pode ser"
+    PEOPLE }|--o{ PEOPLE_ON_FARMS : "vinculado"
+    FARM ||--o{ PEOPLE_ON_FARMS : "vinculado"
+    ADDRESS ||--o| FARM : "localiza"
+    FARM ||--o{ PLOT : "contem"
+    FARM ||--o{ INVENTORY_ITEM : "estoca"
     PLOT ||--o{ SEASON : "recebe"
-    CROP ||--o{ SEASON : "eh_plantada_em"
-    SEASON ||--o{ FIELD_LOG : "registra"
-    
+    CROP ||--o{ SEASON : "cultivada em"
+    SEASON ||--o{ FIELD_LOG : "gera"
+    SEASON ||--o{ TRANSACTION : "vinculada a"
+    MANAGER ||--o{ TRANSACTION : "realiza"
+    MANAGER ||--o| FINANCE : "gere"
+
+    USER {
+        string id PK
+        string email UK
+        string password
+        datetime createdAt
+    }
+
+    PEOPLE {
+        string id PK
+        string name
+        string cellphone
+        Role role
+        string userId FK
+    }
+
+    MANAGER {
+        string id PK
+        string peopleId FK
+    }
+
+    ADDRESS {
+        string id PK
+        string city
+        string neighborhood
+        string state
+    }
+
     FARM {
         string id PK
         string name
-        string ownerName
         float totalArea
-        string location
-        string address
-        datetime createdAt
-        datetime updatedAt
+        string addressId FK
+    }
+
+    PEOPLE_ON_FARMS {
+        string peopleId PK, FK
+        string farmId PK, FK
     }
 
     PLOT {
         string id PK
         string name
         float area
-        string soilType
         string farmId FK
-        datetime createdAt
-        datetime updatedAt
     }
 
     CROP {
@@ -383,48 +420,43 @@ erDiagram
         string name
         string variety
         int daysToHarvest
-        datetime createdAt
-        datetime updatedAt
     }
 
     SEASON {
         string id PK
-        string status
-        datetime plantedAt
-        datetime harvestAt
+        SeasonStatus status
         string plotId FK
         string cropId FK
-        datetime createdAt
-        datetime updatedAt
+        datetime harvestAt
     }
 
     FIELD_LOG {
         string id PK
         string description
-        string category
-        datetime date
+        LogCategory category
         string seasonId FK
     }
 
     INVENTORY_ITEM {
         string id PK
         string name
-        string category
         float quantity
         string unit
-        float minStock
-        datetime createdAt
-        datetime updatedAt
+        string farmId FK
     }
 
-    EXPENSE {
+    TRANSACTION {
         string id PK
         string description
-        float amount
-        string currency
-        datetime date
-        string category
-        datetime createdAt
-        datetime updatedAt
+        decimal amount
+        TransactionType type
+        string managerId FK
+        string seasonId FK
+    }
+
+    FINANCE {
+        string id PK
+        decimal balance
+        string managerId FK
     }
 ```
