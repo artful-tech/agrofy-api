@@ -9,6 +9,10 @@ export interface ICropController extends IBaseController {
     create(req: Request, res: Response): Promise<Response>
 }
 
+export interface IFinanceController {
+    index(req: Request, res: Response): Promise<Response>
+}
+
 export interface IFarmController extends IBaseController {}
 
 export interface IPlotController extends IBaseController {}

@@ -1,5 +1,6 @@
 import { CreateCropDto, UpdateCropDto, ViewCropDto } from "../../../shared/dtos/CropDto";
 import { CreateFarmDto, UpdateFarmDto, ViewFarmDto } from "../../../shared/dtos/FarmDto";
+import { ViewFinanceDto } from "../../../shared/dtos/FinanceDto";
 import { CreatePlotDto, UpdatePlotDto, ViewPlotDto } from "../../../shared/dtos/PlotDto";
 import { CreateUserDto, UpdatePasswordDto, ViewUserDto } from "../../../shared/dtos/UserDto";
 
@@ -15,3 +16,7 @@ export interface IFarmUsecase extends IBaseUsecase<ViewFarmDto, CreateFarmDto, U
 export interface IPlotUsecase extends IBaseUsecase<ViewPlotDto, CreatePlotDto, UpdatePlotDto, string> {}
 
 export interface IUserUsecase extends IBaseUsecase<ViewUserDto, CreateUserDto, UpdatePasswordDto, string> {}
+
+export interface IFinanceUsecase {
+    get(id: string): Promise<ViewFinanceDto | null>;
+}

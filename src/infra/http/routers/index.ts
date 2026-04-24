@@ -6,6 +6,7 @@ import { makePlotRouter } from '../../factories/makePlotRouter';
 import { makeUserRouter } from '../../factories/makeUserRouter';
 import { makeFarmRouter } from '../../factories/makeFarmRouter';
 import { ErrorMiddleware } from '../middlewares/ErrorMiddleware';
+import { makeFinanceRouter } from '../../factories/makeFinanceRouter';
 
 
 export class Routers {
@@ -18,6 +19,7 @@ export class Routers {
         apiRouter.use("/crops", makeCropRouter(this.prisma).getRoutes());
         apiRouter.use("/farms", makeFarmRouter(this.prisma).getRoutes());
         apiRouter.use("/plots", makePlotRouter(this.prisma).getRoutes());
+        apiRouter.use("/finance", makeFinanceRouter(this.prisma).getRoutes())
 
         return apiRouter;
     }
