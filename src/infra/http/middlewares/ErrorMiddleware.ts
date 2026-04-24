@@ -37,7 +37,7 @@ export class ErrorMiddleware {
         if (error.name === 'PrismaClientKnownRequestError') {
             return res.status(409).json({
                 status: "error",
-                message: "Conflito de dados no banco (E-mail já existe?)"
+                message: "Erro no banco de dados, verifique-o!"
             });
         }
 
