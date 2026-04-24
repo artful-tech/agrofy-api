@@ -8,11 +8,6 @@ export class FinanceUsecase implements IFinanceUsecase {
 
     public get = async (id: string): Promise<ViewFinanceDto | null> => {
         const finance = await this.financeRepository.watchFinance(id);
-
-        if (!finance) {
-            return null;
-        }
-
         return FinanceMapper.toView(finance);
     }
 

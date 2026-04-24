@@ -5,8 +5,8 @@ import { PrismaClient } from "@prisma/client";
 export class FinanceRepository implements IFinanceRepository {
     constructor(private prisma: PrismaClient) { }
 
-    public watchFinance = async (managerId: string): Promise<FinanceModel | null> => {
-        const finance = await this.prisma.finance.findUnique({
+    public watchFinance = async (managerId: string): Promise<FinanceModel> => {
+        const finance = await this.prisma.finance.findUniqueOrThrow({
             where: { managerId: managerId }
         });
 
