@@ -2,7 +2,7 @@ import path from 'node:path';
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Router, Request, Response } from "express";
 import { ErrorMiddleware } from '../middlewares/ErrorMiddleware';
-import { Factories } from '../../factories/factories';
+import { Factories } from '../../factories';
 
 
 export class Routers {
@@ -19,7 +19,7 @@ export class Routers {
         apiRouter.use("/crops", this.factory.makeCropRouter().getRoutes());
         apiRouter.use("/farms", this.factory.makeFarmRouter().getRoutes());
         apiRouter.use("/plots", this.factory.makePlotRouter().getRoutes());
-        apiRouter.use("/field-logs", this.factory.makeFieldLogRouter().getRouter());
+        apiRouter.use("/field-logs", this.factory.makeFieldLogRouter().getRoutes());
         apiRouter.use("/finance", this.factory.makeFinanceRouter().getRoutes())
 
         return apiRouter;

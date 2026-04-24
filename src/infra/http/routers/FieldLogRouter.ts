@@ -5,7 +5,7 @@ import { FieldLogController } from "../controllers/FieldLogController";
 export class FieldLogRouter {
     constructor(private fielLogController: FieldLogController) { }
 
-    getRouter = (): Router => {
+    getRoutes = (): Router => {
         const router = Router();
 
         router.get("/", this.fielLogController.getAll);
