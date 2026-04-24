@@ -1,27 +1,26 @@
 import path from 'node:path';
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Router, Request, Response } from "express";
-import { makeCropRouter } from '../../factories/makeCropRouter';
-import { makePlotRouter } from '../../factories/makePlotRouter';
-import { makeUserRouter } from '../../factories/makeUserRouter';
-import { makeFarmRouter } from '../../factories/makeFarmRouter';
 import { ErrorMiddleware } from '../middlewares/ErrorMiddleware';
-import { makeFieldLogRouter } from '../../factories/makeFieldLogRouter';
-import { makeFinanceRouter } from '../../factories/makeFinanceRouter';
+import { Factories } from '../../factories/factories';
 
 
 export class Routers {
-    constructor(private prisma: PrismaClient) {}
+    private factory;
+
+    constructor(private prisma: PrismaClient) {
+        this.factory = new Factories(this.prisma);
+    }
 
     private initApiRoutes = (): Router => {
         const apiRouter = Router();
         
-        apiRouter.use("/users", makeUserRouter(this.prisma).getRoutes());
-        apiRouter.use("/crops", makeCropRouter(this.prisma).getRoutes());
-        apiRouter.use("/farms", makeFarmRouter(this.prisma).getRoutes());
-        apiRouter.use("/plots", makePlotRouter(this.prisma).getRoutes());
-        apiRouter.use("/field-logs", makeFieldLogRouter(this.prisma));
-        apiRouter.use("/finance", makeFinanceRouter(this.prisma).getRoutes())
+        apiRouter.use("/users", this.factory.makeUserRouter().getRoutes());
+        apiRouter.use("/crops", this.factory.makeCropRouter().getRoutes());
+        apiRouter.use("/farms", this.factory.makeFarmRouter().getRoutes());
+        apiRouter.use("/plots", this.factory.makePlotRouter().getRoutes());
+        apiRouter.use("/field-logs", this.factory.makeFieldLogRouter().getRouter());
+        apiRouter.use("/finance", this.factory.makeFinanceRouter().getRoutes())
 
         return apiRouter;
     }

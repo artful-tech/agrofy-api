@@ -1,10 +1,15 @@
 import { Router } from "express";
 import { FieldLogController } from "../controllers/FieldLogController";
 
-export default function FieldLogRouter(controller: FieldLogController) {
-    const router = Router();
 
-    router.get("/", controller.getAll);
+export class FieldLogRouter {
+    constructor(private fielLogController: FieldLogController) { }
 
-    return router;
+    getRouter = (): Router => {
+        const router = Router();
+
+        router.get("/", this.fielLogController.getAll);
+
+        return router;
+    }
 }
