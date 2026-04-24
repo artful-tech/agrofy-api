@@ -1,13 +1,27 @@
-export type CreateUserDto = {
-    email: string;
-    password: string;
-}
+import z from "zod/v4";
 
-export type UpdatePasswordDto = {
-    email: string;
-    currentPassword: string;
-    newPassword: string;
-}
+
+export const CreateUserSchema = z.object({
+    email: z.email().nonempty(),
+    password: z.string().nonempty(),
+    confirmPassword: z.string().nonempty()
+}).refine((data) => data.password === data.confirmPassword, {
+    message: 'As senhas não conferem',
+    path: ['confirmPassword']
+})
+
+export const UpdateUserSchema = z.object({
+    email: z.email().nonempty(),
+    actualPassword: z.string().nonempty(),
+    newPassword: z.string().nonempty(),
+    newConfirmPassword: z.string().nonempty()
+}).refine((data) => data.newPassword === data.newConfirmPassword, {
+    message: 'As senhas não conferem',
+    path: ['confirmPassword']
+})
+
+export type CreateUserDto = z.infer<typeof CreateUserSchema>;
+export type UpdatePasswordDto = z.infer<typeof UpdateUserSchema>;
 
 export type ViewUserDto = {
     id: string;
