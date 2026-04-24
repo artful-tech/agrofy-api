@@ -1,5 +1,8 @@
 import { ViewFieldLogDto } from "../../shared/dtos/FieldLogDto";
+
+
 export class FieldLogMapper {
+    
     public static toView(fieldLogs: any[]): ViewFieldLogDto[] {
         return fieldLogs.map((fieldLog) => ({
             id: fieldLog.id,

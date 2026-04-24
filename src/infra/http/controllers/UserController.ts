@@ -13,6 +13,22 @@ export class UserController implements IUserController {
         return res.json(users)
     }
 
+    public getOne(_req: Request, res: Response): Promise<Response> {
+        throw new Error('Method not implemented.')
+    }
+
+    public create(req: Request, res: Response): Promise<Response> {
+        throw new Error('Method not implemented.')
+    }
+
+    public update(req: Request, res: Response): Promise<Response> {
+        throw new Error('Method not implemented.')
+    }
+
+    public delete(req: Request, res: Response): Promise<Response> {
+        throw new Error('Method not implemented.')
+    }
+
     // public show = async (req: Request, res: Response) => {
     //     const user = await this.userUsecase.findById(Number(req.params.id))
     //     if (!user) return res.status(404).json({ message: 'User not found' })

@@ -18,4 +18,20 @@ export class CropUsecase implements ICropUsecase {
 
         return CropMapper.toView(crops);
     }
+
+    public getOne(id: string): Promise<ViewCropDto | null> {
+        throw new Error("Method not implemented.");
+    }
+
+    public create(createDto: { name: string; daysToHarvest: number; variety?: string | undefined; photo?: string | undefined; observation?: string | undefined; }): Promise<string> {
+        throw new Error("Method not implemented.");
+    }
+
+    public update(updateDto: { id: string; name?: string | undefined; variety?: string | undefined; photo?: string | undefined; daysToHarvest?: number | undefined; observation?: string | undefined; }): Promise<ViewCropDto> {
+        throw new Error("Method not implemented.");
+    }
+
+    public delete(): Promise<boolean> {
+        throw new Error("Method not implemented.");
+    }
 }

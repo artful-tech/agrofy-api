@@ -6,7 +6,7 @@ import { IFinanceUsecase } from "./interfaces";
 export class FinanceUsecase implements IFinanceUsecase {
     constructor(private financeRepository: FinanceRepository) {}
 
-    get = async (id: string): Promise<ViewFinanceDto | null> => {
+    public get = async (id: string): Promise<ViewFinanceDto | null> => {
         const finance = await this.financeRepository.watchFinance(id);
 
         if (!finance) {
@@ -14,6 +14,26 @@ export class FinanceUsecase implements IFinanceUsecase {
         }
 
         return FinanceMapper.toView(finance);
+    }
+
+    public getAll(): Promise<ViewFinanceDto[]> {
+        throw new Error("Method not implemented.");
+    }
+
+    public getOne(id: string): Promise<ViewFinanceDto | null> {
+        throw new Error("Method not implemented.");
+    }
+
+    public create(createDto: any): Promise<string> {
+        throw new Error("Method not implemented.");
+    }
+
+    public update(updateDto: any): Promise<ViewFinanceDto> {
+        throw new Error("Method not implemented.");
+    }
+    
+    public delete(): Promise<boolean> {
+        throw new Error("Method not implemented.");
     }
     
 }

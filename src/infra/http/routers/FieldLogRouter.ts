@@ -8,7 +8,7 @@ export class FieldLogRouter {
     getRoutes = (): Router => {
         const router = Router();
 
-        router.get("/", this.fielLogController.getAll);
+        router.get("/", this.fielLogController.index);
 
         return router;
     }

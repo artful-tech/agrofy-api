@@ -1,6 +1,7 @@
-import { Router, Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import { AppError } from "../../../core/errors/AppError";
 import { ZodError } from "zod/v4";
+
 
 export class ErrorMiddleware {
 

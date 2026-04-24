@@ -15,4 +15,20 @@ export class UserUsecase implements IUserUsecase {
 
         return UserMapper.toView(users);
     }
+
+    public getOne(id: string): Promise<ViewUserDto | null> {
+        throw new Error("Method not implemented.");
+    }
+
+    public create(createDto: { email: string; password: string; confirmPassword: string; }): Promise<string> {
+        throw new Error("Method not implemented.");
+    }
+
+    public update(updateDto: { email: string; actualPassword: string; newPassword: string; newConfirmPassword: string; }): Promise<ViewUserDto> {
+        throw new Error("Method not implemented.");
+    }
+
+    public delete(): Promise<boolean> {
+        throw new Error("Method not implemented.");
+    }
 }

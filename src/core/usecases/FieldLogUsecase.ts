@@ -15,4 +15,20 @@ export class FieldLogUsecase implements IFieldLogUsecase {
 
         return FieldLogMapper.toView(fieldLogs);
     }
+
+    public getOne(id: string): Promise<ViewFieldLogDto | null> {
+        throw new Error("Method not implemented.");
+    }
+
+    public create(createDto: any): Promise<string> {
+        throw new Error("Method not implemented.");
+    }
+
+    public update(updateDto: any): Promise<ViewFieldLogDto> {
+        throw new Error("Method not implemented.");
+    }
+
+    public delete(): Promise<boolean> {
+        throw new Error("Method not implemented.");
+    }
 }
