@@ -1,4 +1,4 @@
-import { Crop, Farm, Finance, Plot, User } from "@prisma/client";
+import { Crop, Farm, Finance, Plot, User, FieldLog } from "@prisma/client";
 
 export interface IBaseRepository<T> {
     findAll(): Promise<T[]>
@@ -21,3 +21,5 @@ export interface IUserRepository extends IBaseRepository<User> {
     update(id: string, data: any): Promise<User>;
     delete(id: string): Promise<User>;
 }
+export interface IFieldLogRepository extends IBaseRepository<FieldLog> {}
+
