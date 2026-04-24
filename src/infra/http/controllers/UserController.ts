@@ -13,6 +13,12 @@ export class UserController implements IUserController {
         return res.json(users)
     }
 
+    public getByEmail = async (req: Request<{email: string}>, res: Response): Promise<Response> => {
+        const { email } = req.body;
+        const user: ViewUserDto = await this.userUsecase.getByEmail(email);
+        return res.json(user);
+    }
+
     public getOne(_req: Request, res: Response): Promise<Response> {
         throw new Error('Method not implemented.')
     }

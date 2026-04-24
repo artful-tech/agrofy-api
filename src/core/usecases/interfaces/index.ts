@@ -20,7 +20,9 @@ export interface IFarmUsecase extends IBaseUsecase<ViewFarmDto, CreateFarmDto, U
 
 export interface IPlotUsecase extends IBaseUsecase<ViewPlotDto, CreatePlotDto, UpdatePlotDto, string> {}
 
-export interface IUserUsecase extends IBaseUsecase<ViewUserDto, CreateUserDto, UpdatePasswordDto, string> {}
+export interface IUserUsecase extends IBaseUsecase<ViewUserDto, CreateUserDto, UpdatePasswordDto, string> {
+    getByEmail(email: string): Promise<ViewUserDto>;
+}
 
 export interface IFieldLogUsecase extends IBaseUsecase<ViewFieldLogDto, any, any, string> {}
 
