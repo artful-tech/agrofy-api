@@ -9,8 +9,6 @@ export const createCropSchema = z.object({
     observation: z.string().optional()
 });
 
-export type CreateCropDto = z.infer<typeof createCropSchema>;
-
 export const updateCropSchema = z.object({
     id: z.uuid("ID inválido"),
     name: z.string().min(2).optional(),
@@ -20,6 +18,7 @@ export const updateCropSchema = z.object({
     observation: z.string().optional()
 });
 
+export type CreateCropDto = z.infer<typeof createCropSchema>;
 export type UpdateCropDto = z.infer<typeof updateCropSchema>;
 
 export type ViewCropDto = {
