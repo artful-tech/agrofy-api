@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "../../../core/errors/AppError";
 import { ZodError } from "zod/v4";
+import { handlePrismaError } from "../../../shared/errors/prismaErrorHandler";
+import { Prisma } from "@prisma/client";
 
 
 export class ErrorMiddleware {
@@ -35,10 +37,13 @@ export class ErrorMiddleware {
         }
 
         // Erro de validação do Prisma (ex: campo único violado)
-        if (error.name === 'PrismaClientKnownRequestError') {
-            return res.status(409).json({
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            const { status, message } = handlePrismaError(error);
+
+            return res.status(status).json({
                 status: "error",
-                message: "Erro no banco de dados, verifique-o!"
+                message: message,
+                code: error.code
             });
         }
 
