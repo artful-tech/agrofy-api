@@ -1,23 +1,28 @@
-export type CreateAddressDto = {
-    number?: number;
-    street?: string;
-    complement?: string;
-    neighborhood?: string;
-    city: string;
-    state: string;
-    country: string;
-}
+import z from "zod/v4";
 
-export type UpdateAddressDto = {
-    number?: number;
-    id: string;
-    street?: string;
-    complement?: string;
-    neighborhood?: string;
-    city?: string;
-    state?: string;
-    country?: string;
-}
+
+export const CreateAddressSchema = z.object({
+    number: z.number().positive().optional(),
+    street: z.string().min(3, 'Nome de rua muito curto').max(60, 'Nome de rua muito grande').optional(),
+    complement: z.string().min(2, 'Nome de complemento muito curto').max(40, 'Nome de complemento muito grande').optional(),
+    neighborhood: z.string().min(2, 'Nome de bairro muito curto').max(100, 'Nome de bairro muito grande').optional(),
+    city: z.string().min(2, 'Nome de cidade muito curto').max(100, 'Nome de cidade muito grande').nonempty({ message: 'Nome de cidade não pode ser vazio' }),
+    state: z.string().min(2, 'Nome de estado muito curto').max(50, 'Nome de estado muito grande').nonempty({ message: 'Nome de bairro não pode ser vazio' }),
+    country: z.string().min(2, 'Nome de país muito curto').max(50, 'Nome de país muito grande').nonempty({ message: 'Nome de estado não pode ser vazio' }),
+});
+
+export const UpdateAddressSchema = z.object({
+    number: z.number().positive().optional(),
+    street: z.string().min(3, 'Nome de rua muito curto').max(60, 'Nome de rua muito grande').optional(),
+    complement: z.string().min(2, 'Nome de complemento muito curto').max(40, 'Nome de complemento muito grande').optional(),
+    neighborhood: z.string().min(2, 'Nome de bairro muito curto').max(100, 'Nome de bairro muito grande').optional(),
+    city: z.string().min(2, 'Nome de cidade muito curto').max(100, 'Nome de cidade muito grande').nonempty({ message: 'Nome de cidade não pode ser vazio' }),
+    state: z.string().min(2, 'Nome de estado muito curto').max(50, 'Nome de estado muito grande').nonempty({ message: 'Nome de bairro não pode ser vazio' }),
+    country: z.string().min(2, 'Nome de país muito curto').max(50, 'Nome de país muito grande').nonempty({ message: 'Nome de estado não pode ser vazio' }),
+});
+
+export type CreateAddressDto = z.infer<typeof CreateAddressSchema>;
+export type UpdateAddressDto = z.infer<typeof UpdateAddressSchema>;
 
 export type ViewAddressDto = {
     number: number | null;
