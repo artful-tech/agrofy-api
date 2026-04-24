@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { IUserRepository } from './interfaces'
 import { UserModel } from "../models/UserModel";
 
@@ -32,6 +32,4 @@ export class UserRepository implements IUserRepository {
     public delete(id: string): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-
-    
 }
