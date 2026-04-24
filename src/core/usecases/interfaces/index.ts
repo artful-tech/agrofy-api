@@ -2,6 +2,7 @@ import { CreateCropDto, UpdateCropDto, ViewCropDto } from "../../../shared/dtos/
 import { CreateFarmDto, UpdateFarmDto, ViewFarmDto } from "../../../shared/dtos/FarmDto";
 import { CreatePlotDto, UpdatePlotDto, ViewPlotDto } from "../../../shared/dtos/PlotDto";
 import { CreateUserDto, UpdatePasswordDto, ViewUserDto } from "../../../shared/dtos/UserDto";
+import { ViewFieldLogDto } from "../../../shared/dtos/FieldLogDto";
 
 
 export interface IBaseUsecase<V, C, U, D> {
@@ -15,3 +16,5 @@ export interface IFarmUsecase extends IBaseUsecase<ViewFarmDto, CreateFarmDto, U
 export interface IPlotUsecase extends IBaseUsecase<ViewPlotDto, CreatePlotDto, UpdatePlotDto, string> {}
 
 export interface IUserUsecase extends IBaseUsecase<ViewUserDto, CreateUserDto, UpdatePasswordDto, string> {}
+
+export interface IFieldLogUsecase extends IBaseUsecase<ViewFieldLogDto, any, any, string> {}
