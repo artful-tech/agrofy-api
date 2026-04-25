@@ -5,23 +5,34 @@ import { PeopleModel, PeopleModelCreate, PeopleModelUpdate } from "../models/Peo
 export class PeopleRepository implements IPeopleRepository {
     constructor(private prisma: PrismaClient) { }
 
-    public findAll = (): Promise<PeopleModel[]> => {
-        throw new Error("Method not implemented.");
+    public findAll = async (): Promise<PeopleModel[]> => {
+        return await this.prisma.people.findMany();
     }
 
-    public findOne = (id: string): Promise<PeopleModel> => {
-        throw new Error("Method not implemented.");
+    public findOne = async (id: string): Promise<PeopleModel> => {
+        return await this.prisma.people.findUniqueOrThrow({
+            where: { id: id }
+        });
     }
 
-    public create = (model: PeopleModelCreate): Promise<string | null> => {
-        throw new Error("Method not implemented.");
+    public create = async (model: PeopleModelCreate): Promise<string> => {
+        const people = await this.prisma.people.create({
+            data: model
+        });
+
+        return people.id;
     }
 
-    public update = async (model: PeopleModelUpdate): Promise<PeopleModel | null> => {
-        throw new Error("Method not implemented.");
+    public update = async (id: string, data: PeopleModelUpdate): Promise<PeopleModel> => {
+        return await this.prisma.people.update({
+            where: { id: id },
+            data: data
+        });
     }
 
-    public delete = (id: string): Promise<boolean> => {
-        throw new Error("Method not implemented.");
+    public delete = async (id: string): Promise<void> => {
+        await this.prisma.people.delete({
+            where: { id: id }
+        });
     }
 }

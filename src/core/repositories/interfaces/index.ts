@@ -16,8 +16,8 @@ import { PeopleModel, PeopleModelCreate, PeopleModelUpdate } from "../../models/
 export interface IBaseRepository<M, C, U, T> {
     findAll(): Promise<M[]>
     findOne(id: string): Promise<M>
-    create(model: C): Promise<string | null>
-    update(id: T, data: U): Promise<M | null>
+    create(model: C): Promise<string>
+    update(id: T, data: U): Promise<M>
     delete(id: T): Promise<void>
 }
 
