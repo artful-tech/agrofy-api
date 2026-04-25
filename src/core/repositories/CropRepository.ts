@@ -16,14 +16,14 @@ export class CropRepository implements ICropRepository {
         });
     }
 
-    public create = async (model: CropModelCreate): Promise<string | null> => {
+    public create = async (model: CropModelCreate): Promise<string> => {
         const crop = await this.prisma.crop.create({
             data: model
         });
         return crop.id;
     }
 
-    public update = async (id: string, model: CropModelUpdate): Promise<CropModel | null> => {
+    public update = async (id: string, model: CropModelUpdate): Promise<CropModel> => {
         return await this.prisma.crop.update({
             where: { id: id },
             data: model

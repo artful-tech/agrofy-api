@@ -21,7 +21,7 @@ export class UserRepository implements IUserRepository {
         return this.prisma.user.findUniqueOrThrow({ where: { id } })
     }
 
-    public create = async (userModel: UserModelCreate): Promise<string | null> => {
+    public create = async (userModel: UserModelCreate): Promise<string> => {
         const userCreated = await this.prisma.user.create({
             data: userModel
         });
@@ -29,7 +29,7 @@ export class UserRepository implements IUserRepository {
         return id;
     }
 
-    public update = async (id: string, model: UserModelUpdate): Promise<UserModel | null> => {
+    public update = async (id: string, model: UserModelUpdate): Promise<UserModel> => {
         throw new Error("Method not implemented.");
     }
 

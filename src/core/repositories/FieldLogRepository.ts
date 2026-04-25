@@ -2,6 +2,7 @@ import { $Enums, PrismaClient } from "@prisma/client";
 import { IFieldLogRepository } from "./interfaces";
 import { FieldLogModel, FieldLogModelCreate, FieldLogModelUpdate } from "../models/FieldLogModel";
 
+
 export class FieldLogRepository implements IFieldLogRepository {
     constructor(private prisma: PrismaClient) {}
 
@@ -13,11 +14,11 @@ export class FieldLogRepository implements IFieldLogRepository {
         throw new Error("Method not implemented.");
     }
 
-    public create = async (model: FieldLogModelCreate): Promise<string | null> => {
+    public create = async (model: FieldLogModelCreate): Promise<string> => {
         throw new Error("Method not implemented.");
     }
 
-    public update = async (id: string, model: FieldLogModelUpdate): Promise<FieldLogModel | null> => {
+    public update = async (id: string, model: FieldLogModelUpdate): Promise<FieldLogModel> => {
         throw new Error("Method not implemented.");
     }
 

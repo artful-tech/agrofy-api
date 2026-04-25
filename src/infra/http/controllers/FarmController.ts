@@ -12,19 +12,19 @@ export class FarmController implements IFarmController {
         return res.json(farms);
     }
 
-    public getOne(_req: Request, res: Response): Promise<Response> {
+    public getOne = async (_req: Request, res: Response): Promise<Response> => {
         throw new Error("Method not implemented.");
     }
     
-    public create(req: Request, res: Response): Promise<Response> {
+    public create = async (req: Request, res: Response): Promise<Response> => {
         throw new Error("Method not implemented.");
     }
 
-    public update(req: Request, res: Response): Promise<Response> {
+    public update = async (req: Request, res: Response): Promise<Response> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete(req: Request, res: Response): Promise<Response> {
+    public delete = async (req: Request, res: Response): Promise<Response> => {
         throw new Error("Method not implemented.");
     }
 

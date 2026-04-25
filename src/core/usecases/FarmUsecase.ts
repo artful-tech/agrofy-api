@@ -16,19 +16,19 @@ export class FarmUsecase implements IFarmUsecase {
         return FarmMapper.toView(farms);
     }
 
-    public getOne(id: string): Promise<FarmDtoView | null> {
+    public getOne = async (id: string): Promise<FarmDtoView> => {
         throw new Error("Method not implemented.");
     }
 
-    public create(createDto: FarmDtoCreate): Promise<string> {
+    public create = async (createDto: FarmDtoCreate): Promise<string> => {
         throw new Error("Method not implemented.");
     }
 
-    public update(updateDto: FarmDtoUpdate): Promise<FarmDtoView> {
+    public update = async (updateDto: FarmDtoUpdate): Promise<FarmDtoView> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete(): Promise<boolean> {
+    public delete = async (): Promise<void> => {
         throw new Error("Method not implemented.");
     }
 }

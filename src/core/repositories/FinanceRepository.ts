@@ -2,6 +2,7 @@ import { IFinanceRepository } from "./interfaces";
 import { FinanceModel } from "../models/FinanceModel";
 import { PrismaClient } from "@prisma/client";
 
+
 export class FinanceRepository implements IFinanceRepository {
     constructor(private prisma: PrismaClient) { }
 

@@ -21,19 +21,19 @@ export class UserUsecase implements IUserUsecase {
         return UserMapper.toView(userModel);
     }
 
-    public getOne(id: string): Promise<UserDtoView | null> {
+    public getOne = async (id: string): Promise<UserDtoView> => {
         throw new Error("Method not implemented.");
     }
 
-    public create(createDto: { email: string; password: string; confirmPassword: string; }): Promise<string> {
+    public create = async (createDto: { email: string; password: string; confirmPassword: string; }): Promise<string> => {
         throw new Error("Method not implemented.");
     }
 
-    public update(updateDto: { email: string; actualPassword: string; newPassword: string; newConfirmPassword: string; }): Promise<UserDtoView> {
+    public update = async (updateDto: { email: string; actualPassword: string; newPassword: string; newConfirmPassword: string; }): Promise<UserDtoView> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete(): Promise<boolean> {
+    public delete = async (): Promise<void> => {
         throw new Error("Method not implemented.");
     }
 }

@@ -12,7 +12,7 @@ export class CropController implements ICropController {
         return res.json(crops);
     }
 
-    public getOne(_req: Request, res: Response): Promise<Response> {
+    public getOne = async (_req: Request, res: Response): Promise<Response> => {
         throw new Error("Method not implemented.");
     }
 
@@ -24,11 +24,11 @@ export class CropController implements ICropController {
         return res.status(201).send();
     }
 
-    public update(req: Request, res: Response): Promise<Response> {
+    public update = async (req: Request, res: Response): Promise<Response> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete(req: Request, res: Response): Promise<Response> {
+    public delete = async (req: Request, res: Response): Promise<Response> => {
         throw new Error("Method not implemented.");
     }
 }

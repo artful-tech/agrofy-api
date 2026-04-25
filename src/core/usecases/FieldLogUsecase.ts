@@ -16,19 +16,19 @@ export class FieldLogUsecase implements IFieldLogUsecase {
         return FieldLogMapper.toView(fieldLogs);
     }
 
-    public getOne(id: string): Promise<FieldLogDtoView | null> {
+    public getOne = async (id: string): Promise<FieldLogDtoView> => {
         throw new Error("Method not implemented.");
     }
 
-    public create(createDto: any): Promise<string> {
+    public create = async (createDto: any): Promise<string> => {
         throw new Error("Method not implemented.");
     }
 
-    public update(updateDto: any): Promise<FieldLogDtoView> {
+    public update = async (updateDto: any): Promise<FieldLogDtoView> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete(): Promise<boolean> {
+    public delete = async (): Promise<void> => {
         throw new Error("Method not implemented.");
     }
 }

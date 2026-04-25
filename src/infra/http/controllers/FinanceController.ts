@@ -14,19 +14,19 @@ export class FinanceController implements IFinanceController {
         return res.json(finance);
     }
 
-    public getOne(_req: Request, res: Response): Promise<Response> {
+    public getOne = async (_req: Request, res: Response): Promise<Response> => {
         throw new Error("Method not implemented.");
     }
 
-    public create(req: Request, res: Response): Promise<Response> {
+    public create = async (req: Request, res: Response): Promise<Response> => {
         throw new Error("Method not implemented.");
     }
 
-    public update(req: Request, res: Response): Promise<Response> {
+    public update = async (req: Request, res: Response): Promise<Response> => {
         throw new Error("Method not implemented.");
     }
     
-    public delete(req: Request, res: Response): Promise<Response> {
+    public delete = async (req: Request, res: Response): Promise<Response> => {
         throw new Error("Method not implemented.");
     }
 }

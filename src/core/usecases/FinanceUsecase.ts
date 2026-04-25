@@ -1,33 +1,34 @@
 import { FinanceDtoView } from "../../shared/dtos/FinanceDto";
 import { FinanceMapper } from "../models/FinanceModel";
-import { FinanceRepository } from "../repositories/FinanceRepository";
+import { IFinanceRepository } from "../repositories/interfaces";
+
 import { IFinanceUsecase } from "./interfaces";
 
 export class FinanceUsecase implements IFinanceUsecase {
-    constructor(private financeRepository: FinanceRepository) {}
+    constructor(private financeRepository: IFinanceRepository) {}
 
     public get = async (id: string): Promise<FinanceDtoView> => {
         const finance = await this.financeRepository.watchFinance(id);
         return FinanceMapper.toView(finance);
     }
 
-    public getAll(): Promise<FinanceDtoView[]> {
+    public getAll = async (): Promise<FinanceDtoView[]> => {
         throw new Error("Method not implemented.");
     }
 
-    public getOne(id: string): Promise<FinanceDtoView | null> {
+    public getOne = async (id: string): Promise<FinanceDtoView> => {
         throw new Error("Method not implemented.");
     }
 
-    public create(createDto: any): Promise<string> {
+    public create = async (createDto: any): Promise<string> => {
         throw new Error("Method not implemented.");
     }
 
-    public update(updateDto: any): Promise<FinanceDtoView> {
+    public update = async (updateDto: any): Promise<FinanceDtoView> => {
         throw new Error("Method not implemented.");
     }
     
-    public delete(): Promise<boolean> {
+    public delete = async (): Promise<void> => {
         throw new Error("Method not implemented.");
     }
     

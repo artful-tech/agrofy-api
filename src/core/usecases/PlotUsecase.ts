@@ -16,19 +16,19 @@ export class PlotUsecase implements IPlotUsecase {
         return PlotMapper.toView(plots);
     }
 
-    public getOne(id: string): Promise<PlotDtoView | null> {
+    public getOne = async (id: string): Promise<PlotDtoView> => {
         throw new Error("Method not implemented.");
     }
 
-    public create(createDto: PlotDtoCreate): Promise<string> {
+    public create = async (createDto: PlotDtoCreate): Promise<string> => {
         throw new Error("Method not implemented.");
     }
 
-    public update(updateDto: PlotDtoUpdate): Promise<PlotDtoView> {
+    public update = async (updateDto: PlotDtoUpdate): Promise<PlotDtoView> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete(): Promise<boolean> {
+    public delete = async (): Promise<void> => {
         throw new Error("Method not implemented.");
     }
 }
