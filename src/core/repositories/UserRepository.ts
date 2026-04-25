@@ -29,11 +29,11 @@ export class UserRepository implements IUserRepository {
         return id;
     }
 
-    public update = async (model: UserModelUpdate): Promise<UserModel | null> => {
+    public update = async (id: string, model: UserModelUpdate): Promise<UserModel | null> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete = async (id: string): Promise<boolean> => {
+    public delete = async (id: string): Promise<void> => {
         throw new Error("Method not implemented.");
     }
 }

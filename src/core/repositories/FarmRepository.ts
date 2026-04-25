@@ -19,11 +19,11 @@ export class FarmRepository implements IFarmRepository {
         throw new Error("Method not implemented.");
     }
 
-    public update = async (model: FarmModelUpdate): Promise<FarmModel | null> => {
+    public update = async (id: string, model: FarmModelUpdate): Promise<FarmModel | null> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete = async (id: string): Promise<boolean> => {
+    public delete = async (id: string): Promise<void> => {
         throw new Error("Method not implemented.");
     }
 

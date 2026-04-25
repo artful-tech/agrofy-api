@@ -18,11 +18,11 @@ export class PlotRepository implements IPlotRepository {
         throw new Error("Method not implemented.");
     }
 
-    public update = async (model: PlotModelUpdate): Promise<PlotModel | null> => {
+    public update = async (id: string, model: PlotModelUpdate): Promise<PlotModel | null> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete = async (id: string): Promise<boolean> => {
+    public delete = async (id: string): Promise<void> => {
         throw new Error("Method not implemented.");
     }
 

@@ -17,11 +17,11 @@ export class FieldLogRepository implements IFieldLogRepository {
         throw new Error("Method not implemented.");
     }
 
-    public update = async (model: FieldLogModelUpdate): Promise<FieldLogModel | null> => {
+    public update = async (id: string, model: FieldLogModelUpdate): Promise<FieldLogModel | null> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete = async (id: string): Promise<boolean> => {
+    public delete = async (id: string): Promise<void> => {
         throw new Error("Method not implemented.");
     }
     
