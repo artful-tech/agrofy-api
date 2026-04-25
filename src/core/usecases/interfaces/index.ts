@@ -4,6 +4,7 @@ import { FinanceDtoView } from "../../../shared/dtos/FinanceDto";
 import { PlotDtoCreate, PlotDtoUpdate, PlotDtoView } from "../../../shared/dtos/PlotDto";
 import { UserDtoCreate, PasswordDtoUpdate, UserDtoView } from "../../../shared/dtos/UserDto";
 import { FieldLogDtoView } from "../../../shared/dtos/FieldLogDto";
+import { PeopleDtoCreate, PeopleDtoUpdate, PeopleDtoView } from "../../../shared/dtos/PeopleDto";
 
 /**
  * Interface base para os casos de uso (Usecases) do Agrofy.
@@ -15,10 +16,10 @@ import { FieldLogDtoView } from "../../../shared/dtos/FieldLogDto";
  */
 export interface IBaseUsecase<V, C, U, D, E> {
     getAll(): Promise<V[]>;
-    getOne(id: string): Promise<V | null>;
+    getOne(id: string): Promise<V>;
     create(createDto: C): Promise<D>;
     update(updateDto: U): Promise<V>;
-    delete(id: E): Promise<boolean>;
+    delete(id: E): Promise<void>;
 }
 
 export interface ICropUsecase extends IBaseUsecase<CropDtoView, CropDtoCreate, CropDtoUpdate, string, string> {}
@@ -30,6 +31,8 @@ export interface IPlotUsecase extends IBaseUsecase<PlotDtoView, PlotDtoCreate, P
 export interface IFieldLogUsecase extends IBaseUsecase<FieldLogDtoView, any, any, string, string> {}
 
 export interface IFinanceUsecase extends IBaseUsecase<FinanceDtoView, any, any, string, string> { }
+
+export interface IPeopleUsecase extends IBaseUsecase<PeopleDtoView, PeopleDtoCreate, PeopleDtoUpdate, string, string> { }
 
 export interface IUserUsecase extends IBaseUsecase<UserDtoView, UserDtoCreate, PasswordDtoUpdate, string, string> {
     getByEmail(email: string): Promise<UserDtoView>;

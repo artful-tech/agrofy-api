@@ -23,6 +23,10 @@ import UserRouter from "../http/routers/UserRouter";
 import { UserRepository } from "../../core/repositories/UserRepository";
 import { UserUsecase } from "../../core/usecases/UserUsecase";
 import { UserController } from "../http/controllers/UserController";
+import PeopleRouter from "../http/routers/PeopleRouter";
+import { PeopleRepository } from "../../core/repositories/PeopleRepository";
+import { PeopleUsecase } from "../../core/usecases/PeopleUsecase";
+import { PeopleController } from "../http/controllers/PeopleController";
 
 
 export class Factories {
@@ -68,5 +72,12 @@ export class Factories {
         const usecase = new UserUsecase(repository);
         const controller = new UserController(usecase);
         return new UserRouter(controller);
+    }
+
+    makePeopleRouter(): PeopleRouter {
+        const repository = new PeopleRepository(this.prisma);
+        const usecase = new PeopleUsecase(repository);
+        const controller = new PeopleController(usecase);
+        return new PeopleRouter(controller);
     }
 }

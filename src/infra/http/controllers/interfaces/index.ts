@@ -20,3 +20,5 @@ export interface IPlotController extends IBaseController {}
 export interface IUserController extends IBaseController {}
 
 export interface IFieldLogController extends IBaseController {}
+
+export interface IPeopleController extends IBaseController {}

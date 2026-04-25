@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { IPeopleRepository } from "./interfaces";
 import { PeopleModel, PeopleModelCreate, PeopleModelUpdate } from "../models/PeopleModel";
 
+
 export class PeopleRepository implements IPeopleRepository {
     constructor(private prisma: PrismaClient) { }
 

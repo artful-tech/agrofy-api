@@ -15,12 +15,13 @@ export class Routers {
     private initApiRoutes = (): Router => {
         const apiRouter = Router();
         
-        apiRouter.use("/users", this.factory.makeUserRouter().getRoutes());
-        apiRouter.use("/crops", this.factory.makeCropRouter().getRoutes());
-        apiRouter.use("/farms", this.factory.makeFarmRouter().getRoutes());
-        apiRouter.use("/plots", this.factory.makePlotRouter().getRoutes());
-        apiRouter.use("/field-logs", this.factory.makeFieldLogRouter().getRoutes());
+        apiRouter.use("/user", this.factory.makeUserRouter().getRoutes());
+        apiRouter.use("/crop", this.factory.makeCropRouter().getRoutes());
+        apiRouter.use("/farm", this.factory.makeFarmRouter().getRoutes());
+        apiRouter.use("/plot", this.factory.makePlotRouter().getRoutes());
+        apiRouter.use("/field-log", this.factory.makeFieldLogRouter().getRoutes());
         apiRouter.use("/finance", this.factory.makeFinanceRouter().getRoutes())
+        apiRouter.use("/people", this.factory.makePeopleRouter().getRoutes())
 
         return apiRouter;
     }
