@@ -1,8 +1,8 @@
-import { CropModel, CropModelInput, CropModelUpdate } from "../../models/CropModel";
-import { FarmModel } from "../../models/FarmModel";
-import { PlotModel } from "../../models/PlotModel";
-import { UserModel } from "../../models/UserModel";
-import { FieldLogModel } from "../../models/FieldLogModel";
+import { CropModel, CropModelCreate, CropModelUpdate } from "../../models/CropModel";
+import { FarmModel, FarmModelCreate, FarmModelUpdate } from "../../models/FarmModel";
+import { PlotModel, PlotModelCreate, PlotModelUpdate } from "../../models/PlotModel";
+import { UserModel, UserModelCreate, UserModelUpdate } from "../../models/UserModel";
+import { FieldLogModel, FieldLogModelCreate, FieldLogModelUpdate } from "../../models/FieldLogModel";
 import { FinanceModel } from "../../models/FinanceModel";
 
 export interface IBaseRepository<M, C, U> {
@@ -13,20 +13,19 @@ export interface IBaseRepository<M, C, U> {
     delete(id: string): Promise<boolean>
 }
 
-export interface ICropRepository extends IBaseRepository<CropModel, CropModelInput, CropModelUpdate> { }
+export interface ICropRepository extends IBaseRepository<CropModel, CropModelCreate, CropModelUpdate> { }
 
-export interface IFarmRepository extends IBaseRepository<FarmModel, any, any> { }
+export interface IFarmRepository extends IBaseRepository<FarmModel, FarmModelCreate, FarmModelUpdate> { }
 
-export interface IPlotRepository extends IBaseRepository<PlotModel, any, any> { }
+export interface IPlotRepository extends IBaseRepository<PlotModel, PlotModelCreate, PlotModelUpdate> { }
+
+export interface IFieldLogRepository extends IBaseRepository<FieldLogModel, FieldLogModelCreate, FieldLogModelUpdate> { }
+
+export interface IUserRepository extends IBaseRepository<UserModel, UserModelCreate, UserModelUpdate> {
+    findByEmail(email: string): Promise<UserModel>
+}
 
 export interface IFinanceRepository {
     watchFinance(managerId: string): Promise<FinanceModel>;
     updateFinance(): Promise<FinanceModel>;
 }
-
-export interface IUserRepository extends IBaseRepository<UserModel, any, any> {
-    findByEmail(email: string): Promise<UserModel>
-}
-
-export interface IFieldLogRepository extends IBaseRepository<FieldLogModel, any, any> { }
-
