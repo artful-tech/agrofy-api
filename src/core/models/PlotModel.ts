@@ -3,6 +3,8 @@ import { CreatePlotDto, UpdatePlotDto, ViewPlotDto } from "../../shared/dtos/Plo
 
 
 export type PlotModel = Plot;
+export type PlotModelCreate = Prisma.PlotCreateInput;
+export type PlotModelUpdate = Prisma.PlotUpdateInput;
 
 export class PlotMapper {
     
@@ -22,7 +24,7 @@ export class PlotMapper {
     /**
      * Transforma o que vem do Front-end (View) Create para o Modelo de Domínio
      */
-    static fromCreateDtoToInput(dto: CreatePlotDto): Prisma.PlotCreateInput {
+    static fromCreateDtoToInput(dto: CreatePlotDto): PlotModelCreate {
         return {
             name: dto.name,
             area: dto.area,
@@ -36,7 +38,7 @@ export class PlotMapper {
         };
     }
 
-    static fromUpdateDtoToInput(dto: UpdatePlotDto): Prisma.PlotUpdateInput {
+    static fromUpdateDtoToInput(dto: UpdatePlotDto): PlotModelUpdate {
         return {
             id: dto.id,
             name: dto.name,

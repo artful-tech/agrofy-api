@@ -3,6 +3,8 @@ import { CreateUserDto, UpdatePasswordDto, ViewUserDto } from "../../shared/dtos
 
 
 export type UserModel = User;
+export type UserModelCreate = Prisma.UserCreateInput;
+export type UserModelUpdate = Prisma.UserUpdateInput;
 
 export class UserMapper {
 
@@ -22,14 +24,14 @@ export class UserMapper {
     /**
      * Transforma o que vem do Front-end (View) Create para o Modelo de Domínio
      */
-    static fromCreateDtoToInput(dto: CreateUserDto): Prisma.UserCreateInput {
+    static fromCreateDtoToInput(dto: CreateUserDto): UserModelCreate {
         return {
             email: dto.email,
             password: dto.password
         };
     }
 
-    static fromUpdateDtoToInput(dto: UpdatePasswordDto): Prisma.UserUpdateInput {
+    static fromUpdateDtoToInput(dto: UpdatePasswordDto): UserModelUpdate {
         return {
             email: dto.email,
             password: dto.newPassword

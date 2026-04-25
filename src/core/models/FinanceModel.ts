@@ -1,8 +1,10 @@
-import { Finance } from "@prisma/client";
+import { Finance, Prisma } from "@prisma/client";
 import { ViewFinanceDto } from "../../shared/dtos/FinanceDto";
 
 
 export type FinanceModel = Finance;
+export type FinanceModelCreate = Prisma.FinanceCreateInput;
+export type FinanceModelUpdate = Prisma.FinanceUpdateInput;
 
 export class FinanceMapper {
     

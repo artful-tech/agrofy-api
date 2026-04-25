@@ -3,6 +3,8 @@ import { CreateFarmDto, UpdateFarmDto, ViewFarmDto } from "../../shared/dtos/Far
 
 
 export type FarmModel = Farm;
+export type FarmModelCreate = Prisma.FarmCreateInput;
+export type FarmModelUpdate = Prisma.FarmUpdateInput;
 
 export class FarmMapper {
     
@@ -22,7 +24,7 @@ export class FarmMapper {
     /**
      * Transforma o que vem do Front-end (View) Create para o Modelo de Domínio
      */
-    static fromCreateDtoToInput(dto: CreateFarmDto): Prisma.FarmCreateInput {
+    static fromCreateDtoToInput(dto: CreateFarmDto): FarmModelCreate {
         return {
             name: dto.name,
             totalArea: dto.totalArea,
@@ -44,7 +46,7 @@ export class FarmMapper {
         };
     }
 
-    static fromUpdateDtoToInput(dto: UpdateFarmDto): Prisma.FarmUpdateInput {
+    static fromUpdateDtoToInput(dto: UpdateFarmDto): FarmModelUpdate {
         let addressInput = undefined;
 
         if (dto.address) {
