@@ -11,14 +11,14 @@ import { PeopleModel, PeopleModelCreate, PeopleModelUpdate } from "../../models/
  * * @template M - Model
  * @template C - Create Model
  * @template U - Update Model
- * @template D - Tipo do ID para exclusão (ex: string ou number)
+ * @template T - Tipo do ID para exclusão (ex: string ou number)
  */
-export interface IBaseRepository<M, C, U, D> {
+export interface IBaseRepository<M, C, U, T> {
     findAll(): Promise<M[]>
     findOne(id: string): Promise<M>
     create(model: C): Promise<string | null>
-    update(model: U): Promise<M | null>
-    delete(id: D): Promise<boolean>
+    update(id: T, data: U): Promise<M | null>
+    delete(id: T): Promise<void>
 }
 
 export interface ICropRepository extends IBaseRepository<CropModel, CropModelCreate, CropModelUpdate, string> { }

@@ -11,7 +11,9 @@ export class CropRepository implements ICropRepository {
     }
 
     public findOne = async (id: string): Promise<CropModel> => {
-        throw new Error("Method not implemented.");
+        return await this.prisma.crop.findUniqueOrThrow({
+            where: { id: id }
+        });
     }
 
     public create = async (model: CropModelCreate): Promise<string | null> => {
@@ -21,11 +23,16 @@ export class CropRepository implements ICropRepository {
         return crop.id;
     }
 
-    public update = async (model: CropModelUpdate): Promise<CropModel | null> => {
-        throw new Error("Method not implemented.");
+    public update = async (id: string, model: CropModelUpdate): Promise<CropModel | null> => {
+        return await this.prisma.crop.update({
+            where: { id: id },
+            data: model
+        });
     }
 
-    public delete = async (id: string): Promise<boolean> => {
-        throw new Error("Method not implemented.");
+    public delete = async (id: string): Promise<void> => {
+        await this.prisma.crop.delete({
+            where: { id: id }
+        });
     }
 }
