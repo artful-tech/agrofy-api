@@ -2,7 +2,9 @@ import { Crop, Prisma } from "@prisma/client";
 import { CreateCropDto, UpdateCropDto, ViewCropDto } from "../../shared/dtos/CropDto";
 
 
-export type CropModel  = Crop;
+export type CropModel = Crop;
+export type CropModelInput = Prisma.CropCreateInput;
+export type CropModelUpdate = Prisma.CropUpdateInput;
 
 export class CropMapper {
 
@@ -22,7 +24,7 @@ export class CropMapper {
     /**
      * Transforma o que vem do Front-end (View) Create para o Modelo de Domínio
      */
-    static fromCreateDtoToInput(dto: CreateCropDto): Prisma.CropCreateInput {
+    static fromCreateDtoToInput(dto: CreateCropDto): CropModelInput {
         return {
             name: dto.name,
             variety: dto.variety,

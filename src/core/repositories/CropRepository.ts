@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { ICropRepository } from "./interfaces";
-import { CropModel } from "../models/CropModel";
+import { CropModelInput, CropModel } from "../models/CropModel";
 
 
 export class CropRepository implements ICropRepository {
@@ -14,8 +14,11 @@ export class CropRepository implements ICropRepository {
         throw new Error("Method not implemented.");
     }
 
-    public create(model: { name: string; id: string; variety: string | null; photo: string | null; daysToHarvest: number; observation: string | null; createdAt: Date; updatedAt: Date; deletedAt: Date | null; }): Promise<string | null> {
-        throw new Error("Method not implemented.");
+    public create = async (model: CropModelInput): Promise<string | null> => {
+        const crop = await this.prisma.crop.create({
+            data: model
+        });
+        return crop.id;
     }
 
     public update(model: { name: string; id: string; variety: string | null; photo: string | null; daysToHarvest: number; observation: string | null; createdAt: Date; updatedAt: Date; deletedAt: Date | null; }): Promise<{ name: string; id: string; variety: string | null; photo: string | null; daysToHarvest: number; observation: string | null; createdAt: Date; updatedAt: Date; deletedAt: Date | null; } | null> {
