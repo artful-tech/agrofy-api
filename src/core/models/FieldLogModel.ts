@@ -1,5 +1,5 @@
 import { FieldLog, Prisma } from "@prisma/client";
-import { ViewFieldLogDto } from "../../shared/dtos/FieldLogDto";
+import { FieldLogDtoView } from "../../shared/dtos/FieldLogDto";
 
 
 export type FieldLogModel = FieldLog;
@@ -8,7 +8,7 @@ export type FieldLogModelUpdate = Prisma.FieldLogUpdateInput;
 
 export class FieldLogMapper {
     
-    public static toView(fieldLogs: any[]): ViewFieldLogDto[] {
+    public static toView(fieldLogs: any[]): FieldLogDtoView[] {
         return fieldLogs.map((fieldLog) => ({
             id: fieldLog.id,
             description: fieldLog.description,

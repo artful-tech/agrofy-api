@@ -18,10 +18,10 @@ export const updateCropSchema = z.object({
     observation: z.string().optional()
 });
 
-export type CreateCropDto = z.infer<typeof createCropSchema>;
-export type UpdateCropDto = z.infer<typeof updateCropSchema>;
+export type CropDtoCreate = z.infer<typeof createCropSchema>;
+export type CropDtoUpdate = z.infer<typeof updateCropSchema>;
 
-export type ViewCropDto = {
+export type CropDtoView = {
     id: string;
     name: string;
     variety: string | null;

@@ -1,29 +1,36 @@
-import { CreateCropDto, UpdateCropDto, ViewCropDto } from "../../../shared/dtos/CropDto";
-import { CreateFarmDto, UpdateFarmDto, ViewFarmDto } from "../../../shared/dtos/FarmDto";
-import { ViewFinanceDto } from "../../../shared/dtos/FinanceDto";
-import { CreatePlotDto, UpdatePlotDto, ViewPlotDto } from "../../../shared/dtos/PlotDto";
-import { CreateUserDto, UpdatePasswordDto, ViewUserDto } from "../../../shared/dtos/UserDto";
-import { ViewFieldLogDto } from "../../../shared/dtos/FieldLogDto";
+import { CropDtoCreate, CropDtoUpdate, CropDtoView } from "../../../shared/dtos/CropDto";
+import { FarmDtoCreate, FarmDtoUpdate, FarmDtoView } from "../../../shared/dtos/FarmDto";
+import { FinanceDtoView } from "../../../shared/dtos/FinanceDto";
+import { PlotDtoCreate, PlotDtoUpdate, PlotDtoView } from "../../../shared/dtos/PlotDto";
+import { UserDtoCreate, PasswordDtoUpdate, UserDtoView } from "../../../shared/dtos/UserDto";
+import { FieldLogDtoView } from "../../../shared/dtos/FieldLogDto";
 
-
-export interface IBaseUsecase<V, C, U, D> {
+/**
+ * Interface base para os casos de uso (Usecases) do Agrofy.
+ * * @template V - DTO de Visualização (View DTO)
+ * @template C - DTO de Criação (Create DTO)
+ * @template U - DTO de Atualização (Update DTO)
+ * @template D - Tipo do ID (ex: string ou number)
+ * @template E - Tipo do identificador único para exclusão
+ */
+export interface IBaseUsecase<V, C, U, D, E> {
     getAll(): Promise<V[]>;
     getOne(id: string): Promise<V | null>;
     create(createDto: C): Promise<D>;
     update(updateDto: U): Promise<V>;
-    delete(): Promise<boolean>;
+    delete(id: E): Promise<boolean>;
 }
 
-export interface ICropUsecase extends IBaseUsecase<ViewCropDto, CreateCropDto, UpdateCropDto, string> {}
+export interface ICropUsecase extends IBaseUsecase<CropDtoView, CropDtoCreate, CropDtoUpdate, string, string> {}
 
-export interface IFarmUsecase extends IBaseUsecase<ViewFarmDto, CreateFarmDto, UpdateFarmDto, string> {}
+export interface IFarmUsecase extends IBaseUsecase<FarmDtoView, FarmDtoCreate, FarmDtoUpdate, string, string> {}
 
-export interface IPlotUsecase extends IBaseUsecase<ViewPlotDto, CreatePlotDto, UpdatePlotDto, string> {}
+export interface IPlotUsecase extends IBaseUsecase<PlotDtoView, PlotDtoCreate, PlotDtoUpdate, string, string> {}
 
-export interface IUserUsecase extends IBaseUsecase<ViewUserDto, CreateUserDto, UpdatePasswordDto, string> {
-    getByEmail(email: string): Promise<ViewUserDto>;
+export interface IFieldLogUsecase extends IBaseUsecase<FieldLogDtoView, any, any, string, string> {}
+
+export interface IFinanceUsecase extends IBaseUsecase<FinanceDtoView, any, any, string, string> { }
+
+export interface IUserUsecase extends IBaseUsecase<UserDtoView, UserDtoCreate, PasswordDtoUpdate, string, string> {
+    getByEmail(email: string): Promise<UserDtoView>;
 }
-
-export interface IFieldLogUsecase extends IBaseUsecase<ViewFieldLogDto, any, any, string> {}
-
-export interface IFinanceUsecase extends IBaseUsecase<ViewFinanceDto, any, any, string> { }

@@ -1,4 +1,4 @@
-import { ViewFinanceDto } from "../../shared/dtos/FinanceDto";
+import { FinanceDtoView } from "../../shared/dtos/FinanceDto";
 import { FinanceMapper } from "../models/FinanceModel";
 import { FinanceRepository } from "../repositories/FinanceRepository";
 import { IFinanceUsecase } from "./interfaces";
@@ -6,16 +6,16 @@ import { IFinanceUsecase } from "./interfaces";
 export class FinanceUsecase implements IFinanceUsecase {
     constructor(private financeRepository: FinanceRepository) {}
 
-    public get = async (id: string): Promise<ViewFinanceDto | null> => {
+    public get = async (id: string): Promise<FinanceDtoView> => {
         const finance = await this.financeRepository.watchFinance(id);
         return FinanceMapper.toView(finance);
     }
 
-    public getAll(): Promise<ViewFinanceDto[]> {
+    public getAll(): Promise<FinanceDtoView[]> {
         throw new Error("Method not implemented.");
     }
 
-    public getOne(id: string): Promise<ViewFinanceDto | null> {
+    public getOne(id: string): Promise<FinanceDtoView | null> {
         throw new Error("Method not implemented.");
     }
 
@@ -23,7 +23,7 @@ export class FinanceUsecase implements IFinanceUsecase {
         throw new Error("Method not implemented.");
     }
 
-    public update(updateDto: any): Promise<ViewFinanceDto> {
+    public update(updateDto: any): Promise<FinanceDtoView> {
         throw new Error("Method not implemented.");
     }
     

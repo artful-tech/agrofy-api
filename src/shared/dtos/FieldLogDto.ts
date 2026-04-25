@@ -1,4 +1,4 @@
-export type ViewFieldLogDto = {
+export type FieldLogDtoView = {
     id: string;
     description: string;
     category: string;

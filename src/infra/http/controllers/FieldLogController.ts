@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { IFieldLogUsecase } from "../../../core/usecases/interfaces";
 import { IFieldLogController } from "./interfaces";
+import { FieldLogDtoView } from "../../../shared/dtos/FieldLogDto";
 
 export class FieldLogController implements IFieldLogController {
     constructor(private fieldLogUsecase: IFieldLogUsecase) {}
 
     public index = async (req: Request, res: Response) => {
-        const data = await this.fieldLogUsecase.getAll();
+        const data: FieldLogDtoView[] = await this.fieldLogUsecase.getAll();
         return res.json(data);
     };
 

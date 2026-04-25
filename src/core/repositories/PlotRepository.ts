@@ -10,7 +10,7 @@ export class PlotRepository implements IPlotRepository {
         return await this.prisma.plot.findMany();
     }
 
-    public findOne = async (id: string): Promise<PlotModel | null> => {
+    public findOne = async (id: string): Promise<PlotModel> => {
         throw new Error("Method not implemented.");
     }
 

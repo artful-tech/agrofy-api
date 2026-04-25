@@ -1,5 +1,5 @@
-import { CreateCropDto, ViewCropDto } from "../../shared/dtos/CropDto";
-import { CropMapper, CropModelInput } from "../models/CropModel";
+import { CropDtoCreate, CropDtoUpdate, CropDtoView } from "../../shared/dtos/CropDto";
+import { CropMapper, CropModelCreate } from "../models/CropModel";
 import { ICropRepository } from "../repositories/interfaces";
 import { ICropUsecase } from "./interfaces";
 
@@ -8,7 +8,7 @@ export class CropUsecase implements ICropUsecase {
 
     constructor(private cropRepository: ICropRepository) { }
 
-    public getAll = async (): Promise<ViewCropDto[]> => {
+    public getAll = async (): Promise<CropDtoView[]> => {
         const crops = await this.cropRepository.findAll();
 
         if (!crops) {
@@ -18,17 +18,17 @@ export class CropUsecase implements ICropUsecase {
         return CropMapper.toView(crops);
     }
 
-    public getOne(id: string): Promise<ViewCropDto | null> {
+    public getOne(id: string): Promise<CropDtoView | null> {
         throw new Error("Method not implemented.");
     }
 
-    public create = async (createDto: CreateCropDto): Promise<string> => {
-        const cropCreateInput: CropModelInput = CropMapper.fromCreateDtoToInput(createDto);
+    public create = async (createDto: CropDtoCreate): Promise<string> => {
+        const cropCreateInput: CropModelCreate = CropMapper.fromCreateDtoToInput(createDto);
         const crop = await this.cropRepository.create(cropCreateInput);
         return crop ?? '';
     }
 
-    public update(updateDto: { id: string; name?: string | undefined; variety?: string | undefined; photo?: string | undefined; daysToHarvest?: number | undefined; observation?: string | undefined; }): Promise<ViewCropDto> {
+    public update = async (updateDto: CropDtoUpdate): Promise<CropDtoView> => {
         throw new Error("Method not implemented.");
     }
 

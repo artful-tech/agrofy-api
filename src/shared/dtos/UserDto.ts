@@ -20,10 +20,10 @@ export const UpdateUserSchema = z.object({
     path: ['confirmPassword']
 })
 
-export type CreateUserDto = z.infer<typeof CreateUserSchema>;
-export type UpdatePasswordDto = z.infer<typeof UpdateUserSchema>;
+export type UserDtoCreate = z.infer<typeof CreateUserSchema>;
+export type PasswordDtoUpdate = z.infer<typeof UpdateUserSchema>;
 
-export type ViewUserDto = {
+export type UserDtoView = {
     id: string;
     email: string;
     createdAt: Date;

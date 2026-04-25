@@ -5,23 +5,30 @@ import { UserModel, UserModelCreate, UserModelUpdate } from "../../models/UserMo
 import { FieldLogModel, FieldLogModelCreate, FieldLogModelUpdate } from "../../models/FieldLogModel";
 import { FinanceModel } from "../../models/FinanceModel";
 
-export interface IBaseRepository<M, C, U> {
+/**
+ * Interface base para os casos de uso (Usecases) do Agrofy.
+ * * @template M - Model
+ * @template C - Create Model
+ * @template U - Update Model
+ * @template D - Tipo do ID para exclusão (ex: string ou number)
+ */
+export interface IBaseRepository<M, C, U, D> {
     findAll(): Promise<M[]>
-    findOne(id: string): Promise<M | null>
+    findOne(id: string): Promise<M>
     create(model: C): Promise<string | null>
     update(model: U): Promise<M | null>
-    delete(id: string): Promise<boolean>
+    delete(id: D): Promise<boolean>
 }
 
-export interface ICropRepository extends IBaseRepository<CropModel, CropModelCreate, CropModelUpdate> { }
+export interface ICropRepository extends IBaseRepository<CropModel, CropModelCreate, CropModelUpdate, string> { }
 
-export interface IFarmRepository extends IBaseRepository<FarmModel, FarmModelCreate, FarmModelUpdate> { }
+export interface IFarmRepository extends IBaseRepository<FarmModel, FarmModelCreate, FarmModelUpdate, string> { }
 
-export interface IPlotRepository extends IBaseRepository<PlotModel, PlotModelCreate, PlotModelUpdate> { }
+export interface IPlotRepository extends IBaseRepository<PlotModel, PlotModelCreate, PlotModelUpdate, string> { }
 
-export interface IFieldLogRepository extends IBaseRepository<FieldLogModel, FieldLogModelCreate, FieldLogModelUpdate> { }
+export interface IFieldLogRepository extends IBaseRepository<FieldLogModel, FieldLogModelCreate, FieldLogModelUpdate, string> { }
 
-export interface IUserRepository extends IBaseRepository<UserModel, UserModelCreate, UserModelUpdate> {
+export interface IUserRepository extends IBaseRepository<UserModel, UserModelCreate, UserModelUpdate, string> {
     findByEmail(email: string): Promise<UserModel>
 }
 

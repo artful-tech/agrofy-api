@@ -9,7 +9,7 @@ export class FieldLogRepository implements IFieldLogRepository {
         return await this.prisma.fieldLog.findMany();
     }
 
-    public findOne = async (id: string): Promise<FieldLogModel | null> => {
+    public findOne = async (id: string): Promise<FieldLogModel> => {
         throw new Error("Method not implemented.");
     }
 

@@ -1,5 +1,5 @@
 import { Finance, Prisma } from "@prisma/client";
-import { ViewFinanceDto } from "../../shared/dtos/FinanceDto";
+import { FinanceDtoView } from "../../shared/dtos/FinanceDto";
 
 
 export type FinanceModel = Finance;
@@ -8,16 +8,16 @@ export type FinanceModelUpdate = Prisma.FinanceUpdateInput;
 
 export class FinanceMapper {
     
-    static toView(model: FinanceModel): ViewFinanceDto;
+    static toView(model: FinanceModel): FinanceDtoView;
 
     /**
      * Transforma o modelo do Banco/Prisma para o que o Front-end precisa
      */
-    static toView(model: FinanceModel): ViewFinanceDto {
+    static toView(model: FinanceModel): FinanceDtoView {
         return this.mapToDto(model);
     }
 
-    private static mapToDto(model: FinanceModel): ViewFinanceDto {
+    private static mapToDto(model: FinanceModel): FinanceDtoView {
         return {
             createdAt: model.createdAt,
             updatedAt: model.updatedAt,

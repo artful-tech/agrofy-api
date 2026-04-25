@@ -1,27 +1,27 @@
-import { CreateAddressDto, UpdateAddressDto, ViewAddressDto } from "./AddressDto";
+import { AddressDtoCreate, AddressDtoUpdate } from "./AddressDto";
 
-export type CreateFarmDto = {
+export type FarmDtoCreate = {
     name: string;
     totalArea: number;
     unity: string;
     resume?: string;
     photo?: string;
-    address: CreateAddressDto;
+    address: AddressDtoCreate;
     observation?: string;
 }
 
-export type UpdateFarmDto = {
+export type FarmDtoUpdate = {
     name?: string;
     id: string;
     totalArea?: number;
     unity?: string;
     resume?: string;
     photo?: string;
-    address?: UpdateAddressDto;
+    address?: AddressDtoUpdate;
     observation?: string;
 }
 
-export type ViewFarmDto = {
+export type FarmDtoView = {
     name: string;
     id: string;
     totalArea: number;

@@ -1,5 +1,5 @@
 import { Prisma, User } from "@prisma/client";
-import { CreateUserDto, UpdatePasswordDto, ViewUserDto } from "../../shared/dtos/UserDto";
+import { UserDtoCreate, PasswordDtoUpdate, UserDtoView } from "../../shared/dtos/UserDto";
 
 
 export type UserModel = User;
@@ -8,13 +8,13 @@ export type UserModelUpdate = Prisma.UserUpdateInput;
 
 export class UserMapper {
 
-    static toView(model: UserModel): ViewUserDto;
-    static toView(models: UserModel[]): ViewUserDto[];
+    static toView(model: UserModel): UserDtoView;
+    static toView(models: UserModel[]): UserDtoView[];
 
     /**
      * Transforma o modelo do Banco/Prisma para o que o Front-end precisa
      */
-    static toView(model: UserModel | UserModel[]): ViewUserDto | ViewUserDto[] {
+    static toView(model: UserModel | UserModel[]): UserDtoView | UserDtoView[] {
         if (Array.isArray(model)) {
             return model.map(item => this.mapToDto(item));
         }
@@ -24,21 +24,21 @@ export class UserMapper {
     /**
      * Transforma o que vem do Front-end (View) Create para o Modelo de Domínio
      */
-    static fromCreateDtoToInput(dto: CreateUserDto): UserModelCreate {
+    static fromCreateDtoToInput(dto: UserDtoCreate): UserModelCreate {
         return {
             email: dto.email,
             password: dto.password
         };
     }
 
-    static fromUpdateDtoToInput(dto: UpdatePasswordDto): UserModelUpdate {
+    static fromUpdateDtoToInput(dto: PasswordDtoUpdate): UserModelUpdate {
         return {
             email: dto.email,
             password: dto.newPassword
         };
     }
 
-    private static mapToDto(model: UserModel): ViewUserDto {
+    private static mapToDto(model: UserModel): UserDtoView {
         return {
             id: model.id,
             email: model.email,

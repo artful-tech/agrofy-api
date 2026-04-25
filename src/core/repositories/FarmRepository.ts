@@ -11,7 +11,7 @@ export class FarmRepository implements IFarmRepository {
         return await this.prisma.farm.findMany();
     }
 
-    public findOne = async (id: string): Promise<{ name: string; id: string; photo: string | null; observation: string | null; createdAt: Date; updatedAt: Date; deletedAt: Date | null; totalArea: number; unity: string; resume: string | null; addressId: string; } | null> => {
+    public findOne = async (id: string): Promise<FarmModel> => {
         throw new Error("Method not implemented.");
     }
 

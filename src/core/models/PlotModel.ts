@@ -1,5 +1,5 @@
 import { Plot, Prisma } from "@prisma/client";
-import { CreatePlotDto, UpdatePlotDto, ViewPlotDto } from "../../shared/dtos/PlotDto";
+import { PlotDtoCreate, PlotDtoUpdate, PlotDtoView} from "../../shared/dtos/PlotDto";
 
 
 export type PlotModel = Plot;
@@ -8,13 +8,13 @@ export type PlotModelUpdate = Prisma.PlotUpdateInput;
 
 export class PlotMapper {
     
-    static toView(model: PlotModel): ViewPlotDto;
-    static toView(models: PlotModel[]): ViewPlotDto[];
+    static toView(model: PlotModel): PlotDtoView;
+    static toView(models: PlotModel[]): PlotDtoView[];
 
     /**
      * Transforma o modelo do Banco/Prisma para o que o Front-end precisa
      */
-    static toView(model: PlotModel | PlotModel[]): ViewPlotDto | ViewPlotDto[] {
+    static toView(model: PlotModel | PlotModel[]): PlotDtoView | PlotDtoView[] {
         if (Array.isArray(model)) {
             return model.map(item => this.mapToDto(item));
         }
@@ -24,7 +24,7 @@ export class PlotMapper {
     /**
      * Transforma o que vem do Front-end (View) Create para o Modelo de Domínio
      */
-    static fromCreateDtoToInput(dto: CreatePlotDto): PlotModelCreate {
+    static fromCreateDtoToInput(dto: PlotDtoCreate): PlotModelCreate {
         return {
             name: dto.name,
             area: dto.area,
@@ -38,7 +38,7 @@ export class PlotMapper {
         };
     }
 
-    static fromUpdateDtoToInput(dto: UpdatePlotDto): PlotModelUpdate {
+    static fromUpdateDtoToInput(dto: PlotDtoUpdate): PlotModelUpdate {
         return {
             id: dto.id,
             name: dto.name,
@@ -50,7 +50,7 @@ export class PlotMapper {
         };
     }
 
-    private static mapToDto(model: PlotModel): ViewPlotDto {
+    private static mapToDto(model: PlotModel): PlotDtoView {
         return {
             name: model.name,
             id: model.id,

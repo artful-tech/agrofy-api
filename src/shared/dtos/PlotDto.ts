@@ -1,4 +1,4 @@
-export type CreatePlotDto = {
+export type PlotDtoCreate = {
     name: string;
     area: number;
     unity: string;
@@ -8,7 +8,7 @@ export type CreatePlotDto = {
     observation?: string;
 }
 
-export type UpdatePlotDto = {
+export type PlotDtoUpdate = {
     name?: string;
     id: string;
     area?: number;
@@ -19,7 +19,7 @@ export type UpdatePlotDto = {
     observation?: string;
 }
 
-export type ViewPlotDto = {
+export type PlotDtoView = {
     name: string;
     id: string;
     area: number;

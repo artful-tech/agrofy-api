@@ -21,10 +21,10 @@ export const UpdateAddressSchema = z.object({
     country: z.string().min(2, 'Nome de país muito curto').max(50, 'Nome de país muito grande').nonempty({ message: 'Nome de estado não pode ser vazio' }),
 });
 
-export type CreateAddressDto = z.infer<typeof CreateAddressSchema>;
-export type UpdateAddressDto = z.infer<typeof UpdateAddressSchema>;
+export type AddressDtoCreate = z.infer<typeof CreateAddressSchema>;
+export type AddressDtoUpdate = z.infer<typeof UpdateAddressSchema>;
 
-export type ViewAddressDto = {
+export type AddressDtoView = {
     number: number | null;
     id: string;
     street: string | null;

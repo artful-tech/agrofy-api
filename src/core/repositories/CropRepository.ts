@@ -10,7 +10,7 @@ export class CropRepository implements ICropRepository {
         return await this.prisma.crop.findMany();
     }
 
-    public findOne = async (id: string): Promise<CropModel | null> => {
+    public findOne = async (id: string): Promise<CropModel> => {
         throw new Error("Method not implemented.");
     }
 
