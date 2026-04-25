@@ -1,5 +1,8 @@
+import { FieldLog } from "@prisma/client";
 import { ViewFieldLogDto } from "../../shared/dtos/FieldLogDto";
 
+
+export type FieldLogModel = FieldLog;
 
 export class FieldLogMapper {
     
