@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { PeopleController } from "../controllers/PeopleController";
+import { ValidationMiddleware } from "../middlewares/ValidationMiddleware";
+import { createPeopleSchema, updatePeopleSchema } from "../../../shared/dtos/PeopleDto";
 
 
 export default class PeopleRouter {
@@ -11,8 +13,16 @@ export default class PeopleRouter {
 
         peopleRouter.get('/', this.peopleController.index);
         peopleRouter.get('/:peopleId', this.peopleController.getOne);
-        peopleRouter.post('/', this.peopleController.create);
-        peopleRouter.patch('/', this.peopleController.update);
+        peopleRouter.post(
+            '/', 
+            ValidationMiddleware.validate(createPeopleSchema),
+            this.peopleController.create
+        );
+        peopleRouter.patch(
+            '/', 
+            ValidationMiddleware.validate(updatePeopleSchema),
+            this.peopleController.update
+        );
         peopleRouter.delete('/', this.peopleController.delete);
 
         return peopleRouter;
