@@ -1,6 +1,6 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { IUserRepository } from './interfaces'
-import { UserModel } from "../models/UserModel";
+import { UserModel, UserModelCreate, UserModelUpdate } from "../models/UserModel";
 
 
 export class UserRepository implements IUserRepository {
@@ -17,11 +17,11 @@ export class UserRepository implements IUserRepository {
         return user;
     }
     
-    public findOne(id: string): Promise<{ id: string; email: string; password: string; createdAt: Date; updatedAt: Date; deletedAt: Date | null; } | null> {
+    public findOne = async (id: string): Promise<UserModel | null> => {
         return this.prisma.user.findUniqueOrThrow({ where: { id } })
     }
 
-    public create = async (userModel: Prisma.UserCreateInput): Promise<string | null> => {
+    public create = async (userModel: UserModelCreate): Promise<string | null> => {
         const userCreated = await this.prisma.user.create({
             data: userModel
         });
@@ -29,11 +29,11 @@ export class UserRepository implements IUserRepository {
         return id;
     }
 
-    public update(model: { id: string; email: string; password: string; createdAt: Date; updatedAt: Date; deletedAt: Date | null; }): Promise<{ id: string; email: string; password: string; createdAt: Date; updatedAt: Date; deletedAt: Date | null; } | null> {
+    public update = async (model: UserModelUpdate): Promise<UserModel | null> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete(id: string): Promise<boolean> {
+    public delete = async (id: string): Promise<boolean> => {
         throw new Error("Method not implemented.");
     }
 }

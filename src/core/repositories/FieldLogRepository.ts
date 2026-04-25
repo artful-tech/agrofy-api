@@ -1,5 +1,6 @@
 import { $Enums, PrismaClient } from "@prisma/client";
 import { IFieldLogRepository } from "./interfaces";
+import { FieldLogModel, FieldLogModelCreate, FieldLogModelUpdate } from "../models/FieldLogModel";
 
 export class FieldLogRepository implements IFieldLogRepository {
     constructor(private prisma: PrismaClient) {}
@@ -8,21 +9,20 @@ export class FieldLogRepository implements IFieldLogRepository {
         return await this.prisma.fieldLog.findMany();
     }
 
-    public findOne(id: string): Promise<{ id: string; createdAt: Date; updatedAt: Date; deletedAt: Date | null; description: string; category: $Enums.LogCategory; date: Date; seasonId: string; } | null> {
+    public findOne = async (id: string): Promise<FieldLogModel | null> => {
         throw new Error("Method not implemented.");
     }
 
-    public create(model: { id: string; createdAt: Date; updatedAt: Date; deletedAt: Date | null; description: string; category: $Enums.LogCategory; date: Date; seasonId: string; }): Promise<string | null> {
+    public create = async (model: FieldLogModelCreate): Promise<string | null> => {
         throw new Error("Method not implemented.");
     }
 
-    public update(model: { id: string; createdAt: Date; updatedAt: Date; deletedAt: Date | null; description: string; category: $Enums.LogCategory; date: Date; seasonId: string; }): Promise<{ id: string; createdAt: Date; updatedAt: Date; deletedAt: Date | null; description: string; category: $Enums.LogCategory; date: Date; seasonId: string; } | null> {
+    public update = async (model: FieldLogModelUpdate): Promise<FieldLogModel | null> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete(id: string): Promise<boolean> {
+    public delete = async (id: string): Promise<boolean> => {
         throw new Error("Method not implemented.");
     }
-
     
 }

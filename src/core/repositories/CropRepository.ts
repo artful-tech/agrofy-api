@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { ICropRepository } from "./interfaces";
-import { CropModelInput, CropModel } from "../models/CropModel";
+import { CropModelCreate, CropModel, CropModelUpdate } from "../models/CropModel";
 
 
 export class CropRepository implements ICropRepository {
@@ -10,22 +10,22 @@ export class CropRepository implements ICropRepository {
         return await this.prisma.crop.findMany();
     }
 
-    public findOne(id: string): Promise<{ name: string; id: string; variety: string | null; photo: string | null; daysToHarvest: number; observation: string | null; createdAt: Date; updatedAt: Date; deletedAt: Date | null; } | null> {
+    public findOne = async (id: string): Promise<CropModel | null> => {
         throw new Error("Method not implemented.");
     }
 
-    public create = async (model: CropModelInput): Promise<string | null> => {
+    public create = async (model: CropModelCreate): Promise<string | null> => {
         const crop = await this.prisma.crop.create({
             data: model
         });
         return crop.id;
     }
 
-    public update(model: { name: string; id: string; variety: string | null; photo: string | null; daysToHarvest: number; observation: string | null; createdAt: Date; updatedAt: Date; deletedAt: Date | null; }): Promise<{ name: string; id: string; variety: string | null; photo: string | null; daysToHarvest: number; observation: string | null; createdAt: Date; updatedAt: Date; deletedAt: Date | null; } | null> {
+    public update = async (model: CropModelUpdate): Promise<CropModel | null> => {
         throw new Error("Method not implemented.");
     }
 
-    public delete(id: string): Promise<boolean> {
+    public delete = async (id: string): Promise<boolean> => {
         throw new Error("Method not implemented.");
     }
 }
