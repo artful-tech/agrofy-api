@@ -25,6 +25,11 @@ export const handlePrismaError = (error: Prisma.PrismaClientKnownRequestError): 
                 status: 400, 
                 message: "Violação de relacionamento. Verifique se os IDs informados existem." 
             };
+        case 'ECONNREFUSED':
+            return {
+                status: 503, 
+                message: "Não foi possível se conectar ao banco de dados" 
+            };
         default:
             return { 
                 status: 500, 
