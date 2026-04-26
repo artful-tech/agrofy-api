@@ -21,7 +21,11 @@ export class FarmUsecase implements IFarmUsecase {
     }
 
     public create = async (createDto: FarmDtoCreate): Promise<string> => {
-        throw new Error("Method not implemented.");
+        const model = FarmMapper.fromCreateDtoToInput(createDto);
+
+        const farmId = await this.farmRepository.create(model);
+
+        return farmId;
     }
 
     public update = async (updateDto: FarmDtoUpdate): Promise<FarmDtoView> => {
