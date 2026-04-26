@@ -10,6 +10,7 @@ export default class FarmRouter {
         const farmRouter = Router();
 
         farmRouter.get('/', this.farmController.index);
+        farmRouter.post('/', this.farmController.create);
 
         return farmRouter;
     }

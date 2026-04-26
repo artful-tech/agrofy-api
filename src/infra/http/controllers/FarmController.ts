@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { IFarmUsecase } from "../../../core/usecases/interfaces";
 import { IFarmController } from "./interfaces";
-import { FarmDtoView } from "../../../shared/dtos/FarmDto";
-
+import { FarmDtoView, createFarmSchema } from "../../../shared/dtos/FarmDto";
 
 export class FarmController implements IFarmController {
     constructor(private farmUsecase: IFarmUsecase) {}
@@ -17,7 +16,11 @@ export class FarmController implements IFarmController {
     }
     
     public create = async (req: Request, res: Response): Promise<Response> => {
-        throw new Error("Method not implemented.");
+        const data = createFarmSchema.parse(req.body);
+
+        const farmId = await this.farmUsecase.create(data);
+
+        return res.status(201).json({ id: farmId });
     }
 
     public update = async (req: Request, res: Response): Promise<Response> => {
@@ -27,6 +30,4 @@ export class FarmController implements IFarmController {
     public delete = async (req: Request, res: Response): Promise<Response> => {
         throw new Error("Method not implemented.");
     }
-
-    
 }
