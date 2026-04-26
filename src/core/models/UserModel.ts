@@ -27,7 +27,14 @@ export class UserMapper {
     static fromCreateDtoToInput(dto: UserDtoCreate): UserModelCreate {
         return {
             email: dto.email,
-            password: dto.password
+            password: dto.password,
+            people: dto.people ? {
+                create: {
+                    name: dto.people.name,
+                    cellphone: dto.people.cellphone,
+                    photo: dto.people.photo,
+                }
+            } : undefined
         };
     }
 

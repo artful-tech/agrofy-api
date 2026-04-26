@@ -7,6 +7,7 @@
     "dev": "dotenv -e .env.development -- npx nodemon --watch src/ -e ts --exec \"ts-node -r tsconfig-paths/register src/server.ts\"",
     "prod": "dotenv -e .env -- npx nodemon --watch src/ -e ts --exec \"ts-node -r tsconfig-paths/register src/server.ts\"",
     "migrate:dev": "dotenv -e .env.development -- npx prisma migrate dev",
+    "migrate:dev:deploy": "dotenv -e .env.development -- npx prisma migrate deploy",
     "migrate:dev:reset": "dotenv -e .env.development -- npx prisma migrate reset",
     "migrate:prod": "npx prisma migrate deploy",
     "migrate:prod:reset": "dotenv -e .env -- npx prisma migrate reset",
@@ -24,6 +25,7 @@
   "dependencies": {
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
@@ -34,6 +36,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/morgan": "^1.9.10",

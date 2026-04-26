@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { IUserUsecase } from '../../../core/usecases/interfaces'
 import { IUserController } from './interfaces'
-import { UserDtoView } from '../../../shared/dtos/UserDto'
+import { UserDtoCreate, UserDtoView } from '../../../shared/dtos/UserDto'
 
 
 export class UserController implements IUserController {
@@ -24,7 +24,11 @@ export class UserController implements IUserController {
     }
 
     public create = async (req: Request, res: Response): Promise<Response> => {
-        throw new Error('Method not implemented.')
+        const userDto: UserDtoCreate = req.body;
+        const id: string = await this.userUsecase.create(userDto);
+        res.setHeader('x-resource-id', id);
+        res.setHeader('Location', `/api/user/${id}`);
+        return res.status(201).send();
     }
 
     public update = async (req: Request, res: Response): Promise<Response> => {

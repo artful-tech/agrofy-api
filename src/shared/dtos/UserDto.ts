@@ -1,10 +1,12 @@
 import z from "zod";
+import { createPeopleSchema } from "./PeopleDto";
 
 
 export const CreateUserSchema = z.object({
     email: z.email().nonempty(),
     password: z.string().nonempty(),
-    confirmPassword: z.string().nonempty()
+    confirmPassword: z.string().nonempty(),
+    people: createPeopleSchema.optional(),
 }).refine((data) => data.password === data.confirmPassword, {
     message: 'As senhas não conferem',
     path: ['confirmPassword']

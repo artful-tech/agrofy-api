@@ -7,6 +7,12 @@ interface PrismaErrorResponse {
 
 export const handlePrismaError = (error: Prisma.PrismaClientKnownRequestError): PrismaErrorResponse => {
     switch (error.code) {
+        case 'P2000':
+            // Tamanho de coluna maior que o permitido
+            return { 
+                status: 409, 
+                message: `O campo ${error.meta?.target} já está em uso.` 
+            };
         case 'P2002':
             // Unique constraint failed (ex: email duplicado)
             return { 

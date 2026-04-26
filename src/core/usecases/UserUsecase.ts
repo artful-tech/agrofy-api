@@ -1,4 +1,5 @@
-import { UserDtoView } from "../../shared/dtos/UserDto";
+import { HashService } from "../../infra/services/HashService";
+import { UserDtoCreate, UserDtoView } from "../../shared/dtos/UserDto";
 import { UserMapper } from "../models/UserModel";
 import { IUserRepository } from "../repositories/interfaces";
 import { IUserUsecase } from "./interfaces";
@@ -25,8 +26,11 @@ export class UserUsecase implements IUserUsecase {
         throw new Error("Method not implemented.");
     }
 
-    public create = async (createDto: { email: string; password: string; confirmPassword: string; }): Promise<string> => {
-        throw new Error("Method not implemented.");
+    public create = async (createDto: UserDtoCreate): Promise<string> => {
+        const hashedPassword = await HashService.hash(createDto.password);
+        const userModelCreate = UserMapper.fromCreateDtoToInput(createDto);
+        userModelCreate.password = hashedPassword;
+        return await this.userRepository.create(userModelCreate);
     }
 
     public update = async (updateDto: { email: string; actualPassword: string; newPassword: string; newConfirmPassword: string; }): Promise<UserDtoView> => {

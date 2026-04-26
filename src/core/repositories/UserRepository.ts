@@ -25,8 +25,7 @@ export class UserRepository implements IUserRepository {
         const userCreated = await this.prisma.user.create({
             data: userModel
         });
-        const id = userCreated.id;
-        return id;
+        return userCreated.id;
     }
 
     public update = async (id: string, model: UserModelUpdate): Promise<UserModel> => {
