@@ -6,7 +6,7 @@ export const createPeopleSchema = z.object({
     name: z.string().min(2).max(150),
     cellphone: z.string().min(11).max(12).optional(),
     photo: z.string().optional(),
-    userId: z.uuid  ("ID inválido")
+    userId: z.uuid("ID inválido")
 });
 
 export const updatePeopleSchema = z.object({

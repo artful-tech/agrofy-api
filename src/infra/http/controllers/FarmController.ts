@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IFarmUsecase } from "../../../core/usecases/interfaces";
 import { IFarmController } from "./interfaces";
-import { FarmDtoView, createFarmSchema } from "../../../shared/dtos/FarmDto";
+import { FarmDtoCreate, FarmDtoView } from "../../../shared/dtos/FarmDto";
 
 export class FarmController implements IFarmController {
     constructor(private farmUsecase: IFarmUsecase) {}
@@ -16,11 +16,11 @@ export class FarmController implements IFarmController {
     }
     
     public create = async (req: Request, res: Response): Promise<Response> => {
-        const data = createFarmSchema.parse(req.body);
-
-        const farmId = await this.farmUsecase.create(data);
-
-        return res.status(201).json({ id: farmId });
+        const farmDto: FarmDtoCreate = req.body;
+        const id = await this.farmUsecase.create(farmDto);
+        res.setHeader('x-resource-id', id);
+        res.setHeader('Location', `/api/people/${id}`);
+        return res.status(201).send();
     }
 
     public update = async (req: Request, res: Response): Promise<Response> => {
