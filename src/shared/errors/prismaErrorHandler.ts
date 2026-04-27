@@ -19,6 +19,11 @@ export const handlePrismaError = (error: Prisma.PrismaClientKnownRequestError): 
                 status: 409, 
                 message: `O campo ${error.meta?.target} já está em uso.` 
             };
+        case 'P2014':
+            return { 
+                status: 409, 
+                message: "Este registro já está vinculado a outra entidade e não pode ser reutilizado." 
+            };
         case 'P2025':
             // Record not found (findUniqueOrThrow / update / delete)
             return { 
