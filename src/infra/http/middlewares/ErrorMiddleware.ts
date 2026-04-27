@@ -30,9 +30,12 @@ export class ErrorMiddleware {
 
         if (error instanceof ZodError) {
             return res.status(400).json({
-                status: "validation_error",
+                status: "erro_de_validacao",
                 message: "Dados inválidos",
-                errors: error.issues
+                errors: error.issues.map(issue => ({
+                    fields: issue.path,
+                    message: issue.message
+                }))
             });
         }
 
