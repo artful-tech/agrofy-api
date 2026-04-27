@@ -7,12 +7,19 @@ export class PeopleRepository implements IPeopleRepository {
     constructor(private prisma: PrismaClient) { }
 
     public findAll = async (): Promise<PeopleModel[]> => {
-        return await this.prisma.people.findMany();
+        return await this.prisma.people.findMany({
+            where: {
+                deletedAt: null
+            }
+        });
     }
 
     public findOne = async (id: string): Promise<PeopleModel> => {
         return await this.prisma.people.findUniqueOrThrow({
-            where: { id: id }
+            where: { 
+                id: id,
+                deletedAt: null
+            }
         });
     }
 
@@ -26,14 +33,30 @@ export class PeopleRepository implements IPeopleRepository {
 
     public update = async (id: string, data: PeopleModelUpdate): Promise<PeopleModel> => {
         return await this.prisma.people.update({
-            where: { id: id },
+            where: { 
+                id: id,
+                deletedAt: null
+            },
             data: data
         });
     }
 
     public delete = async (id: string): Promise<void> => {
-        await this.prisma.people.delete({
-            where: { id: id }
+        const person = await this.prisma.people.findUniqueOrThrow({
+            where: { id }
         });
+
+        await this.prisma.$transaction([
+            
+            this.prisma.people.update({
+                where: { id },
+                data: { deletedAt: new Date() }
+            }),
+            
+            this.prisma.user.update({
+                where: { id: person.userId },
+                data: { deletedAt: new Date() }
+            })
+        ]);
     }
 }

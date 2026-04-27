@@ -28,7 +28,7 @@ export class PeopleUsecase implements IPeopleUsecase {
     }
 
     public delete = async (id: string): Promise<void> => {
-        return await this.peopleRepository.delete(id);
+        await this.peopleRepository.delete(id);
     }
     
 }

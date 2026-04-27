@@ -2,6 +2,7 @@ import { Router } from "express";
 import { PeopleController } from "../controllers/PeopleController";
 import { ValidationMiddleware } from "../middlewares/ValidationMiddleware";
 import { createPeopleSchema, updatePeopleSchema } from "../../../shared/dtos/PeopleDto";
+import { idUUIDParamSchema } from "../../../shared/dtos";
 
 
 export default class PeopleRouter {
@@ -11,19 +12,34 @@ export default class PeopleRouter {
     getRoutes = (): Router => {
         const peopleRouter = Router();
 
-        peopleRouter.get('/', this.peopleController.index);
-        peopleRouter.get('/:peopleId', this.peopleController.getOne);
+        peopleRouter.get(
+            '/', 
+            this.peopleController.index
+        );
+
+        peopleRouter.get(
+            '/:id', 
+            ValidationMiddleware.validate(idUUIDParamSchema, 'params'),
+            this.peopleController.getOne
+        );
+
         peopleRouter.post(
             '/', 
             ValidationMiddleware.validate(createPeopleSchema),
             this.peopleController.create
         );
+
         peopleRouter.patch(
             '/', 
             ValidationMiddleware.validate(updatePeopleSchema),
             this.peopleController.update
         );
-        peopleRouter.delete('/', this.peopleController.delete);
+
+        peopleRouter.delete(
+            '/:id', 
+            ValidationMiddleware.validate(idUUIDParamSchema, 'params'),
+            this.peopleController.delete
+        );
 
         return peopleRouter;
     }

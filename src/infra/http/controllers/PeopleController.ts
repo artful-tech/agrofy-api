@@ -11,9 +11,9 @@ export class PeopleController implements IPeopleController {
         return res.json(peoples);
     }
 
-    public getOne = async (req: Request<{peopleId: string}>, res: Response): Promise<Response> => {
-        const { peopleId } = req.params;
-        const people = await this.peopleUsecase.getOne(peopleId);
+    public getOne = async (req: Request<{id: string}>, res: Response): Promise<Response> => {
+        const { id } = req.params;
+        const people = await this.peopleUsecase.getOne(id);
         return res.json(people);
     }
 
@@ -31,10 +31,10 @@ export class PeopleController implements IPeopleController {
         return res.status(200).json(people);
     }
 
-    public delete = async(req: Request<{ peopleId: string }>, res: Response): Promise<Response> => {
-        const { peopleId } = req.params;
-        await this.peopleUsecase.delete(peopleId);
-        return res.status(204);
+    public delete = async (req: Request<{ id: string }>, res: Response): Promise<Response> => {
+        const { id } = req.params;
+        await this.peopleUsecase.delete(id);
+        return res.status(204).send();
     }
     
 }
