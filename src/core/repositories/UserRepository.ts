@@ -7,18 +7,28 @@ export class UserRepository implements IUserRepository {
     constructor(private prisma: PrismaClient) {}
 
     public findAll = async (): Promise<UserModel[]> => {
-        return await this.prisma.user.findMany();
+        return await this.prisma.user.findMany({
+            where: { deletedAt: null }
+        });
     }
 
     public findByEmail = async (email: string): Promise<UserModel> => {
         const user = await this.prisma.user.findUniqueOrThrow({
-            where: { email: email }
+            where: { 
+                email: email,
+                deletedAt: null
+            }
         });
         return user;
     }
     
     public findOne = async (id: string): Promise<UserModel> => {
-        return this.prisma.user.findUniqueOrThrow({ where: { id } })
+        return this.prisma.user.findUniqueOrThrow({
+            where: { 
+                id: id,
+                deletedAt: null
+            } 
+        })
     }
 
     public create = async (userModel: UserModelCreate): Promise<string> => {
