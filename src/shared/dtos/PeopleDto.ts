@@ -14,8 +14,7 @@ export const updatePeopleSchema = z.object({
     name: z.string().min(2).max(150).optional(),
     cellphone: z.string().min(11).max(12).optional().optional(),
     role: z.enum($Enums.Role).optional(),
-    photo: z.string().optional().optional(),
-    userId: z.uuid().optional()
+    photo: z.string().optional().optional()
 });
 
 export type PeopleDtoCreate = z.infer<typeof createPeopleSchema>;

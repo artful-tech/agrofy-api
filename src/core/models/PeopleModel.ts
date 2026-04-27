@@ -39,10 +39,7 @@ export class PeopleMapper {
             name: dto.name,
             cellphone: dto.cellphone,
             role: dto.role,
-            photo: dto.photo,
-            user: {
-                connect: { id: dto.userId }
-            }
+            photo: dto.photo
         };
     }
 
