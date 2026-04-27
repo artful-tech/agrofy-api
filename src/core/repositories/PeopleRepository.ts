@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { IPeopleRepository } from "./interfaces";
 import { PeopleModel, PeopleModelCreate, PeopleModelUpdate } from "../models/PeopleModel";
+import { AppError } from "../errors/AppError";
 
 
 export class PeopleRepository implements IPeopleRepository {
@@ -24,6 +25,17 @@ export class PeopleRepository implements IPeopleRepository {
     }
 
     public create = async (model: PeopleModelCreate): Promise<string> => {
+        const userExists = await this.prisma.user.findFirst({
+            where: { 
+                id: model.user.connect?.id,
+                deletedAt: null
+            }
+        });
+
+        if (!userExists) {
+            throw new AppError('Não existe usuário com esse ID', 400)
+        }
+
         const people = await this.prisma.people.create({
             data: model
         });
@@ -32,6 +44,10 @@ export class PeopleRepository implements IPeopleRepository {
     }
 
     public update = async (id: string, data: PeopleModelUpdate): Promise<PeopleModel> => {
+        await this.prisma.people.findFirstOrThrow({
+            where: { id }
+        })
+
         return await this.prisma.people.update({
             where: { 
                 id: id,
