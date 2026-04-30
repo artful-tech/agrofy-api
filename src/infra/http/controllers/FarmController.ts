@@ -21,7 +21,7 @@ export class FarmController implements IFarmController {
         const farmDto: FarmDtoCreate = req.body;
         const id = await this.farmUsecase.create(farmDto);
         res.setHeader('x-resource-id', id);
-        res.setHeader('Location', `/api/people/${id}`);
+        res.setHeader('Location', `/api/farm/${id}`);
         return res.status(201).send();
     }
 
