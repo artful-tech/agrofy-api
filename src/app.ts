@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import { prisma } from './infra/database/prisma';
 import { Routers } from './infra/http/routers';
+import { LogConfig } from './infra/utils/LogConfig';
 
 const app = express();
  
@@ -23,6 +24,8 @@ app.use(
     },
   })
 );
+
+app.use(LogConfig.format());
 app.use(express.json());
 
 // ROTAS DA APLICAÇÃO
