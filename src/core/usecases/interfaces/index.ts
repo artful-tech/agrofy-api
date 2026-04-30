@@ -3,16 +3,17 @@ import { FarmDtoCreate, FarmDtoUpdate, FarmDtoView } from "../../../shared/dtos/
 import { FinanceDtoView } from "../../../shared/dtos/FinanceDto";
 import { PlotDtoCreate, PlotDtoUpdate, PlotDtoView } from "../../../shared/dtos/PlotDto";
 import { UserDtoCreate, PasswordDtoUpdate, UserDtoView } from "../../../shared/dtos/UserDto";
-import { FieldLogDtoView } from "../../../shared/dtos/FieldLogDto";
+import { FieldLogDtoCreate, FieldLogDtoUpdate, FieldLogDtoView } from "../../../shared/dtos/FieldLogDto";
 import { PeopleDtoCreate, PeopleDtoUpdate, PeopleDtoView } from "../../../shared/dtos/PeopleDto";
 
 /**
  * Interface base para os casos de uso (Usecases) do Agrofy.
- * * @template V - DTO de Visualização (View DTO)
+ * 
+ * @template V - DTO de Visualização (View DTO)
  * @template C - DTO de Criação (Create DTO)
  * @template U - DTO de Atualização (Update DTO)
- * @template D - Tipo do ID (ex: string ou number)
- * @template E - Tipo do identificador único para exclusão
+ * @template D - Tipo do retorno do create
+ * @template E - Tipo do identificador para delete
  */
 export interface IBaseUsecase<V, C, U, D, E> {
     getAll(): Promise<V[]>;
@@ -28,11 +29,17 @@ export interface IFarmUsecase extends IBaseUsecase<FarmDtoView, FarmDtoCreate, F
 
 export interface IPlotUsecase extends IBaseUsecase<PlotDtoView, PlotDtoCreate, PlotDtoUpdate, string, string> {}
 
-export interface IFieldLogUsecase extends IBaseUsecase<FieldLogDtoView, any, any, string, string> {}
+export interface IFieldLogUsecase extends IBaseUsecase<
+    FieldLogDtoView,
+    FieldLogDtoCreate,
+    FieldLogDtoUpdate,
+    string,
+    string
+> {}
 
-export interface IFinanceUsecase extends IBaseUsecase<FinanceDtoView, any, any, string, string> { }
+export interface IFinanceUsecase extends IBaseUsecase<FinanceDtoView, any, any, string, string> {}
 
-export interface IPeopleUsecase extends IBaseUsecase<PeopleDtoView, PeopleDtoCreate, PeopleDtoUpdate, string, string> { }
+export interface IPeopleUsecase extends IBaseUsecase<PeopleDtoView, PeopleDtoCreate, PeopleDtoUpdate, string, string> {}
 
 export interface IUserUsecase extends IBaseUsecase<UserDtoView, UserDtoCreate, PasswordDtoUpdate, string, string> {
     getByEmail(email: string): Promise<UserDtoView>;

@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { FieldLogController } from "../controllers/FieldLogController";
 
-
 export class FieldLogRouter {
     constructor(private fielLogController: FieldLogController) { }
 
@@ -9,6 +8,7 @@ export class FieldLogRouter {
         const router = Router();
 
         router.get("/", this.fielLogController.index);
+        router.post("/", this.fielLogController.create);
 
         return router;
     }

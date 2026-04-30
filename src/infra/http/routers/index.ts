@@ -19,7 +19,7 @@ export class Routers {
         apiRouter.use("/crop", this.factory.makeCropRouter().getRoutes());
         apiRouter.use("/farm", this.factory.makeFarmRouter().getRoutes());
         apiRouter.use("/plot", this.factory.makePlotRouter().getRoutes());
-        apiRouter.use("/field-log", this.factory.makeFieldLogRouter().getRoutes());
+        apiRouter.use("/field-logs", this.factory.makeFieldLogRouter().getRoutes());
         apiRouter.use("/finance", this.factory.makeFinanceRouter().getRoutes())
         apiRouter.use("/people", this.factory.makePeopleRouter().getRoutes())
 
