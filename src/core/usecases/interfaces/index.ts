@@ -5,6 +5,7 @@ import { PlotDtoCreate, PlotDtoUpdate, PlotDtoView } from "../../../shared/dtos/
 import { UserDtoCreate, PasswordDtoUpdate, UserDtoView } from "../../../shared/dtos/UserDto";
 import { FieldLogDtoView } from "../../../shared/dtos/FieldLogDto";
 import { PeopleDtoCreate, PeopleDtoUpdate, PeopleDtoView } from "../../../shared/dtos/PeopleDto";
+import { SeasonDtoCreate, SeasonDtoUpdate, SeasonDtoView } from "../../../shared/dtos/SeasonDto";
 
 /**
  * Interface base para os casos de uso (Usecases) do Agrofy.
@@ -33,6 +34,8 @@ export interface IFieldLogUsecase extends IBaseUsecase<FieldLogDtoView, any, any
 export interface IFinanceUsecase extends IBaseUsecase<FinanceDtoView, any, any, string, string> { }
 
 export interface IPeopleUsecase extends IBaseUsecase<PeopleDtoView, PeopleDtoCreate, PeopleDtoUpdate, string, string> { }
+
+export interface ISeasonUsecase extends IBaseUsecase<SeasonDtoView, SeasonDtoCreate, SeasonDtoUpdate, string, string> { }
 
 export interface IUserUsecase extends IBaseUsecase<UserDtoView, UserDtoCreate, PasswordDtoUpdate, string, string> {
     getByEmail(email: string): Promise<UserDtoView>;

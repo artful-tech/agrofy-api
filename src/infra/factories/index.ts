@@ -27,6 +27,10 @@ import PeopleRouter from "../http/routers/PeopleRouter";
 import { PeopleRepository } from "../../core/repositories/PeopleRepository";
 import { PeopleUsecase } from "../../core/usecases/PeopleUsecase";
 import { PeopleController } from "../http/controllers/PeopleController";
+import { SeasonRouter } from "../http/routers/SeasonRouter";
+import { SeasonRepository } from "../../core/repositories/SeasonRepository";
+import { SeasonUsecase } from "../../core/usecases/SeasonUsecase";
+import { SeasonController } from "../http/controllers/SeasonController";
 
 
 export class Factories {
@@ -79,5 +83,12 @@ export class Factories {
         const usecase = new PeopleUsecase(repository);
         const controller = new PeopleController(usecase);
         return new PeopleRouter(controller);
+    }
+
+    makeSeasonRouter(): SeasonRouter {
+        const repository = new SeasonRepository(this.prisma);
+        const usecase = new SeasonUsecase(repository);
+        const controller = new SeasonController(usecase);
+        return new SeasonRouter(controller);
     }
 }

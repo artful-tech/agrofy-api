@@ -22,7 +22,8 @@ export class Routers {
         apiRouter.use("/field-log", this.factory.makeFieldLogRouter().getRoutes());
         apiRouter.use("/finance", this.factory.makeFinanceRouter().getRoutes())
         apiRouter.use("/people", this.factory.makePeopleRouter().getRoutes())
-
+        apiRouter.use("/season", this.factory.makeSeasonRouter().getRoutes())
+        
         return apiRouter;
     }
 
