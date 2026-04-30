@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IFarmUsecase } from "../../../core/usecases/interfaces";
 import { IFarmController } from "./interfaces";
-import { FarmDtoCreate, FarmDtoView } from "../../../shared/dtos/FarmDto";
+import { FarmDtoCreate, FarmDtoUpdate, FarmDtoView } from "../../../shared/dtos/FarmDto";
 
 export class FarmController implements IFarmController {
     constructor(private farmUsecase: IFarmUsecase) {}
@@ -11,8 +11,10 @@ export class FarmController implements IFarmController {
         return res.json(farms);
     }
 
-    public getOne = async (_req: Request, res: Response): Promise<Response> => {
-        throw new Error("Method not implemented.");
+    public getOne = async (req: Request<{id: string}>, res: Response): Promise<Response> => {
+        const { id } = req.params;
+        const farm: FarmDtoView = await this.farmUsecase.getOne(id);
+        return res.json(farm);
     }
     
     public create = async (req: Request, res: Response): Promise<Response> => {
@@ -24,10 +26,14 @@ export class FarmController implements IFarmController {
     }
 
     public update = async (req: Request, res: Response): Promise<Response> => {
-        throw new Error("Method not implemented.");
+        const farmDto: FarmDtoUpdate = req.body;
+        const farm: FarmDtoView = await this.farmUsecase.update(farmDto);
+        return res.status(200).json(farm);
     }
 
-    public delete = async (req: Request, res: Response): Promise<Response> => {
-        throw new Error("Method not implemented.");
+    public delete = async (req: Request<{ id: string }>, res: Response): Promise<Response> => {
+        const { id } = req.params;
+        await this.farmUsecase.delete(id);
+        return res.status(204).send();
     }
 }
