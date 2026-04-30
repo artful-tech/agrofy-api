@@ -46,7 +46,10 @@ export class SeasonRepository {
 
     public delete = async (id: string): Promise<void> => {
         await this.prisma.season.findUniqueOrThrow({
-            where: { id }
+            where: { 
+                id: id,
+                deletedAt: null
+            }
         });
 
         await this.prisma.season.update({
