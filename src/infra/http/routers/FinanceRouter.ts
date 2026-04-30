@@ -2,8 +2,8 @@ import { Router } from "express";
 import { FinanceController } from "../controllers/FinanceController";
 import { RouteDisplay } from "../../utils/RouteDisplay";
 
-export default class FinanceRouter {
 
+export default class FinanceRouter {
     constructor(private financeController: FinanceController) {}
 
     getRoutes = (): Router => {

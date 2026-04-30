@@ -6,7 +6,6 @@ import { RouteDisplay } from "../../utils/RouteDisplay";
 
 
 export default class UserRouter {
-
     constructor(private userController: UserController) {}
 
     getRoutes = (): Router => {

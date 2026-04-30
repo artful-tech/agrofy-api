@@ -7,7 +7,6 @@ import { idUUIDParamSchema } from "../../../shared/dtos";
 
 
 export default class CropRouter {
-
     constructor(private cropController: ICropController) { }
 
     getRoutes = (): Router => {

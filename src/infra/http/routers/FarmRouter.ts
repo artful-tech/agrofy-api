@@ -7,7 +7,6 @@ import { idUUIDParamSchema } from "../../../shared/dtos";
 
 
 export default class FarmRouter {
-
     constructor(private farmController: FarmController) {}
 
     getRoutes = (): Router => {

@@ -7,7 +7,6 @@ import { RouteDisplay } from "../../utils/RouteDisplay";
 
 
 export default class PeopleRouter {
-
     constructor(private peopleController: PeopleController) {}
 
     getRoutes = (): Router => {

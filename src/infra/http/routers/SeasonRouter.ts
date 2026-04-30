@@ -5,6 +5,7 @@ import { idUUIDParamSchema } from "../../../shared/dtos";
 import { createSeasonSchema, updateSeasonSchema } from "../../../shared/dtos/SeasonDto";
 import { RouteDisplay } from "../../utils/RouteDisplay";
 
+
 export class SeasonRouter {
     constructor(private seasonController: SeasonController) {}
     

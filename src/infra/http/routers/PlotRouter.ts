@@ -7,7 +7,6 @@ import { createPlotSchema, updatePlotSchema } from "../../../shared/dtos/PlotDto
 
 
 export default  class PlotRouter {
-
     constructor(private plotController: PlotController) {}
 
     getRoutes = (): Router => {
