@@ -2,6 +2,7 @@ import { Router } from "express";
 import { UserController } from "../controllers/UserController";
 import { ValidationMiddleware } from "../middlewares/ValidationMiddleware";
 import { CreateUserSchema } from "../../../shared/dtos/UserDto";
+import { RouteDisplay } from "../../utils/RouteDisplay";
 
 
 export default class UserRouter {
@@ -18,9 +19,8 @@ export default class UserRouter {
             ValidationMiddleware.validate(CreateUserSchema),
             this.userController.create
         )
-        // userRouter.post('/', this.userController.store)
-        // userRouter.put('/:id', this.userController.update)
-        // userRouter.delete('/:id', this.userController.destroy)
+        
+        RouteDisplay.scan(userRouter, "/api/user");
         
         return userRouter;
     }

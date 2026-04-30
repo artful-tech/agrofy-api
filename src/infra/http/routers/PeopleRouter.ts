@@ -3,6 +3,7 @@ import { PeopleController } from "../controllers/PeopleController";
 import { ValidationMiddleware } from "../middlewares/ValidationMiddleware";
 import { createPeopleSchema, updatePeopleSchema } from "../../../shared/dtos/PeopleDto";
 import { idUUIDParamSchema } from "../../../shared/dtos";
+import { RouteDisplay } from "../../utils/RouteDisplay";
 
 
 export default class PeopleRouter {
@@ -40,6 +41,8 @@ export default class PeopleRouter {
             ValidationMiddleware.validate(idUUIDParamSchema, 'params'),
             this.peopleController.delete
         );
+
+        RouteDisplay.scan(peopleRouter, "/api/people");
 
         return peopleRouter;
     }
