@@ -8,7 +8,6 @@ const GREEN = "\x1b[32m";
 const RESET = "\x1b[0m";
 
 import app from './app';
-import { WeatherApiService } from './infra/services/WeatherApiService';
 
 app.listen(PORT, () => {
     console.log(`\n${BRIGHT}${GREEN}🚀 Agrofy-API is blazing fast at http://localhost:${PORT}${RESET}\n`)
