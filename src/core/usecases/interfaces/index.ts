@@ -31,13 +31,7 @@ export interface IFarmUsecase extends IBaseUsecase<FarmDtoView, FarmDtoCreate, F
 
 export interface IPlotUsecase extends IBaseUsecase<PlotDtoView, PlotDtoCreate, PlotDtoUpdate, string, string> {}
 
-export interface IFieldLogUsecase extends IBaseUsecase<
-    FieldLogDtoView,
-    FieldLogDtoCreate,
-    FieldLogDtoUpdate,
-    string,
-    string
-> {}
+export interface IFieldLogUsecase extends IBaseUsecase<FieldLogDtoView, FieldLogDtoCreate, FieldLogDtoUpdate, string, string> {}
 
 export interface IFinanceUsecase extends IBaseUsecase<FinanceDtoView, any, any, string, string> {}
 

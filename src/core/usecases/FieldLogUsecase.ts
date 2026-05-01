@@ -8,31 +8,26 @@ export class FieldLogUsecase implements IFieldLogUsecase {
 
     public getAll = async (): Promise<FieldLogDtoView[]> => {
         const fieldLogs = await this.fieldLogRepository.findAll();
-
-        if (!fieldLogs) {
-            return [];
-        }
-
         return FieldLogMapper.toView(fieldLogs);
     }
 
     public getOne = async (id: string): Promise<FieldLogDtoView> => {
-        throw new Error("Method not implemented.");
+        const fieldLog = await this.fieldLogRepository.findOne(id);
+        return FieldLogMapper.toView(fieldLog);
     }
 
     public create = async (createDto: FieldLogDtoCreate): Promise<string> => {
         const model = FieldLogMapper.fromCreateDtoToInput(createDto);
-
-        const fieldLogId = await this.fieldLogRepository.create(model);
-
-        return fieldLogId;
+        return await this.fieldLogRepository.create(model);
     }
 
     public update = async (updateDto: any): Promise<FieldLogDtoView> => {
-        throw new Error("Method not implemented.");
+        const model = FieldLogMapper.fromUpdateDtoToInput(updateDto);
+        const { id, ...data } = model;
+        return await this.fieldLogRepository.update(id as string, data);
     }
 
-    public delete = async (): Promise<void> => {
-        throw new Error("Method not implemented.");
+    public delete = async (id: string): Promise<void> => {
+        await this.fieldLogRepository.delete(id);
     }
 }
