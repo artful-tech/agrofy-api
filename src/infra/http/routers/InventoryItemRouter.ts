@@ -41,7 +41,7 @@ export class InventoryItemRouter {
             this.inventoryItemController.delete
         );
 
-        RouteDisplay.scan(inventoryItemRouter, "/api/inventoryItem");
+        RouteDisplay.scan(inventoryItemRouter, "/api/inventory-item");
 
         return inventoryItemRouter;
     }
