@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { SeasonUsecase } from "../../../core/usecases/SeasonUsecase";
 import { SeasonDtoCreate, SeasonDtoUpdate, SeasonDtoView } from "../../../shared/dtos/SeasonDto";
 import { ISeasonController } from "./interfaces";
+import { ISeasonUsecase } from "../../../core/usecases/interfaces";
 
 export class SeasonController implements ISeasonController {
-    constructor(private seasonUsecase: SeasonUsecase) {}
+    constructor(private seasonUsecase: ISeasonUsecase) {}
 
     public index = async (_req: Request, res: Response): Promise<Response> => {
         const seasons: SeasonDtoView[] = await this.seasonUsecase.getAll();
