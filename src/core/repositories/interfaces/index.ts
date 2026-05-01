@@ -6,6 +6,7 @@ import { FieldLogModel, FieldLogModelCreate, FieldLogModelUpdate } from "../../m
 import { FinanceModel } from "../../models/FinanceModel";
 import { PeopleModel, PeopleModelCreate, PeopleModelUpdate } from "../../models/PeopleModel";
 import { SeasonModel, SeasonModelCreate, SeasonModelUpdate } from "../../models/SeasonModel";
+import { InventoryItemModel, InventoryItemModelCreate, InventoryItemModelUpdate } from "../../models/InventoryItemModel";
 
 /**
  * Interface base para os casos de uso (Usecases) do Agrofy.
@@ -28,18 +29,13 @@ export interface IFarmRepository extends IBaseRepository<FarmModel, FarmModelCre
 
 export interface IPlotRepository extends IBaseRepository<PlotModel, PlotModelCreate, PlotModelUpdate, string> { }
 
-export interface IUserRepository extends IBaseRepository<User> {
-    findById(id: string): Promise<User | null>;
-    create(data: any): Promise<User>;
-    update(id: string, data: any): Promise<User>;
-    delete(id: string): Promise<User>;
-}
-
 export interface IFieldLogRepository extends IBaseRepository<FieldLogModel, FieldLogModelCreate, FieldLogModelUpdate, string> { }
 
 export interface IPeopleRepository extends IBaseRepository<PeopleModel, PeopleModelCreate, PeopleModelUpdate, string> { }
 
 export interface ISeasonRepository extends IBaseRepository<SeasonModel, SeasonModelCreate, SeasonModelUpdate, string> { }
+
+export interface IInventoryItemRepository extends IBaseRepository<InventoryItemModel, InventoryItemModelCreate, InventoryItemModelUpdate, string> { }
 
 export interface IUserRepository extends IBaseRepository<UserModel, UserModelCreate, UserModelUpdate, string> {
     findByEmail(email: string): Promise<UserModel>

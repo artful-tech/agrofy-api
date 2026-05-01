@@ -1,7 +1,7 @@
  { PrismaClient } from "@prisma/client";
 import { InventoryRepository } from "../../core/repositories/InventoryRepository";
 import { InventoryUsecase } from "../../usecases/InventoryUsecase";
-import { InventoryController } from "../http/controllers/InventoryController";
+import { InventoryController } from "../http/controllers/InventoryItemController";
 
 const prisma = new PrismaClient();
 

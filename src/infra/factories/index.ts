@@ -31,6 +31,10 @@ import { SeasonRouter } from "../http/routers/SeasonRouter";
 import { SeasonRepository } from "../../core/repositories/SeasonRepository";
 import { SeasonUsecase } from "../../core/usecases/SeasonUsecase";
 import { SeasonController } from "../http/controllers/SeasonController";
+import { InventoryItemRepository } from "../../core/repositories/InventoryItemRepository";
+import { InventoryItemUsecase } from "../../core/usecases/InventoryItemUsecase";
+import { InventoryItemController } from "../http/controllers/InventoryItemController";
+import { InventoryItemRouter } from "../http/routers/InventoryItemRouter";
 
 
 export class Factories {
@@ -90,5 +94,12 @@ export class Factories {
         const usecase = new SeasonUsecase(repository);
         const controller = new SeasonController(usecase);
         return new SeasonRouter(controller);
+    }
+    
+    makeInventoryItemRouter(): InventoryItemRouter {
+        const repository = new InventoryItemRepository(this.prisma);
+        const usecase = new InventoryItemUsecase(repository);
+        const controller = new InventoryItemController(usecase);
+        return new InventoryItemRouter(controller);
     }
 }

@@ -1,23 +1,23 @@
 import { InventoryItem, Prisma } from "@prisma/client";
 import {
-  CreateInventoryDto,
-  UpdateInventoryDto,
-  ViewInventoryDto
-} from "../../shared/dtos/InventoryDto";
+  InventoryItemDtoCreate,
+  InventoryItemDtoUpdate,
+  InventoryItemDtoView
+} from "../../shared/dtos/InventoryItemDto";
 
-export type InventoryModel = InventoryItem;
+export type InventoryItemModel = InventoryItem;
+export type InventoryItemModelCreate = Prisma.InventoryItemCreateInput;
+export type InventoryItemModelUpdate = Prisma.InventoryItemUpdateInput;
 
-export class InventoryMapper {
+export class InventoryItemMapper {
 
-    static toView(model: InventoryModel): ViewInventoryDto;
-    static toView(models: InventoryModel[]): ViewInventoryDto[];
+    static toView(model: InventoryItemModel): InventoryItemDtoView;
+    static toView(models: InventoryItemModel[]): InventoryItemDtoView[];
 
     /**
      * Transforma o modelo do Banco/Prisma para o que o Front-end precisa
      */
-    static toView(
-        model: InventoryModel | InventoryModel[]
-    ): ViewInventoryDto | ViewInventoryDto[] {
+    static toView(model: InventoryItemModel | InventoryItemModel[]): InventoryItemDtoView | InventoryItemDtoView[] {
         if (Array.isArray(model)) {
             return model.map(item => this.mapToDto(item));
         }
@@ -28,9 +28,7 @@ export class InventoryMapper {
     /**
      * Transforma o que vem do Front-end (Create) para o Prisma Input
      */
-    static fromCreateDtoToInput(
-        dto: CreateInventoryDto
-    ): Prisma.InventoryItemCreateInput {
+    static fromCreateDtoToInput(dto: InventoryItemDtoCreate): Prisma.InventoryItemCreateInput {
         return {
             name: dto.name,
             category: dto.category,
@@ -48,9 +46,7 @@ export class InventoryMapper {
     /**
      * Transforma Update DTO para Prisma UpdateInput
      */
-    static fromUpdateDtoToInput(
-        dto: UpdateInventoryDto
-    ): Prisma.InventoryItemUpdateInput {
+    static fromUpdateDtoToInput(dto: InventoryItemDtoUpdate): Prisma.InventoryItemUpdateInput {
         return {
             id: dto.id,
             name: dto.name,
@@ -61,19 +57,18 @@ export class InventoryMapper {
         };
     }
 
-    private static mapToDto(
-        model: InventoryModel
-    ): ViewInventoryDto {
+    private static mapToDto(model: InventoryItemModel): InventoryItemDtoView {
         return {
-            id: model.id,
             name: model.name,
+            id: model.id,
             category: model.category,
             quantity: model.quantity,
             unit: model.unit,
             minStock: model.minStock,
             farmId: model.farmId,
             createdAt: model.createdAt,
-            updatedAt: model.updatedAt
+            updatedAt: model.updatedAt,
+            deletedAt: model.deletedAt
         };
     }
 }

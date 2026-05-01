@@ -6,6 +6,7 @@ import { UserDtoCreate, PasswordDtoUpdate, UserDtoView } from "../../../shared/d
 import { FieldLogDtoCreate, FieldLogDtoUpdate, FieldLogDtoView } from "../../../shared/dtos/FieldLogDto";
 import { PeopleDtoCreate, PeopleDtoUpdate, PeopleDtoView } from "../../../shared/dtos/PeopleDto";
 import { SeasonDtoCreate, SeasonDtoUpdate, SeasonDtoView } from "../../../shared/dtos/SeasonDto";
+import { InventoryItemDtoCreate, InventoryItemDtoUpdate, InventoryItemDtoView } from "../../../shared/dtos/InventoryItemDto";
 
 /**
  * Interface base para os casos de uso (Usecases) do Agrofy.
@@ -41,6 +42,8 @@ export interface IFieldLogUsecase extends IBaseUsecase<
 export interface IFinanceUsecase extends IBaseUsecase<FinanceDtoView, any, any, string, string> {}
 
 export interface IPeopleUsecase extends IBaseUsecase<PeopleDtoView, PeopleDtoCreate, PeopleDtoUpdate, string, string> {}
+
+export interface IInventoryItemUsecase extends IBaseUsecase<InventoryItemDtoView, InventoryItemDtoCreate, InventoryItemDtoUpdate, string, string> {}
 
 export interface ISeasonUsecase extends IBaseUsecase<SeasonDtoView, SeasonDtoCreate, SeasonDtoUpdate, string, string> { }
 

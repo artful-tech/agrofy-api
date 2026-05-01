@@ -21,6 +21,8 @@ export interface IUserController extends IBaseController {}
 
 export interface IFieldLogController extends IBaseController {}
 
+export interface IIventoryItemController extends IBaseController {}
+
 export interface IPeopleController extends IBaseController {}
 
 export interface ISeasonController extends IBaseController {}
