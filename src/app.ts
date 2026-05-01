@@ -8,7 +8,6 @@ import { LogConfig } from './infra/utils/LogConfig';
 
 const app = express();
  
-app.use(morgan('tiny'));
 app.use(cors());
 
 app.use(
