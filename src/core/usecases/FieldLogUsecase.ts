@@ -1,4 +1,4 @@
-import { FieldLogDtoView } from "../../shared/dtos/FieldLogDto";
+import { FieldLogDtoCreate, FieldLogDtoView } from "../../shared/dtos/FieldLogDto";
 import { FieldLogMapper } from "../models/FieldLogModel";
 import { IFieldLogRepository } from "../repositories/interfaces";
 import { IFieldLogUsecase } from "./interfaces";
@@ -20,8 +20,12 @@ export class FieldLogUsecase implements IFieldLogUsecase {
         throw new Error("Method not implemented.");
     }
 
-    public create = async (createDto: any): Promise<string> => {
-        throw new Error("Method not implemented.");
+    public create = async (createDto: FieldLogDtoCreate): Promise<string> => {
+        const model = FieldLogMapper.fromCreateDtoToInput(createDto);
+
+        const fieldLogId = await this.fieldLogRepository.create(model);
+
+        return fieldLogId;
     }
 
     public update = async (updateDto: any): Promise<FieldLogDtoView> => {
