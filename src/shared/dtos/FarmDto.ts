@@ -1,27 +1,31 @@
-import { CreateAddressDto, UpdateAddressDto, ViewAddressDto } from "./AddressDto";
+import { AddressDtoCreate, AddressDtoUpdate, CreateAddressSchema, UpdateAddressSchema } from "./AddressDto";
+import z from "zod";
 
-export type CreateFarmDto = {
-    name: string;
-    totalArea: number;
-    unity: string;
-    resume?: string;
-    photo?: string;
-    address: CreateAddressDto;
-    observation?: string;
-}
+export const createFarmSchema = z.object({
+    name: z.string().min(2).max(150),
+    totalArea: z.number().positive(),
+    unity: z.string().min(1).max(20),
+    resume: z.string().optional(),
+    photo: z.url(),
+    address: CreateAddressSchema,
+    observation: z.string().optional(),
+});
 
-export type UpdateFarmDto = {
-    name?: string;
-    id: string;
-    totalArea?: number;
-    unity?: string;
-    resume?: string;
-    photo?: string;
-    address?: UpdateAddressDto;
-    observation?: string;
-}
+export const updateFarmSchema = z.object({
+    id: z.uuid("ID inválido"),
+    name: z.string().min(2).max(150).optional(),
+    totalArea: z.number().positive().optional(),
+    unity: z.string().min(1).max(20).optional(),
+    resume: z.string().optional(),
+    photo: z.url().optional(),
+    address: UpdateAddressSchema.optional(),
+    observation: z.string().optional().optional(),
+});
 
-export type ViewFarmDto = {
+export type FarmDtoCreate = z.infer<typeof createFarmSchema>;
+export type FarmDtoUpdate = z.infer<typeof updateFarmSchema>;
+
+export type FarmDtoView = {
     name: string;
     id: string;
     totalArea: number;
@@ -34,3 +38,4 @@ export type ViewFarmDto = {
     updatedAt: Date;
     deletedAt?: Date | null;
 }
+

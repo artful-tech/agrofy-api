@@ -1,18 +1,20 @@
 import { Farm, Prisma } from "@prisma/client";
-import { CreateFarmDto, UpdateFarmDto, ViewFarmDto } from "../../shared/dtos/FarmDto";
+import { FarmDtoCreate, FarmDtoUpdate, FarmDtoView } from "../../shared/dtos/FarmDto";
 
 
 export type FarmModel = Farm;
+export type FarmModelCreate = Prisma.FarmCreateInput;
+export type FarmModelUpdate = Prisma.FarmUpdateInput;
 
 export class FarmMapper {
     
-    static toView(model: FarmModel): ViewFarmDto;
-    static toView(models: FarmModel[]): ViewFarmDto[];
+    static toView(model: FarmModel): FarmDtoView;
+    static toView(models: FarmModel[]): FarmDtoView[];
 
     /**
      * Transforma o modelo do Banco/Prisma para o que o Front-end precisa
      */
-    static toView(model: FarmModel | FarmModel[]): ViewFarmDto | ViewFarmDto[] {
+    static toView(model: FarmModel | FarmModel[]): FarmDtoView | FarmDtoView[] {
         if (Array.isArray(model)) {
             return model.map(item => this.mapToDto(item));
         }
@@ -22,7 +24,7 @@ export class FarmMapper {
     /**
      * Transforma o que vem do Front-end (View) Create para o Modelo de Domínio
      */
-    static fromCreateDtoToInput(dto: CreateFarmDto): Prisma.FarmCreateInput {
+    static fromCreateDtoToInput(dto: FarmDtoCreate): FarmModelCreate {
         return {
             name: dto.name,
             totalArea: dto.totalArea,
@@ -44,7 +46,7 @@ export class FarmMapper {
         };
     }
 
-    static fromUpdateDtoToInput(dto: UpdateFarmDto): Prisma.FarmUpdateInput {
+    static fromUpdateDtoToInput(dto: FarmDtoUpdate): FarmModelUpdate {
         let addressInput = undefined;
 
         if (dto.address) {
@@ -72,7 +74,7 @@ export class FarmMapper {
         };
     }
 
-    private static mapToDto(model: FarmModel): ViewFarmDto {
+    private static mapToDto(model: FarmModel): FarmDtoView {
         return {
             name: model.name,
             id: model.id,

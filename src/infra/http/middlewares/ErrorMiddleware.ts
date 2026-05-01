@@ -1,6 +1,9 @@
-import { Router, Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import { AppError } from "../../../core/errors/AppError";
 import { ZodError } from "zod/v4";
+import { handlePrismaError } from "../../../shared/errors/prismaErrorHandler";
+import { Prisma } from "@prisma/client";
+
 
 export class ErrorMiddleware {
 
@@ -27,17 +30,23 @@ export class ErrorMiddleware {
 
         if (error instanceof ZodError) {
             return res.status(400).json({
-                status: "validation_error",
+                status: "erro_de_validacao",
                 message: "Dados inválidos",
-                errors: error.issues
+                errors: error.issues.map(issue => ({
+                    fields: issue.path,
+                    message: issue.message
+                }))
             });
         }
 
         // Erro de validação do Prisma (ex: campo único violado)
-        if (error.name === 'PrismaClientKnownRequestError') {
-            return res.status(409).json({
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            const { status, message } = handlePrismaError(error);
+
+            return res.status(status).json({
                 status: "error",
-                message: "Conflito de dados no banco (E-mail já existe?)"
+                message: message,
+                code: error.code
             });
         }
 

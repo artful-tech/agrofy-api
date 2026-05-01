@@ -1,4 +1,5 @@
-import { ViewUserDto } from "../../shared/dtos/UserDto";
+import { HashService } from "../../infra/services/HashService";
+import { UserDtoCreate, UserDtoView } from "../../shared/dtos/UserDto";
 import { UserMapper } from "../models/UserModel";
 import { IUserRepository } from "../repositories/interfaces";
 import { IUserUsecase } from "./interfaces";
@@ -6,7 +7,7 @@ import { IUserUsecase } from "./interfaces";
 export class UserUsecase implements IUserUsecase {
     constructor(private userRepository: IUserRepository) {}
     
-    public getAll = async (): Promise<ViewUserDto[]> => {
+    public getAll = async (): Promise<UserDtoView[]> => {
         const users = await this.userRepository.findAll();
 
         if (!users) {
@@ -14,5 +15,29 @@ export class UserUsecase implements IUserUsecase {
         }
 
         return UserMapper.toView(users);
+    }
+
+    public getByEmail = async (email: string): Promise<UserDtoView> => {
+        const userModel = await this.userRepository.findByEmail(email);
+        return UserMapper.toView(userModel);
+    }
+
+    public getOne = async (id: string): Promise<UserDtoView> => {
+        throw new Error("Method not implemented.");
+    }
+
+    public create = async (createDto: UserDtoCreate): Promise<string> => {
+        const hashedPassword = await HashService.hash(createDto.password);
+        const userModelCreate = UserMapper.fromCreateDtoToInput(createDto);
+        userModelCreate.password = hashedPassword;
+        return await this.userRepository.create(userModelCreate);
+    }
+
+    public update = async (updateDto: { email: string; actualPassword: string; newPassword: string; newConfirmPassword: string; }): Promise<UserDtoView> => {
+        throw new Error("Method not implemented.");
+    }
+
+    public delete = async (): Promise<void> => {
+        throw new Error("Method not implemented.");
     }
 }
