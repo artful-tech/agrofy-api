@@ -1,10 +1,10 @@
 import { SeasonDtoCreate, SeasonDtoUpdate, SeasonDtoView } from "../../shared/dtos/SeasonDto";
 import { SeasonMapper } from "../models/SeasonModel";
-import { SeasonRepository } from "../repositories/SeasonRepository";
+import { ISeasonRepository } from "../repositories/interfaces";
 import { ISeasonUsecase } from "./interfaces";
 
 export class SeasonUsecase implements ISeasonUsecase {
-    constructor(private seasonRepository: SeasonRepository) {}
+    constructor(private seasonRepository: ISeasonRepository) {}
 
     public getAll = async (): Promise<SeasonDtoView[]> => {
         const seasons = await this.seasonRepository.findAll();
