@@ -35,6 +35,11 @@ import { InventoryItemRepository } from "../../core/repositories/InventoryItemRe
 import { InventoryItemUsecase } from "../../core/usecases/InventoryItemUsecase";
 import { InventoryItemController } from "../http/controllers/InventoryItemController";
 import { InventoryItemRouter } from "../http/routers/InventoryItemRouter";
+import { AuthRouter } from "../http/routers/AuthRouter";
+import { AuthUsecase } from "../../core/usecases/AuthUsecase";
+import { HashService } from "../services/HashService";
+import { TokenService } from "../services/TokenService";
+import { AuthController } from "../http/controllers/AuthController";
 
 
 export class Factories {
@@ -101,5 +106,12 @@ export class Factories {
         const usecase = new InventoryItemUsecase(repository);
         const controller = new InventoryItemController(usecase);
         return new InventoryItemRouter(controller);
+    }
+
+    makeAuthRouter(): AuthRouter {
+        const repository = new UserRepository(this.prisma);
+        const usecase = new AuthUsecase(repository, new HashService(), new TokenService());
+        const controller = new AuthController(usecase);
+        return new AuthRouter(controller);
     }
 }

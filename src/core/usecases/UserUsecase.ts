@@ -27,10 +27,7 @@ export class UserUsecase implements IUserUsecase {
     }
 
     public create = async (createDto: UserDtoCreate): Promise<string> => {
-        const hashedPassword = await HashService.hash(createDto.password);
-        const userModelCreate = UserMapper.fromCreateDtoToInput(createDto);
-        userModelCreate.password = hashedPassword;
-        return await this.userRepository.create(userModelCreate);
+        throw new Error("Method not implemented.");
     }
 
     public update = async (updateDto: { email: string; actualPassword: string; newPassword: string; newConfirmPassword: string; }): Promise<UserDtoView> => {

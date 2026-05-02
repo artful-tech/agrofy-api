@@ -44,3 +44,8 @@ export interface ISeasonUsecase extends IBaseUsecase<SeasonDtoView, SeasonDtoCre
 export interface IUserUsecase extends IBaseUsecase<UserDtoView, UserDtoCreate, PasswordDtoUpdate, string, string> {
     getByEmail(email: string): Promise<UserDtoView>;
 }
+
+export interface IAuthUsecase {
+    signin(email: string, password: string): Promise<string>
+    signup(createDto: UserDtoCreate): Promise<string>
+}

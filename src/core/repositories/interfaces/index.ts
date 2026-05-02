@@ -38,7 +38,7 @@ export interface ISeasonRepository extends IBaseRepository<SeasonModel, SeasonMo
 export interface IInventoryItemRepository extends IBaseRepository<InventoryItemModel, InventoryItemModelCreate, InventoryItemModelUpdate, string> { }
 
 export interface IUserRepository extends IBaseRepository<UserModel, UserModelCreate, UserModelUpdate, string> {
-    findByEmail(email: string): Promise<UserModel>
+    findByEmail(email: string): Promise<UserModel | null>
 }
 
 export interface IFinanceRepository {

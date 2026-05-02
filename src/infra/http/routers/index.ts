@@ -24,6 +24,7 @@ export class Routers {
         apiRouter.use("/people", this.factory.makePeopleRouter().getRoutes())
         apiRouter.use("/season", this.factory.makeSeasonRouter().getRoutes())
         apiRouter.use("/inventory-item", this.factory.makeInventoryItemRouter().getRoutes())
+        apiRouter.use("/auth", this.factory.makeAuthRouter().getRoutes())
         
         return apiRouter;
     }
