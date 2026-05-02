@@ -20,7 +20,7 @@ export class AuthController implements IAuthController {
 
         return res.status(200).json({
             message: "Login realizado com sucesso",
-            token // Opcional: enviar o token no JSON também ajuda o Front-end (Flutter)
+            token
         });
     }
 
