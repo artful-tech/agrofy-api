@@ -1,5 +1,6 @@
 import { HashService } from "../../infra/services/HashService";
 import { UserDtoCreate, UserDtoView } from "../../shared/dtos/UserDto";
+import { AppError } from "../errors/AppError";
 import { UserMapper } from "../models/UserModel";
 import { IUserRepository } from "../repositories/interfaces";
 import { IUserUsecase } from "./interfaces";
@@ -19,6 +20,9 @@ export class UserUsecase implements IUserUsecase {
 
     public getByEmail = async (email: string): Promise<UserDtoView> => {
         const userModel = await this.userRepository.findByEmail(email);
+        if (!userModel) {
+            throw new AppError('Usuário não encontrado', 409);
+        }
         return UserMapper.toView(userModel);
     }
 
